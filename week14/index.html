@@ -1298,11 +1298,11 @@ f(x) = \frac{1}{\sqrt{2\pi}\, \sigma} \exp\left( -\frac{(x - \mu)^2}{2\sigma^2} 
 <h3 id="3">例題3</h3>
 <div class="admonition example">
 <p class="admonition-title"><span class="arithmatex">\(\displaystyle\iint_D \frac{x^2 - y^2}{(x^2 + y^2)^2}\, dx\, dy\)</span>, <span class="arithmatex">\(D = \{(x, y) \mid 0 \le x \le 1,\; 0 \le y \le 1\}\)</span> を調べよ。</p>
+<details class="success">
+<summary>解</summary>
 <p><div class="figure-container">
   <img src="assets/images/square-region.svg" alt="正方形領域D" style="max-width: 240px;">
 </div></p>
-<details class="success">
-<summary>解</summary>
 <p>被積分関数は <span class="arithmatex">\((x, y) = (0, 0)\)</span> で発散するため、広義積分として扱う。<span class="arithmatex">\(\varepsilon &gt; 0\)</span> として、積分順序を変えて計算してみる。</p>
 <hr />
 <p><strong>積分順序1：<span class="arithmatex">\(y\)</span> を先に積分（<span class="arithmatex">\(\varepsilon \le y \le 1\)</span> で固定）</strong></p>
@@ -1337,12 +1337,12 @@ $$
 <h3 id="1-p256">演習1（教科書 p.256）</h3>
 <div class="admonition note">
 <p class="admonition-title"><span class="arithmatex">\(\displaystyle\iint_D \ln(x^2 + y^2)\, dx\, dy\)</span>, <span class="arithmatex">\(D = \{(x, y) \mid x^2 + y^2 \le 1\}\)</span> を求めよ。</p>
+<details class="success">
+<summary>解答</summary>
 <p>被積分関数は原点 <span class="arithmatex">\((0, 0)\)</span> で発散する（<span class="arithmatex">\(\ln(x^2 + y^2) \to -\infty\)</span>）。</p>
 <p><div class="figure-container" style="display: flex; justify-content: center; gap: 40px; flex-wrap: wrap;">
   <img src="assets/images/unit-disk-polar.svg" alt="単位円板と極座標変換" style="max-width: 420px;">
 </div></p>
-<details class="success">
-<summary>解答</summary>
 <p>極座標変換 <span class="arithmatex">\(x = r\cos\theta\)</span>, <span class="arithmatex">\(y = r\sin\theta\)</span> を用いる。<span class="arithmatex">\(D\)</span> は原点中心・半径 <span class="arithmatex">\(1\)</span> の円板なので</p>
 <div class="arithmatex">\[
 r: \varepsilon \to 1, \qquad \theta: 0 \to 2\pi
