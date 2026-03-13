@@ -1340,24 +1340,31 @@ f(t, 0) = \frac{0}{t^2} = 0 \quad \therefore\ \lim_{t \to 0} f(t, 0) = 0
 <div class="admonition example">
 <p class="admonition-title">例題 1</p>
 <p><span class="arithmatex">\(\displaystyle\lim_{(x,y) \to (0,0)} \frac{2x - y + 5}{1 + x^2 + y^2}\)</span></p>
-<p><strong>解</strong>：分母・分子ともに連続なので、そのまま代入できる。</p>
+<details class="success">
+<summary>解</summary>
+<p>分母・分子ともに連続なので、そのまま代入できる。</p>
 <div class="arithmatex">\[
 = \frac{0 - 0 + 5}{1 + 0 + 0} = 5
 \]</div>
+</details>
 </div>
 <div class="admonition example">
 <p class="admonition-title">例題 2</p>
 <p><span class="arithmatex">\(\displaystyle\lim_{(x,y) \to (0,0)} \frac{x}{x^2 + y^2}\)</span></p>
-<p><strong>解</strong>：<span class="arithmatex">\(x\)</span> 軸に沿って近づける（<span class="arithmatex">\(y = 0\)</span>）と</p>
+<details class="success">
+<summary>解</summary>
+<p><span class="arithmatex">\(x\)</span> 軸に沿って近づける（<span class="arithmatex">\(y = 0\)</span>）と</p>
 <div class="arithmatex">\[
 f(x, 0) = \frac{1}{x}
 \]</div>
 <p><span class="arithmatex">\(\displaystyle\lim_{x \to +0} \frac{1}{x} = +\infty\)</span>, <span class="arithmatex">\(\displaystyle\lim_{x \to -0} \frac{1}{x} = -\infty\)</span> であるから、<strong>極限は存在しない</strong>。</p>
+</details>
 </div>
 <div class="admonition example">
 <p class="admonition-title">例題 3</p>
 <p><span class="arithmatex">\(\displaystyle\lim_{(x,y) \to (0,0)} \frac{x^3}{x^2 + y^2}\)</span></p>
-<p><strong>解</strong>：</p>
+<details class="success">
+<summary>解</summary>
 <ul>
 <li><span class="arithmatex">\(x\)</span> 軸に沿う：<span class="arithmatex">\(f(x, 0) = x \to 0\)</span></li>
 <li><span class="arithmatex">\(y\)</span> 軸に沿う：<span class="arithmatex">\(f(0, y) = 0\)</span></li>
@@ -1374,11 +1381,14 @@ $$</p>
 <div class="arithmatex">\[
 \therefore\ \lim_{(x,y) \to (0,0)} \frac{x^3}{x^2 + y^2} = 0
 \]</div>
+</details>
 </div>
 <div class="admonition example">
 <p class="admonition-title">例題 4</p>
 <p><span class="arithmatex">\(\displaystyle\lim_{(x,y) \to (0,0)} \frac{xy}{\sqrt{x^2 + 3y^2}}\)</span></p>
-<p><strong>解</strong>：極座標で</p>
+<details class="success">
+<summary>解</summary>
+<p>極座標で</p>
 <div class="arithmatex">\[
 f(r\cos\theta,\, r\sin\theta) = \frac{r^2\cos\theta\sin\theta}{r\sqrt{\cos^2\theta + 3\sin^2\theta}} = \frac{r\cos\theta\sin\theta}{\sqrt{1 + 2\sin^2\theta}}
 \]</div>
@@ -1388,17 +1398,20 @@ f(r\cos\theta,\, r\sin\theta) = \frac{r^2\cos\theta\sin\theta}{r\sqrt{\cos^2\the
 <div class="arithmatex">\[
 \therefore\ \lim_{(x,y) \to (0,0)} \frac{xy}{\sqrt{x^2 + 3y^2}} = 0
 \]</div>
+</details>
 </div>
 <div class="admonition example">
 <p class="admonition-title">例題 5</p>
 <p><span class="arithmatex">\(\displaystyle\lim_{(x,y) \to (0,0)} \frac{\sin(xy)}{x^2 + y^2}\)</span></p>
-<p><strong>解</strong>：</p>
+<details class="success">
+<summary>解</summary>
 <div class="arithmatex">\[
 \frac{\sin(xy)}{x^2 + y^2} = \frac{\sin(xy)}{xy} \cdot \frac{xy}{x^2 + y^2}
 \]</div>
 <p>第1因子は <span class="arithmatex">\(\displaystyle\lim_{t \to 0} \frac{\sin t}{t} = 1\)</span> より <span class="arithmatex">\(1\)</span> に近づく。</p>
 <p>第2因子は <span class="arithmatex">\(y = x\)</span> に沿うと <span class="arithmatex">\(1/2\)</span>、<span class="arithmatex">\(y = 0\)</span> に沿うと <span class="arithmatex">\(0\)</span> であり、<strong>極限なし</strong>。</p>
 <p><span class="arithmatex">\(\therefore\)</span> <strong>極限は存在しない。</strong></p>
+</details>
 </div>
 <hr />
 <h2 id="21">2.1 極限の性質</h2>
@@ -1436,7 +1449,9 @@ f(x, y) = \begin{cases}
 0 &amp; (x, y) = (0, 0)
 \end{cases}
 \]</div>
-<p><strong>解</strong>：極座標で</p>
+<details class="success">
+<summary>解</summary>
+<p>極座標で</p>
 <div class="arithmatex">\[
 f(r\cos\theta,\, r\sin\theta) = r^2 \cdot \frac{\cos^2\theta(\cos^2\theta - 3\sin^2\theta)}{2\cos^2\theta + \sin^2\theta}
 \]</div>
@@ -1444,6 +1459,7 @@ f(r\cos\theta,\, r\sin\theta) = r^2 \cdot \frac{\cos^2\theta(\cos^2\theta - 3\si
 |f(r\cos\theta,\, r\sin\theta) - 0| \leq r^2 \to 0 \quad (r \to 0) = f(0, 0)
 \]</div>
 <p><span class="arithmatex">\(\therefore\)</span> <span class="arithmatex">\((0, 0)\)</span> で連続である。</p>
+</details>
 </div>
 <h3 id="_3">連続関数の演算</h3>
 <p>関数 <span class="arithmatex">\(f\)</span> と <span class="arithmatex">\(g\)</span> が <span class="arithmatex">\(D\)</span> の点 <span class="arithmatex">\(A\)</span> で連続ならば</p>
@@ -1518,7 +1534,8 @@ f_y(x, y) = \frac{\partial f(x, y)}{\partial y} = \lim_{h \to 0} \frac{f(x,\, y 
 <div class="admonition example">
 <p class="admonition-title">例題 1</p>
 <p><span class="arithmatex">\(f(x, y) = x^2 y^3\)</span></p>
-<p><strong>解</strong>：</p>
+<details class="success">
+<summary>解</summary>
 <p>定義に基づく計算：</p>
 <div class="arithmatex">\[
 \frac{\partial f(x, y)}{\partial x} = \lim_{h \to 0} \frac{(x+h)^2 y^3 - x^2 y^3}{h} = \lim_{h \to 0} \frac{(x^2 + 2xh + h^2)y^3 - x^2 y^3}{h}
@@ -1531,30 +1548,37 @@ f_y(x, y) = \frac{\partial f(x, y)}{\partial y} = \lim_{h \to 0} \frac{f(x,\, y 
 \frac{\partial f(x, y)}{\partial y} = \lim_{h \to 0} \frac{x^2(y+h)^3 - x^2 y^3}{h} = \lim_{h \to 0} (3x^2 y^2 + 3x^2 y h + x^2 h^2) = 3x^2 y^2
 \]</div>
 <p><span class="arithmatex">\(y\)</span> を定数とみなして微分すれば、直ちに <span class="arithmatex">\(\dfrac{\partial f}{\partial x} = 2xy^3\)</span> が得られる。</p>
+</details>
 </div>
 <div class="admonition example">
 <p class="admonition-title">例題 2（p.184）</p>
 <p><span class="arithmatex">\(\displaystyle f(x, y) = \frac{x}{y}\)</span></p>
-<p><strong>解</strong>：</p>
+<details class="success">
+<summary>解</summary>
 <div class="arithmatex">\[
 \frac{\partial f}{\partial x} = \frac{1}{y}, \qquad \frac{\partial f}{\partial y} = -\frac{x}{y^2}
 \]</div>
+</details>
 </div>
 <div class="admonition example">
 <p class="admonition-title">例題 3（p.184）</p>
 <p><span class="arithmatex">\(f(x, y) = \sin(2x - y)\)</span></p>
-<p><strong>解</strong>：</p>
+<details class="success">
+<summary>解</summary>
 <div class="arithmatex">\[
 \frac{\partial f}{\partial x} = 2\cos(2x - y), \qquad \frac{\partial f}{\partial y} = -\cos(2x - y)
 \]</div>
+</details>
 </div>
 <div class="admonition example">
 <p class="admonition-title">例題 4（p.185）</p>
 <p><span class="arithmatex">\(f(x, y) = e^x \sin y\)</span></p>
-<p><strong>解</strong>：</p>
+<details class="success">
+<summary>解</summary>
 <div class="arithmatex">\[
 \frac{\partial f}{\partial x} = e^x \sin y, \qquad \frac{\partial f}{\partial y} = e^x \cos y
 \]</div>
+</details>
 </div>
 <hr />
 <h2 id="_6">偏微分可能性と連続性</h2>
