@@ -1,0 +1,19 @@
+\input{preamble}
+\begin{document}
+\begin{tikzpicture}
+  % Axes
+  \draw[axis] (-2,0) -- (2,0) node[below] {$x$};
+  \draw[axis] (0,-0.5) -- (0,2) node[left] {$y$};
+
+  % Semicircle
+  \draw[very thick, domain=-1:1, samples=60] plot ({1.5*\x}, {1.5*sqrt(1-\x*\x)});
+
+  % Labels
+  \node[below, font=\small] at (-1.5,0) {$-1$};
+  \node[below, font=\small] at (1.5,0) {$1$};
+  \node[left, font=\small] at (0,1.5) {$1$};
+
+  % Label
+  \node[right, font=\small] at (1.2,1.2) {$y = \sqrt{1-x^2}$};
+\end{tikzpicture}
+\end{document}

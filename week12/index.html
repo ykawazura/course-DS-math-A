@@ -1,0 +1,1559 @@
+
+<!doctype html>
+<html lang="ja" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="宇都宮大学 データサイエンスの数理A 講義ノート">
+      
+      
+        <meta name="author" content="川面 洋平">
+      
+      
+      
+        <link rel="prev" href="../week10/">
+      
+      
+        <link rel="next" href="../week13/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.2">
+    
+    
+      
+        <title>第12回 重積分 - データサイエンスの数理A</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../stylesheets/extra.css">
+    
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#12" class="md-skip">
+          コンテンツにスキップ
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="ヘッダー">
+    <a href=".." title="データサイエンスの数理A" class="md-header__button md-logo" aria-label="データサイエンスの数理A" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            データサイエンスの数理A
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              第12回 重積分
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="検索" placeholder="検索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="検索">
+        
+        <button type="reset" class="md-search__icon md-icon" title="クリア" aria-label="クリア" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            検索を初期化
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="タブ" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+  
+    
+  
+  ホーム
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../week01/" class="md-tabs__link">
+          
+  
+  
+  講義ノート
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="ナビゲーション" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="データサイエンスの数理A" class="md-nav__button md-logo" aria-label="データサイエンスの数理A" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    データサイエンスの数理A
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ホーム
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    講義ノート
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    講義ノート
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week01/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第1回 ガイダンス、多変数関数の導入
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week02/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第2回 偏微分
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week03/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第3回 全微分
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week04/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第4回 高階偏導関数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week05/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第5回 合成関数の偏微分
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week06/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第6回 多変数のテイラー展開
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week07/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第7回 陰関数の微分
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week08/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第8回 2変数の極値
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week09/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第9回 n変数の極値
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week10/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第10回 条件つき極値問題
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第12回 重積分
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第12回 重積分
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目次">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目次
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#121-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.1 1変数の積分（復習）
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#122-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.2 2変数の場合
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#123" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.3 具体的な計算方法
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="12.3 具体的な計算方法">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-x" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        (1) \(x\) 平面でスライス
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-y" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        (2) \(y\) 平面でスライス
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#124" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.4 フビニの定理
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#125" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.5 重積分の性質
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#126" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.6 積分の書き方に関する注意
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#127" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.7 例題
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="12.7 例題">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-p218" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例題1（教科書 p.218）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-p229" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例題2（教科書 p.229）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-p230" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例題3（教科書 p.230）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        演習問題
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="演習問題">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-p218_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        演習1（教科書 p.218）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-p230" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        演習2（教科書 p.230）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-p232" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        演習3（教科書 p.232）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week13/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第13回 重積分の変数変換
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week14/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第14回 広義積分
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week15/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第15回 ベクトル場の微分
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../supplement/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    おまけ ベクトル場の積分
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目次">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目次
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#121-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.1 1変数の積分（復習）
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#122-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.2 2変数の場合
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#123" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.3 具体的な計算方法
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="12.3 具体的な計算方法">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-x" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        (1) \(x\) 平面でスライス
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-y" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        (2) \(y\) 平面でスライス
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#124" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.4 フビニの定理
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#125" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.5 重積分の性質
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#126" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.6 積分の書き方に関する注意
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#127" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.7 例題
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="12.7 例題">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-p218" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例題1（教科書 p.218）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-p229" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例題2（教科書 p.229）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-p230" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例題3（教科書 p.230）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        演習問題
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="演習問題">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-p218_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        演習1（教科書 p.218）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-p230" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        演習2（教科書 p.230）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-p232" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        演習3（教科書 p.232）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="12">第12回：重積分</h1>
+<h2 id="121-1">12.1 1変数の積分（復習）</h2>
+<p>1変数関数 <span class="arithmatex">\(f(x)\)</span> の定積分</p>
+<div class="arithmatex">\[
+\int_a^b f(x)\, dx
+\]</div>
+<p>は、<span class="arithmatex">\(y = f(x)\)</span> と <span class="arithmatex">\(y = 0\)</span>（<span class="arithmatex">\(x\)</span> 軸）の間の<strong>符号付面積</strong>を表す。<span class="arithmatex">\(f(x) &gt; 0\)</span> の部分は正、<span class="arithmatex">\(f(x) &lt; 0\)</span> の部分は負として面積を計算する。</p>
+<div class="figure-container">
+  <img src="assets/images/signed-area.svg" alt="符号付面積" style="max-width: 400px;">
+</div>
+
+<div class="figure-container">
+  <img src="assets/images/riemann-strip.svg" alt="微小短冊 f(x)dx" style="max-width: 400px;">
+</div>
+
+<hr />
+<h2 id="122-2">12.2 2変数の場合</h2>
+<p>2変数関数 <span class="arithmatex">\(f(x, y)\)</span> の<strong>重積分</strong>（二重積分）</p>
+<div class="arithmatex">\[
+\iint_D f(x, y)\, dx\, dy
+\]</div>
+<p>は、曲面 <span class="arithmatex">\(z = f(x, y)\)</span> と <span class="arithmatex">\(z = 0\)</span>（<span class="arithmatex">\(xy\)</span> 平面）の間の<strong>符号付き体積</strong>を表す（<span class="arithmatex">\((x, y) \in D\)</span>）。</p>
+<div class="figure-container">
+  <img src="assets/images/double-integral-volume.svg" alt="重積分と符号付き体積">
+</div>
+
+<hr />
+<h2 id="123">12.3 具体的な計算方法</h2>
+<p>重積分を具体的に計算するには、<strong>フビニの定理</strong>を用いて<strong>逐次積分</strong>（累次積分）に帰着させる。</p>
+<h3 id="1-x">(1) <span class="arithmatex">\(x\)</span> 平面でスライス</h3>
+<p><span class="arithmatex">\(x\)</span> を固定し、<span class="arithmatex">\(y\)</span> 方向に積分して断面積 <span class="arithmatex">\(S(x)\)</span> を求める。</p>
+<div class="figure-container">
+  <img src="assets/images/x-slice.svg" alt="x平面でスライス" style="max-width: 900px;">
+</div>
+
+<div class="arithmatex">\[
+S(x) = \int_{a(x)}^{b(x)} f(x, y)\, dy
+\]</div>
+<p>これを <span class="arithmatex">\(x\)</span> 方向に積分すると体積が得られる。</p>
+<div class="arithmatex">\[
+\iint_D f(x, y)\, dx\, dy = \int_{x_0}^{x_1} S(x)\, dx = \int_{x_0}^{x_1} \left( \int_{a(x)}^{b(x)} f(x, y)\, dy \right) dx
+\]</div>
+<h3 id="2-y">(2) <span class="arithmatex">\(y\)</span> 平面でスライス</h3>
+<p><span class="arithmatex">\(y\)</span> を固定し、<span class="arithmatex">\(x\)</span> 方向に積分して断面積 <span class="arithmatex">\(T(y)\)</span> を求める。</p>
+<div class="figure-container">
+  <img src="assets/images/y-slice.svg" alt="y平面でスライス" style="max-width: 900px;">
+</div>
+
+<div class="arithmatex">\[
+T(y) = \int_{c(y)}^{d(y)} f(x, y)\, dx
+\]</div>
+<p>これを <span class="arithmatex">\(y\)</span> 方向に積分すると体積が得られる。</p>
+<div class="arithmatex">\[
+\iint_D f(x, y)\, dx\, dy = \int_{y_0}^{y_1} T(y)\, dy = \int_{y_0}^{y_1} \left( \int_{c(y)}^{d(y)} f(x, y)\, dx \right) dy
+\]</div>
+<p>どちらのスライスで計算した結果も同じであるというのがフビニの定理である。</p>
+<hr />
+<h2 id="124">12.4 フビニの定理</h2>
+<div class="admonition info">
+<p class="admonition-title">フビニの定理</p>
+<p><span class="arithmatex">\(f(x, y)\)</span> が領域 <span class="arithmatex">\(D\)</span> 上で連続であるとき、重積分は<strong>逐次積分</strong>（累次積分）に変換できる。</p>
+<div class="arithmatex">\[
+\iint_D f(x, y)\, dx\, dy = \int_{x_0}^{x_1} \left( \int_{a(x)}^{b(x)} f(x, y)\, dy \right) dx = \int_{y_0}^{y_1} \left( \int_{c(y)}^{d(y)} f(x, y)\, dx \right) dy
+\]</div>
+<p>逐次積分とは、多重積分を<strong>一変数の積分の繰り返し</strong>に帰着させる方法である。内側の積分では一方の変数を固定して積分し、その結果を外側の変数で積分する。</p>
+<ul>
+<li><span class="arithmatex">\(x\)</span> で先に外側を積分する場合：内側で <span class="arithmatex">\(y\)</span> を <span class="arithmatex">\(a(x)\)</span> から <span class="arithmatex">\(b(x)\)</span> まで積分し、外側で <span class="arithmatex">\(x\)</span> を <span class="arithmatex">\(x_0\)</span> から <span class="arithmatex">\(x_1\)</span> まで積分する。</li>
+<li><span class="arithmatex">\(y\)</span> で先に外側を積分する場合：内側で <span class="arithmatex">\(x\)</span> を <span class="arithmatex">\(c(y)\)</span> から <span class="arithmatex">\(d(y)\)</span> まで積分し、外側で <span class="arithmatex">\(y\)</span> を <span class="arithmatex">\(y_0\)</span> から <span class="arithmatex">\(y_1\)</span> まで積分する。</li>
+</ul>
+<p>フビニの定理は、<strong>積分の順序を交換しても結果が等しい</strong>ことを保証する。</p>
+</div>
+<div class="figure-container" style="display: flex; justify-content: center; gap: 40px; flex-wrap: wrap;">
+  <img src="assets/images/fubini-x-first.svg" alt="x方向に先に積分" style="max-width: 320px;">
+  <img src="assets/images/fubini-y-first.svg" alt="y方向に先に積分" style="max-width: 320px;">
+</div>
+
+<hr />
+<h2 id="125">12.5 重積分の性質</h2>
+<p><strong>(1) 線形性</strong></p>
+<div class="arithmatex">\[
+\iint_D \bigl[f(x, y) \pm g(x, y)\bigr]\, dx\, dy = \iint_D f(x, y)\, dx\, dy \pm \iint_D g(x, y)\, dx\, dy
+\]</div>
+<p><strong>(2) 定数倍</strong></p>
+<div class="arithmatex">\[
+\iint_D k\, f(x, y)\, dx\, dy = k \iint_D f(x, y)\, dx\, dy
+\]</div>
+<p><strong>(3) 領域の分割</strong></p>
+<p>領域 <span class="arithmatex">\(D\)</span> が <span class="arithmatex">\(D = D_1 \cup D_2\)</span>（<span class="arithmatex">\(D_1 \cap D_2\)</span> が面積 <span class="arithmatex">\(0\)</span>）と分割されるとき、</p>
+<div class="figure-container">
+  <img src="assets/images/region-split.svg" alt="領域の分割" style="max-width: 200px;">
+</div>
+
+<div class="arithmatex">\[
+\iint_D f(x, y)\, dx\, dy = \iint_{D_1} f(x, y)\, dx\, dy + \iint_{D_2} f(x, y)\, dx\, dy
+\]</div>
+<p><strong>(4) 長方形領域で変数分離できる場合</strong></p>
+<p><span class="arithmatex">\(D\)</span> が長方形 <span class="arithmatex">\(a \le x \le b\)</span>, <span class="arithmatex">\(c \le y \le d\)</span> で、<span class="arithmatex">\(f(x, y) = g(x)\, h(y)\)</span> と変数分離できるとき、</p>
+<div class="figure-container">
+  <img src="assets/images/rectangle-region.svg" alt="長方形領域" style="max-width: 280px;">
+</div>
+
+<div class="arithmatex">\[
+\iint_D f(x, y)\, dx\, dy = \left( \int_a^b g(x)\, dx \right) \left( \int_c^d h(y)\, dy \right)
+\]</div>
+<hr />
+<h2 id="126">12.6 積分の書き方に関する注意</h2>
+<div class="arithmatex">\[
+\int_a^b \left( \int_c^d f(x, y)\, dx \right) dy
+\]</div>
+<p>は</p>
+<div class="arithmatex">\[
+\int_a^b dy \int_c^d dx\, f(x, y)
+\]</div>
+<p>とも書く。ここで</p>
+<ul>
+<li><span class="arithmatex">\(\displaystyle\int_c^d dx\)</span> を「<span class="arithmatex">\(x\)</span> に関する積分作用素」</li>
+<li><span class="arithmatex">\(\displaystyle\int_a^b dy\)</span> を「<span class="arithmatex">\(y\)</span> に関する積分作用素」</li>
+</ul>
+<p>と見ることができる。</p>
+<hr />
+<h2 id="127">12.7 例題</h2>
+<h3 id="1-p218">例題1（教科書 p.218）</h3>
+<div class="admonition example">
+<p class="admonition-title"><span class="arithmatex">\(\displaystyle\iint_D xy\, dx\, dy\)</span>, <span class="arithmatex">\(D = \{(x, y) \mid 0 \le x \le 1,\; 0 \le y \le 2\}\)</span> を求めよ。</p>
+<details class="success">
+<summary>解</summary>
+<p><span class="arithmatex">\(D\)</span> は長方形で <span class="arithmatex">\(f(x, y) = xy\)</span> は変数分離できるから</p>
+<div class="arithmatex">\[
+\iint_D xy\, dx\, dy = \left( \int_0^1 x\, dx \right) \left( \int_0^2 y\, dy \right)
+\]</div>
+<div class="arithmatex">\[
+= \left[ \frac{x^2}{2} \right]_0^1 \cdot \left[ \frac{y^2}{2} \right]_0^2 = \frac{1}{2} \cdot 2 = 1
+\]</div>
+</details>
+<details class="success">
+<summary>別解（逐次積分）</summary>
+<div class="arithmatex">\[
+\int_0^2 \left( \int_0^1 xy\, dx \right) dy = \int_0^2 y \left[ \frac{x^2}{2} \right]_0^1 dy = \int_0^2 \frac{y}{2}\, dy = \left[ \frac{y^2}{4} \right]_0^2 = 1
+\]</div>
+</details>
+</div>
+<h3 id="2-p229">例題2（教科書 p.229）</h3>
+<div class="admonition example">
+<p class="admonition-title"><span class="arithmatex">\(\displaystyle\iint_D (x + 4y + 2)\, dx\, dy\)</span>, <span class="arithmatex">\(D = \{(x, y) \mid 1 \le x \le 2,\; x \le y \le 2x\}\)</span> を求めよ。</p>
+<details class="success">
+<summary>解</summary>
+<p><div class="figure-container">
+  <img src="assets/images/ex2-region.svg" alt="例題2の積分領域" style="max-width: 260px;">
+</div></p>
+<p><span class="arithmatex">\(x\)</span> で外側を積分する。</p>
+<div class="arithmatex">\[
+\int_1^2 \left( \int_x^{2x} (x + 4y + 2)\, dy \right) dx
+\]</div>
+<p>内側の積分を計算する。</p>
+<div class="arithmatex">\[
+\int_x^{2x} (x + 4y + 2)\, dy = \left[ (x + 2)y + 2y^2 \right]_{y=x}^{y=2x}
+\]</div>
+<div class="arithmatex">\[
+= (x + 2) \cdot 2x + 2(2x)^2 - (x + 2) \cdot x - 2x^2
+\]</div>
+<div class="arithmatex">\[
+= 2x^2 + 4x + 8x^2 - x^2 - 2x - 2x^2 = 7x^2 + 2x
+\]</div>
+<p>外側の積分を計算する。</p>
+<div class="arithmatex">\[
+\int_1^2 (7x^2 + 2x)\, dx = \left[ \frac{7}{3}x^3 + x^2 \right]_1^2
+\]</div>
+<div class="arithmatex">\[
+= \frac{56}{3} + 4 - \frac{7}{3} - 1 = \frac{49}{3} + 3 = \frac{58}{3}
+\]</div>
+</details>
+</div>
+<h3 id="3-p230">例題3（教科書 p.230）</h3>
+<div class="admonition example">
+<p class="admonition-title"><span class="arithmatex">\(\displaystyle\iint_D y\, dx\, dy\)</span>, <span class="arithmatex">\(D = \{(x, y) \mid x + y \ge 1,\; x^2 + y^2 \le 1\}\)</span> を求めよ。</p>
+<details class="success">
+<summary>解</summary>
+<p><div class="figure-container">
+  <img src="assets/images/ex3-region.svg" alt="例題3の積分領域" style="max-width: 280px;">
+</div></p>
+<p>領域 <span class="arithmatex">\(D\)</span> は単位円 <span class="arithmatex">\(x^2 + y^2 \le 1\)</span> のうち直線 <span class="arithmatex">\(x + y = 1\)</span> より上側の部分である。</p>
+<p><span class="arithmatex">\(x\)</span> で外側を積分する。<span class="arithmatex">\(x + y = 1\)</span> より <span class="arithmatex">\(y = 1 - x\)</span>、<span class="arithmatex">\(x^2 + y^2 = 1\)</span> より <span class="arithmatex">\(y = \sqrt{1 - x^2}\)</span>（上半分）。<span class="arithmatex">\(x\)</span> の範囲は <span class="arithmatex">\(0 \le x \le 1\)</span>。</p>
+<div class="arithmatex">\[
+\int_0^1 \left( \int_{1-x}^{\sqrt{1-x^2}} y\, dy \right) dx
+\]</div>
+<div class="arithmatex">\[
+= \frac{1}{2} \int_0^1 \left[ y^2 \right]_{1-x}^{\sqrt{1-x^2}} dx = \frac{1}{2} \int_0^1 \left( 1 - x^2 - (1 - x)^2 \right) dx
+\]</div>
+<div class="arithmatex">\[
+= \frac{1}{2} \int_0^1 \left( 1 - x^2 - 1 + 2x - x^2 \right) dx = \frac{1}{2} \int_0^1 (2x - 2x^2)\, dx
+\]</div>
+<div class="arithmatex">\[
+= \int_0^1 (x - x^2)\, dx = \left[ \frac{x^2}{2} - \frac{x^3}{3} \right]_0^1 = \frac{1}{2} - \frac{1}{3} = \frac{1}{6}
+\]</div>
+</details>
+</div>
+<hr />
+<h2 id="_1">演習問題</h2>
+<h3 id="1-p218_1">演習1（教科書 p.218）</h3>
+<div class="admonition note">
+<p class="admonition-title"><span class="arithmatex">\(\displaystyle\iint_D x^2 y\, dx\, dy\)</span>, <span class="arithmatex">\(D = \{(x, y) \mid 0 \le x \le 1,\; 0 \le y \le 1\}\)</span> を求めよ。</p>
+<details class="success">
+<summary>解答</summary>
+<p><span class="arithmatex">\(D\)</span> は長方形で <span class="arithmatex">\(f(x, y) = x^2 y\)</span> は変数分離できるから</p>
+<div class="arithmatex">\[
+\iint_D x^2 y\, dx\, dy = \left( \int_0^1 x^2\, dx \right) \left( \int_0^1 y\, dy \right) = \left[ \frac{x^3}{3} \right]_0^1 \cdot \left[ \frac{y^2}{2} \right]_0^1 = \frac{1}{3} \cdot \frac{1}{2} = \frac{1}{6}
+\]</div>
+</details>
+</div>
+<h3 id="2-p230">演習2（教科書 p.230）</h3>
+<div class="admonition note">
+<p class="admonition-title"><span class="arithmatex">\(\displaystyle\iint_D (x + y)\, dx\, dy\)</span>, <span class="arithmatex">\(D = \{(x, y) \mid 0 \le x \le 1,\; 0 \le y \le 1 - x\}\)</span> を求めよ。</p>
+<p><div class="figure-container">
+  <img src="assets/images/exercise2-region.svg" alt="演習2の積分領域" style="max-width: 220px;">
+</div></p>
+<details class="success">
+<summary>解答</summary>
+<p><span class="arithmatex">\(x\)</span> で外側を積分する。</p>
+<div class="arithmatex">\[
+\int_0^1 \left( \int_0^{1-x} (x + y)\, dy \right) dx = \int_0^1 \left[ xy + \frac{y^2}{2} \right]_0^{1-x} dx
+\]</div>
+<div class="arithmatex">\[
+= \int_0^1 \left[ x(1 - x) + \frac{(1 - x)^2}{2} \right] dx
+\]</div>
+<div class="arithmatex">\[
+= \int_0^1 \left[ x - x^2 + \frac{1}{2} - x + \frac{x^2}{2} \right] dx = \int_0^1 \left( \frac{1}{2} - \frac{x^2}{2} \right) dx
+\]</div>
+<div class="arithmatex">\[
+= \left[ \frac{x}{2} - \frac{x^3}{6} \right]_0^1 = \frac{1}{2} - \frac{1}{6} = \frac{1}{3}
+\]</div>
+</details>
+</div>
+<h3 id="3-p232">演習3（教科書 p.232）</h3>
+<div class="admonition note">
+<p class="admonition-title"><span class="arithmatex">\(\displaystyle\iint_D \sqrt{x}\, dx\, dy\)</span>, <span class="arithmatex">\(D = \{(x, y) \mid 0 \le x \le 1,\; 0 \le y \le \tfrac{1}{2},\; y^2 \le x\}\)</span> を求めよ。</p>
+<p><div class="figure-container">
+  <img src="assets/images/exercise3-region.svg" alt="演習3の積分領域" style="max-width: 280px;">
+</div></p>
+<details class="success">
+<summary>解答</summary>
+<p><span class="arithmatex">\(y\)</span> で外側を積分する。<span class="arithmatex">\(x\)</span> の範囲は <span class="arithmatex">\(y^2 \le x \le 1\)</span>。</p>
+<div class="arithmatex">\[
+\int_0^{1/2} \left( \int_{y^2}^1 \sqrt{x}\, dx \right) dy = \int_0^{1/2} \left[ \frac{2}{3} x^{3/2} \right]_{y^2}^1 dy
+\]</div>
+<div class="arithmatex">\[
+= \int_0^{1/2} \frac{2}{3} \left( 1 - y^3 \right) dy = \frac{2}{3} \left[ y - \frac{y^4}{4} \right]_0^{1/2}
+\]</div>
+<div class="arithmatex">\[
+= \frac{2}{3} \left( \frac{1}{2} - \frac{1}{64} \right) = \frac{2}{3} \cdot \frac{31}{64} = \frac{31}{96}
+\]</div>
+</details>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  ページトップへ戻る
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+      <div class="md-progress" data-md-component="progress" role="progressbar"></div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.instant", "navigation.instant.progress", "navigation.tabs", "navigation.top", "content.tooltips"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u30b3\u30d4\u30fc\u3057\u307e\u3057\u305f", "clipboard.copy": "\u30af\u30ea\u30c3\u30d7\u30dc\u30fc\u30c9\u3078\u30b3\u30d4\u30fc", "search.result.more.one": "\u3053\u306e\u30da\u30fc\u30b8\u5185\u306b\u3082\u30461\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.more.other": "\u3053\u306e\u30da\u30fc\u30b8\u5185\u306b\u3042\u3068#\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.none": "\u4f55\u3082\u898b\u3064\u304b\u308a\u307e\u305b\u3093\u3067\u3057\u305f", "search.result.one": "1\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.other": "#\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.placeholder": "\u691c\u7d22\u30ad\u30fc\u30ef\u30fc\u30c9\u3092\u5165\u529b\u3057\u3066\u304f\u3060\u3055\u3044", "search.result.term.missing": "\u691c\u7d22\u306b\u542b\u307e\u308c\u306a\u3044", "select.version": "\u30d0\u30fc\u30b8\u30e7\u30f3\u5207\u308a\u66ff\u3048"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+      
+        <script src="../javascripts/katex.js"></script>
+      
+    
+  </body>
+</html>

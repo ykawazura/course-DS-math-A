@@ -1,0 +1,30 @@
+\input{preamble}
+\begin{document}
+\begin{tikzpicture}
+  % Axes
+  \draw[axis] (-0.5,0) -- (7,0) node[below] {$x$};
+  \draw[axis] (0,-0.5) -- (0,5.5) node[left] {$y$};
+  \node[below left] at (0,0) {O};
+
+  % Axis labels
+  \node[below, font=\small] at (3.5,-0.7) {部屋の広さ\,(m${}^2$)};
+  \node[rotate=90, font=\small] at (-1.0,2.75) {家賃\,(万円)};
+
+  % Regression line (red, very thick)
+  \draw[red, very thick] (0.5,0.8) -- (6.6,4.87);
+
+  % Data points and residual lines
+  % Each: data point (x,y), regression value yhat = 0.667*x + 0.467
+  \foreach \x/\y in {1.0/1.5, 1.5/1.8, 2.0/2.5, 2.5/1.9, 3.0/2.8,
+                      3.5/3.5, 4.0/3.0, 4.5/4.2, 5.0/3.8, 5.5/4.0, 6.0/4.9} {
+    \pgfmathsetmacro{\yhat}{0.667*\x + 0.467}
+    \draw[blue, dash pattern=on 2pt off 2pt, semithick] (\x,\y) -- (\x,\yhat);
+    \fill (\x,\y) circle (3pt);
+  }
+
+  % Residual label with curved arrow
+  \node[blue, font=\small] at (2.4,4.5) {$y_i-(ax_i+b)$};
+  \draw[blue, thin, -{Stealth[length=4pt]}]
+    (3.4,4.45) .. controls (4.0,4.5) and (4.3,4.3) .. (4.5,3.85);
+\end{tikzpicture}
+\end{document}

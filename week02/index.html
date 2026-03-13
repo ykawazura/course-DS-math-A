@@ -1,0 +1,1716 @@
+
+<!doctype html>
+<html lang="ja" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="宇都宮大学 データサイエンスの数理A 講義ノート">
+      
+      
+        <meta name="author" content="川面 洋平">
+      
+      
+      
+        <link rel="prev" href="../week01/">
+      
+      
+        <link rel="next" href="../week03/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.2">
+    
+    
+      
+        <title>第2回 偏微分 - データサイエンスの数理A</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../stylesheets/extra.css">
+    
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#2" class="md-skip">
+          コンテンツにスキップ
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="ヘッダー">
+    <a href=".." title="データサイエンスの数理A" class="md-header__button md-logo" aria-label="データサイエンスの数理A" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            データサイエンスの数理A
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              第2回 偏微分
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="検索" placeholder="検索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="検索">
+        
+        <button type="reset" class="md-search__icon md-icon" title="クリア" aria-label="クリア" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            検索を初期化
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="タブ" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+  
+    
+  
+  ホーム
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../week01/" class="md-tabs__link">
+          
+  
+  
+  講義ノート
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="ナビゲーション" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="データサイエンスの数理A" class="md-nav__button md-logo" aria-label="データサイエンスの数理A" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    データサイエンスの数理A
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ホーム
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    講義ノート
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    講義ノート
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week01/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第1回 ガイダンス、多変数関数の導入
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第2回 偏微分
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第2回 偏微分
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目次">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目次
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#2_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2変数関数の極限
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2変数関数の極限">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1変数の場合の復習
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2変数の場合
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        極座標による判定法
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例題
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 極限の性質
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 連続関数
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.2 連続関数">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        連続関数の演算
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#23-partial-derivative" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 偏微分（Partial derivative）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.3 偏微分（Partial derivative）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1変数の微分の復習
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2変数への拡張
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#x" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        \(x\) に関する偏微分
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#y" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        \(y\) に関する偏微分
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        偏導関数
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3変数以上への拡張
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        偏微分の計算方法
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        偏微分可能性と連続性
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        演習問題
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week03/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第3回 全微分
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week04/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第4回 高階偏導関数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week05/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第5回 合成関数の偏微分
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week06/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第6回 多変数のテイラー展開
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week07/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第7回 陰関数の微分
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week08/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第8回 2変数の極値
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week09/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第9回 n変数の極値
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week10/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第10回 条件つき極値問題
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week12/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第12回 重積分
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week13/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第13回 重積分の変数変換
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week14/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第14回 広義積分
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week15/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第15回 ベクトル場の微分
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../supplement/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    おまけ ベクトル場の積分
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目次">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目次
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#2_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2変数関数の極限
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2変数関数の極限">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1変数の場合の復習
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2変数の場合
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        極座標による判定法
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例題
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 極限の性質
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 連続関数
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.2 連続関数">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        連続関数の演算
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#23-partial-derivative" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 偏微分（Partial derivative）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.3 偏微分（Partial derivative）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1変数の微分の復習
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2変数への拡張
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#x" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        \(x\) に関する偏微分
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#y" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        \(y\) に関する偏微分
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        偏導関数
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3変数以上への拡張
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        偏微分の計算方法
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        偏微分可能性と連続性
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        演習問題
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="2">第2回：偏微分</h1>
+<h2 id="2_1">2変数関数の極限</h2>
+<h3 id="1">1変数の場合の復習</h3>
+<p><span class="arithmatex">\(x\)</span> が <span class="arithmatex">\(a\)</span> と異なる値をとりながら <span class="arithmatex">\(a\)</span> に近づくとき、<span class="arithmatex">\(f(x)\)</span> の値が <span class="arithmatex">\(A\)</span> に近づくならば</p>
+<div class="arithmatex">\[
+\lim_{x \to a} f(x) = A
+\]</div>
+<p>と書く。</p>
+<div class="figure-container">
+  <img src="assets/images/limit-1var-review.svg" alt="1変数関数の極限の復習">
+  <div class="caption">図1：1変数関数の極限。左側極限と右側極限が一致するとき極限が存在する。</div>
+</div>
+
+<p><strong>極限の存在条件</strong>：右側極限と左側極限が一致すること。</p>
+<div class="arithmatex">\[
+\lim_{x \to +a} f(x) = \lim_{x \to -a} f(x) = A
+\]</div>
+<h3 id="2_2">2変数の場合</h3>
+<p>2変数の場合、<span class="arithmatex">\(f(x, y)\)</span> において <span class="arithmatex">\((x, y)\)</span> のある点 <span class="arithmatex">\((a, b)\)</span> への近づけ方が<strong>無数にある</strong>。</p>
+<div class="figure-container">
+  <img src="assets/images/limit-2var-paths.svg" alt="2変数極限：異なる経路">
+  <div class="caption">図2：原点への近づけ方は無限にある。直線 $y = 0$、$y = x$、$y = -x$ など。</div>
+</div>
+
+<div class="admonition note">
+<p class="admonition-title">注意</p>
+<p>極限を考える点は定義域 <span class="arithmatex">\(D\)</span> に含まれる必要はない。</p>
+</div>
+<div class="admonition example">
+<p class="admonition-title">例</p>
+<p><span class="arithmatex">\(\displaystyle f(x, y) = \frac{2xy}{x^2 + y^2}\)</span>, <span class="arithmatex">\((x, y) \neq (0, 0)\)</span></p>
+<p><span class="arithmatex">\((x, y) \to (0, 0)\)</span> での極限はどうなるか？</p>
+<p><strong>① 直線 <span class="arithmatex">\(y = x\)</span> に沿って近づける</strong></p>
+<p><img src="assets/images/limit-2var-along-yx.svg" alt="y=xに沿って近づける"></p>
+<div class="arithmatex">\[
+f(t, t) = \frac{2t^2}{t^2 + t^2} = 1 \quad \therefore\ \lim_{t \to 0} f(t, t) = 1
+\]</div>
+<p><strong>② <span class="arithmatex">\(x\)</span> 軸に沿って近づける</strong> (<span class="arithmatex">\(y = 0\)</span>)</p>
+<p><img src="assets/images/limit-2var-along-xaxis.svg" alt="x軸に沿って近づける"></p>
+<div class="arithmatex">\[
+f(t, 0) = \frac{0}{t^2} = 0 \quad \therefore\ \lim_{t \to 0} f(t, 0) = 0
+\]</div>
+<p>経路によって極限値が異なるので、<strong>極限は存在しない</strong>。</p>
+</div>
+<h3 id="_1">極座標による判定法</h3>
+<p><span class="arithmatex">\(f(x, y)\)</span> が点 <span class="arithmatex">\((a, b)\)</span> で極限をもつためには <span class="arithmatex">\((x, y) \to (a, b)\)</span> の近づけ方によらず <span class="arithmatex">\(f(x, y)\)</span> がある値 <span class="arithmatex">\(A\)</span> に近づく必要がある。</p>
+<div class="figure-container">
+  <img src="assets/images/polar-approach.svg" alt="極座標で近づく">
+  <div class="caption">図3：極座標で半径 $r$ を $0$ に縮めながら近づける。</div>
+</div>
+
+<p><span class="arithmatex">\(\sqrt{(x-a)^2 + (y-b)^2} = r\)</span> とすると、<span class="arithmatex">\(x = a + r\cos\theta\)</span>, <span class="arithmatex">\(y = b + r\sin\theta\)</span> である。</p>
+<p><span class="arithmatex">\((x, y) \to (a, b)\)</span> の近づけ方によらず <span class="arithmatex">\(f(x, y)\)</span> がある値 <span class="arithmatex">\(A\)</span> に近づくということは、</p>
+<div class="arithmatex">\[
+|f(a + r\cos\theta,\, b + r\sin\theta) - A| \to 0 \quad (r \to 0)
+\]</div>
+<p>が <span class="arithmatex">\(\theta\)</span> に<strong>依存しない</strong>ことである。</p>
+<p>このとき、<span class="arithmatex">\(\displaystyle\lim_{(x,y) \to (a,b)} f(x,y) = A\)</span> と書く。</p>
+<h3 id="_2">例題</h3>
+<div class="admonition example">
+<p class="admonition-title">例題 1</p>
+<p><span class="arithmatex">\(\displaystyle\lim_{(x,y) \to (0,0)} \frac{2x - y + 5}{1 + x^2 + y^2}\)</span></p>
+<p><strong>解</strong>：分母・分子ともに連続なので、そのまま代入できる。</p>
+<div class="arithmatex">\[
+= \frac{0 - 0 + 5}{1 + 0 + 0} = 5
+\]</div>
+</div>
+<div class="admonition example">
+<p class="admonition-title">例題 2</p>
+<p><span class="arithmatex">\(\displaystyle\lim_{(x,y) \to (0,0)} \frac{x}{x^2 + y^2}\)</span></p>
+<p><strong>解</strong>：<span class="arithmatex">\(x\)</span> 軸に沿って近づける（<span class="arithmatex">\(y = 0\)</span>）と</p>
+<div class="arithmatex">\[
+f(x, 0) = \frac{1}{x}
+\]</div>
+<p><span class="arithmatex">\(\displaystyle\lim_{x \to +0} \frac{1}{x} = +\infty\)</span>, <span class="arithmatex">\(\displaystyle\lim_{x \to -0} \frac{1}{x} = -\infty\)</span> であるから、<strong>極限は存在しない</strong>。</p>
+</div>
+<div class="admonition example">
+<p class="admonition-title">例題 3</p>
+<p><span class="arithmatex">\(\displaystyle\lim_{(x,y) \to (0,0)} \frac{x^3}{x^2 + y^2}\)</span></p>
+<p><strong>解</strong>：</p>
+<ul>
+<li><span class="arithmatex">\(x\)</span> 軸に沿う：<span class="arithmatex">\(f(x, 0) = x \to 0\)</span></li>
+<li><span class="arithmatex">\(y\)</span> 軸に沿う：<span class="arithmatex">\(f(0, y) = 0\)</span></li>
+<li><span class="arithmatex">\(y = x\)</span> に沿う：<span class="arithmatex">\(f(x, x) = x/2 \to 0\)</span></li>
+</ul>
+<p>すべての経路で <span class="arithmatex">\(0\)</span> だが、これだけでは不十分。極座標で確認する。</p>
+<div class="arithmatex">\[
+f(r\cos\theta,\, r\sin\theta) = \frac{r^3 \cos^3\theta}{r^2(\cos^2\theta + \sin^2\theta)} = r\cos^3\theta
+\]</div>
+<p><span class="arithmatex">\(|\cos^3\theta| \leq 1\)</span> なのではさみうちの原理を使って
+$$
+|f(r\cos\theta,\, r\sin\theta) - 0| \leq |r| \to 0 \quad (r \to 0)
+$$</p>
+<div class="arithmatex">\[
+\therefore\ \lim_{(x,y) \to (0,0)} \frac{x^3}{x^2 + y^2} = 0
+\]</div>
+</div>
+<div class="admonition example">
+<p class="admonition-title">例題 4</p>
+<p><span class="arithmatex">\(\displaystyle\lim_{(x,y) \to (0,0)} \frac{xy}{\sqrt{x^2 + 3y^2}}\)</span></p>
+<p><strong>解</strong>：極座標で</p>
+<div class="arithmatex">\[
+f(r\cos\theta,\, r\sin\theta) = \frac{r^2\cos\theta\sin\theta}{r\sqrt{\cos^2\theta + 3\sin^2\theta}} = \frac{r\cos\theta\sin\theta}{\sqrt{1 + 2\sin^2\theta}}
+\]</div>
+<div class="arithmatex">\[
+|f(r\cos\theta,\, r\sin\theta) - 0| \leq |r| \to 0 \quad (r \to 0)
+\]</div>
+<div class="arithmatex">\[
+\therefore\ \lim_{(x,y) \to (0,0)} \frac{xy}{\sqrt{x^2 + 3y^2}} = 0
+\]</div>
+</div>
+<div class="admonition example">
+<p class="admonition-title">例題 5</p>
+<p><span class="arithmatex">\(\displaystyle\lim_{(x,y) \to (0,0)} \frac{\sin(xy)}{x^2 + y^2}\)</span></p>
+<p><strong>解</strong>：</p>
+<div class="arithmatex">\[
+\frac{\sin(xy)}{x^2 + y^2} = \frac{\sin(xy)}{xy} \cdot \frac{xy}{x^2 + y^2}
+\]</div>
+<p>第1因子は <span class="arithmatex">\(\displaystyle\lim_{t \to 0} \frac{\sin t}{t} = 1\)</span> より <span class="arithmatex">\(1\)</span> に近づく。</p>
+<p>第2因子は <span class="arithmatex">\(y = x\)</span> に沿うと <span class="arithmatex">\(1/2\)</span>、<span class="arithmatex">\(y = 0\)</span> に沿うと <span class="arithmatex">\(0\)</span> であり、<strong>極限なし</strong>。</p>
+<p><span class="arithmatex">\(\therefore\)</span> <strong>極限は存在しない。</strong></p>
+</div>
+<hr />
+<h2 id="21">2.1 極限の性質</h2>
+<p><span class="arithmatex">\(D \subset \mathbb{R}^n\)</span>, <span class="arithmatex">\(f \colon D \to \mathbb{R}\)</span>, <span class="arithmatex">\(g \colon D \to \mathbb{R}\)</span> とする。</p>
+<p><span class="arithmatex">\(A \in D\)</span> に対し <span class="arithmatex">\(\displaystyle\lim_{P \to A} f(P) = \alpha\)</span> かつ <span class="arithmatex">\(\displaystyle\lim_{P \to A} g(P) = \beta\)</span> のとき：</p>
+<ol>
+<li>
+<p><span class="arithmatex">\(c, d \in \mathbb{R}\)</span> に対し <span class="arithmatex">\(\displaystyle\lim_{P \to A} \left[c\,f(P) + d\,g(P)\right] = c\alpha + d\beta\)</span></p>
+</li>
+<li>
+<p><span class="arithmatex">\(\displaystyle\lim_{P \to A} f(P)\,g(P) = \alpha\beta\)</span></p>
+</li>
+<li>
+<p><span class="arithmatex">\(g(P) \neq 0\)</span> (<span class="arithmatex">\(P \in D\)</span>) かつ <span class="arithmatex">\(\beta \neq 0\)</span> のとき <span class="arithmatex">\(\displaystyle\lim_{P \to A} \frac{f(P)}{g(P)} = \frac{\alpha}{\beta}\)</span></p>
+</li>
+</ol>
+<hr />
+<h2 id="22">2.2 連続関数</h2>
+<p><span class="arithmatex">\(f\)</span> が <span class="arithmatex">\(D\)</span> の点 <span class="arithmatex">\((a_1, \ldots, a_n)\)</span> で<strong>連続</strong>であるとは</p>
+<div class="arithmatex">\[
+\lim_{(x_1, \ldots, x_n) \to (a_1, \ldots, a_n)} f(x_1, \ldots, x_n) = f(a_1, \ldots, a_n)
+\]</div>
+<p>が成り立つことである。</p>
+<div class="figure-container">
+  <img src="assets/images/continuous-discontinuous.svg" alt="連続と不連続">
+  <div class="caption">図4：連続関数と不連続関数の例。</div>
+</div>
+
+<div class="admonition example">
+<p class="admonition-title">例題</p>
+<p>次の関数は <span class="arithmatex">\((0, 0)\)</span> で連続か？</p>
+<div class="arithmatex">\[
+f(x, y) = \begin{cases}
+\dfrac{x^4 - 3x^2y^2}{2x^2 + y^2} &amp; (x, y) \neq (0, 0) \\[8pt]
+0 &amp; (x, y) = (0, 0)
+\end{cases}
+\]</div>
+<p><strong>解</strong>：極座標で</p>
+<div class="arithmatex">\[
+f(r\cos\theta,\, r\sin\theta) = r^2 \cdot \frac{\cos^2\theta(\cos^2\theta - 3\sin^2\theta)}{2\cos^2\theta + \sin^2\theta}
+\]</div>
+<div class="arithmatex">\[
+|f(r\cos\theta,\, r\sin\theta) - 0| \leq r^2 \to 0 \quad (r \to 0) = f(0, 0)
+\]</div>
+<p><span class="arithmatex">\(\therefore\)</span> <span class="arithmatex">\((0, 0)\)</span> で連続である。</p>
+</div>
+<h3 id="_3">連続関数の演算</h3>
+<p>関数 <span class="arithmatex">\(f\)</span> と <span class="arithmatex">\(g\)</span> が <span class="arithmatex">\(D\)</span> の点 <span class="arithmatex">\(A\)</span> で連続ならば</p>
+<ul>
+<li><span class="arithmatex">\(cf + dg\)</span> も <span class="arithmatex">\(A\)</span> で連続</li>
+<li><span class="arithmatex">\(fg\)</span> も <span class="arithmatex">\(A\)</span> で連続</li>
+<li><span class="arithmatex">\(f/g\)</span> も <span class="arithmatex">\(A\)</span> で連続（<span class="arithmatex">\(g(P) \neq 0\)</span> のとき）</li>
+</ul>
+<hr />
+<h2 id="23-partial-derivative">2.3 偏微分（Partial derivative）</h2>
+<h3 id="1_1">1変数の微分の復習</h3>
+<p><span class="arithmatex">\(y = f(x)\)</span> の微分（または導関数）は</p>
+<div class="arithmatex">\[
+f'(x) = \lim_{h \to 0} \frac{f(x + h) - f(x)}{h}
+\]</div>
+<p><span class="arithmatex">\(f'(x)\)</span> は <span class="arithmatex">\(\dfrac{\mathrm{d}f(x)}{\mathrm{d}x}\)</span> とも書く。</p>
+<p><span class="arithmatex">\(x = a\)</span> における <span class="arithmatex">\(f(x)\)</span> の導関数の値 <span class="arithmatex">\(f'(a)\)</span> を <span class="arithmatex">\(f(x)\)</span> の <span class="arithmatex">\(x = a\)</span> における<strong>微分係数</strong>という。</p>
+<p>これは <span class="arithmatex">\(y = f(x)\)</span> の <span class="arithmatex">\(x = a\)</span> における接線の傾きを表す。</p>
+<h3 id="2_3">2変数への拡張</h3>
+<p><span class="arithmatex">\(z = f(x, y)\)</span> は曲面なので、微分係数を求めることは <span class="arithmatex">\((x, y) = (a, b)\)</span> における<strong>接平面の傾き</strong>を求めることである。</p>
+<div class="figure-container">
+  <img src="assets/images/surface-tangent-plane.svg" alt="曲面と接平面">
+  <div class="caption">図5：曲面 $z = f(x, y)$ と点 $(a, b)$ における接平面。</div>
+</div>
+
+<p>平面の方程式は <span class="arithmatex">\(z = \alpha x + \beta y\)</span> の形なので、傾きは<strong>2つある</strong>。</p>
+<h3 id="x"><span class="arithmatex">\(x\)</span> に関する偏微分</h3>
+<p>曲面 <span class="arithmatex">\(z = f(x, y)\)</span> を <span class="arithmatex">\(y = b\)</span> で切った断面 <span class="arithmatex">\(z = f(x, b)\)</span> を考える。</p>
+<div class="figure-container">
+  <img src="assets/images/partial-deriv-x.svg" alt="x方向の偏微分">
+  <div class="caption">図6：$y = b$ で切った断面と $x$ 方向の偏微分。この傾きが $\left.\dfrac{\mathrm{d}f(x, b)}{\mathrm{d}x}\right|_{x=a}$ である。</div>
+</div>
+
+<p><span class="arithmatex">\(f(x, y)\)</span> が点 <span class="arithmatex">\((a, b)\)</span> において <span class="arithmatex">\(x\)</span> に関して<strong>偏微分可能</strong>とは、<span class="arithmatex">\(F(x) = f(x, b)\)</span> が <span class="arithmatex">\(x = a\)</span> で微分可能、すなわち</p>
+<div class="arithmatex">\[
+F'(a) = \lim_{h \to 0} \frac{F(a + h) - F(a)}{h} = \lim_{h \to 0} \frac{f(a + h,\, b) - f(a,\, b)}{h}
+\]</div>
+<p>が存在することである。この <span class="arithmatex">\(F'(a)\)</span> を、<span class="arithmatex">\(f\)</span> の <span class="arithmatex">\((a, b)\)</span> における <strong><span class="arithmatex">\(x\)</span> に関する偏微分係数</strong> といい、</p>
+<div class="arithmatex">\[
+f_x(a, b), \quad \frac{\partial f}{\partial x}(a, b), \quad \left.\frac{\partial f(x, y)}{\partial x}\right|_{(x,y)=(a,b)}
+\]</div>
+<p>と書く（<span class="arithmatex">\(\partial\)</span> はラウンド、デル、パーシャルなどと呼ばれる）。</p>
+<h3 id="y"><span class="arithmatex">\(y\)</span> に関する偏微分</h3>
+<p>同様に、<span class="arithmatex">\(G(y) = f(a, y)\)</span> として</p>
+<div class="figure-container">
+  <img src="assets/images/partial-deriv-y.svg" alt="y方向の偏微分">
+  <div class="caption">図7：$x = a$ で切った断面と $y$ 方向の偏微分。この傾きが $\left.\dfrac{\mathrm{d}f(a, y)}{\mathrm{d}y}\right|_{y=b}$ である。</div>
+</div>
+
+<div class="arithmatex">\[
+G'(b) = \lim_{h \to 0} \frac{G(b + h) - G(b)}{h} = \lim_{h \to 0} \frac{f(a,\, b + h) - f(a,\, b)}{h}
+\]</div>
+<p>を <span class="arithmatex">\(f\)</span> の <span class="arithmatex">\((a, b)\)</span> における <strong><span class="arithmatex">\(y\)</span> に関する偏微分係数</strong> といい、<span class="arithmatex">\(f_y(a, b)\)</span>, <span class="arithmatex">\(\dfrac{\partial f}{\partial y}(a, b)\)</span> と書く。</p>
+<h3 id="_4">偏導関数</h3>
+<div class="arithmatex">\[
+f_x(x, y) = \frac{\partial f(x, y)}{\partial x} = \lim_{h \to 0} \frac{f(x + h,\, y) - f(x,\, y)}{h}
+\]</div>
+<p>を <span class="arithmatex">\(f(x, y)\)</span> の <strong><span class="arithmatex">\(x\)</span> に関する偏導関数</strong> という。</p>
+<p>同様に</p>
+<div class="arithmatex">\[
+f_y(x, y) = \frac{\partial f(x, y)}{\partial y} = \lim_{h \to 0} \frac{f(x,\, y + h) - f(x,\, y)}{h}
+\]</div>
+<p>を <span class="arithmatex">\(f(x, y)\)</span> の <strong><span class="arithmatex">\(y\)</span> に関する偏導関数</strong> という。</p>
+<p><span class="arithmatex">\(f(x, y)\)</span> から <span class="arithmatex">\(f_x(x, y)\)</span> を求めることを <span class="arithmatex">\(f\)</span> を <strong><span class="arithmatex">\(x\)</span> で偏微分する</strong> という。</p>
+<h3 id="3">3変数以上への拡張</h3>
+<p>3変数以上の場合も同様に定義される。</p>
+<div class="arithmatex">\[
+\frac{\partial f(x, y, z)}{\partial x} = \lim_{h \to 0} \frac{f(x + h,\, y,\, z) - f(x,\, y,\, z)}{h}
+\]</div>
+<h3 id="_5">偏微分の計算方法</h3>
+<p><span class="arithmatex">\(\dfrac{\partial f}{\partial x}\)</span> は <span class="arithmatex">\(x\)</span> 以外の変数をすべて<strong>定数とみなして</strong>、<span class="arithmatex">\(x\)</span> で1変数と同様に微分すればよい。</p>
+<div class="admonition example">
+<p class="admonition-title">例題 1</p>
+<p><span class="arithmatex">\(f(x, y) = x^2 y^3\)</span></p>
+<p><strong>解</strong>：</p>
+<p>定義に基づく計算：</p>
+<div class="arithmatex">\[
+\frac{\partial f(x, y)}{\partial x} = \lim_{h \to 0} \frac{(x+h)^2 y^3 - x^2 y^3}{h} = \lim_{h \to 0} \frac{(x^2 + 2xh + h^2)y^3 - x^2 y^3}{h}
+\]</div>
+<div class="arithmatex">\[
+= \lim_{h \to 0} (2xy^3 + h y^3) = 2xy^3
+\]</div>
+<p>同様に</p>
+<div class="arithmatex">\[
+\frac{\partial f(x, y)}{\partial y} = \lim_{h \to 0} \frac{x^2(y+h)^3 - x^2 y^3}{h} = \lim_{h \to 0} (3x^2 y^2 + 3x^2 y h + x^2 h^2) = 3x^2 y^2
+\]</div>
+<p><span class="arithmatex">\(y\)</span> を定数とみなして微分すれば、直ちに <span class="arithmatex">\(\dfrac{\partial f}{\partial x} = 2xy^3\)</span> が得られる。</p>
+</div>
+<div class="admonition example">
+<p class="admonition-title">例題 2（p.184）</p>
+<p><span class="arithmatex">\(\displaystyle f(x, y) = \frac{x}{y}\)</span></p>
+<p><strong>解</strong>：</p>
+<div class="arithmatex">\[
+\frac{\partial f}{\partial x} = \frac{1}{y}, \qquad \frac{\partial f}{\partial y} = -\frac{x}{y^2}
+\]</div>
+</div>
+<div class="admonition example">
+<p class="admonition-title">例題 3（p.184）</p>
+<p><span class="arithmatex">\(f(x, y) = \sin(2x - y)\)</span></p>
+<p><strong>解</strong>：</p>
+<div class="arithmatex">\[
+\frac{\partial f}{\partial x} = 2\cos(2x - y), \qquad \frac{\partial f}{\partial y} = -\cos(2x - y)
+\]</div>
+</div>
+<div class="admonition example">
+<p class="admonition-title">例題 4（p.185）</p>
+<p><span class="arithmatex">\(f(x, y) = e^x \sin y\)</span></p>
+<p><strong>解</strong>：</p>
+<div class="arithmatex">\[
+\frac{\partial f}{\partial x} = e^x \sin y, \qquad \frac{\partial f}{\partial y} = e^x \cos y
+\]</div>
+</div>
+<hr />
+<h2 id="_6">偏微分可能性と連続性</h2>
+<p>1変数のときは「微分可能 <span class="arithmatex">\(\Rightarrow\)</span> 連続」であった。</p>
+<p>2変数のときは <strong>「偏微分可能 <span class="arithmatex">\(\Rightarrow\)</span> 連続」は成り立たない。</strong></p>
+<div class="admonition warning">
+<p class="admonition-title">反例</p>
+<div class="arithmatex">\[
+f(x, y) = \begin{cases}
+\dfrac{2xy}{x^2 + y^2} &amp; (x, y) \neq (0, 0) \\[8pt]
+0 &amp; (x, y) = (0, 0)
+\end{cases}
+\]</div>
+<p><strong>偏微分可能であること</strong>：</p>
+<div class="arithmatex">\[
+f_x(0, 0) = \lim_{h \to 0} \frac{f(h, 0) - f(0, 0)}{h} = \lim_{h \to 0} \frac{\frac{2h \cdot 0}{h^2} - 0}{h} = 0
+\]</div>
+<div class="arithmatex">\[
+f_y(0, 0) = \lim_{h \to 0} \frac{f(0, h) - f(0, 0)}{h} = \lim_{h \to 0} \frac{\frac{2 \cdot 0 \cdot h}{h^2} - 0}{h} = 0
+\]</div>
+<p><span class="arithmatex">\(\therefore\)</span> 偏微分可能。</p>
+<p><strong>連続でないこと</strong>：<span class="arithmatex">\(y = x\)</span> に沿って <span class="arithmatex">\((0, 0)\)</span> に近づけると</p>
+<div class="arithmatex">\[
+f(x, x) = \frac{2x^2}{x^2 + x^2} = 1 \neq 0 = f(0, 0)
+\]</div>
+<p><span class="arithmatex">\(\therefore\)</span> 連続でない。</p>
+</div>
+<p>連続であるためには、<span class="arithmatex">\((x, y)\)</span> をすべての方向から近づけても <span class="arithmatex">\(f(x, y)\)</span> が同じ値に近づく必要がある。一方、偏微分は <span class="arithmatex">\(x\)</span> 軸・<span class="arithmatex">\(y\)</span> 軸に沿った変化しか見ていない。</p>
+<p><span class="arithmatex">\(\longrightarrow\)</span> <strong>「全微分」</strong> が必要（次回以降で扱う）。</p>
+<hr />
+<h2 id="_7">演習問題</h2>
+<div class="admonition note">
+<p class="admonition-title">演習 1</p>
+<p><span class="arithmatex">\(\displaystyle f(x, y) = \frac{x}{x + y}\)</span> の偏導関数を求めよ。</p>
+<details class="success">
+<summary>解答</summary>
+<div class="arithmatex">\[
+f_x(x, y) = \frac{1 \cdot (x + y) - x \cdot 1}{(x + y)^2} = \frac{y}{(x + y)^2}
+\]</div>
+<div class="arithmatex">\[
+f_y(x, y) = \frac{- x \cdot 1}{(x + y)^2} = -\frac{x}{(x + y)^2}
+\]</div>
+</details>
+</div>
+<div class="admonition note">
+<p class="admonition-title">演習 2</p>
+<p><span class="arithmatex">\(f(x, y) = \sqrt{x^2 + y^2}\)</span> の偏導関数を求めよ。</p>
+<details class="success">
+<summary>解答</summary>
+<div class="arithmatex">\[
+f_x(x, y) = \frac{x}{\sqrt{x^2 + y^2}}, \qquad f_y(x, y) = \frac{y}{\sqrt{x^2 + y^2}}
+\]</div>
+</details>
+</div>
+<div class="admonition note">
+<p class="admonition-title">演習 3</p>
+<p><span class="arithmatex">\(f(x, y) = e^{ax} \sin(by)\)</span> の偏導関数を求めよ。</p>
+<details class="success">
+<summary>解答</summary>
+<div class="arithmatex">\[
+f_x(x, y) = ae^{ax} \sin(by), \qquad f_y(x, y) = be^{ax} \cos(by)
+\]</div>
+</details>
+</div>
+<div class="admonition note">
+<p class="admonition-title">演習 4</p>
+<p><span class="arithmatex">\(f(x, y) = \ln(x^2 + y^2)\)</span>, <span class="arithmatex">\((x, y) \neq (0, 0)\)</span> の偏導関数を求めよ。</p>
+<details class="success">
+<summary>解答</summary>
+<div class="arithmatex">\[
+f_x(x, y) = \frac{2x}{x^2 + y^2}, \qquad f_y(x, y) = \frac{2y}{x^2 + y^2}
+\]</div>
+</details>
+</div>
+<div class="admonition note">
+<p class="admonition-title">演習 5</p>
+<p><span class="arithmatex">\(\displaystyle f(x, y) = \tan^{-1}\!\left(\frac{x}{y}\right)\)</span> の偏導関数を求めよ。</p>
+<details class="success">
+<summary>解答</summary>
+<p><span class="arithmatex">\(\dfrac{\mathrm{d}}{\mathrm{d}u}\tan^{-1}(u) = \dfrac{1}{1 + u^2}\)</span> を用いる。</p>
+<div class="arithmatex">\[
+f_x(x, y) = \frac{1}{1 + \left(\frac{x}{y}\right)^2} \cdot \frac{1}{y} = \frac{y}{x^2 + y^2}
+\]</div>
+<div class="arithmatex">\[
+f_y(x, y) = \frac{1}{1 + \left(\frac{x}{y}\right)^2} \cdot \left(-\frac{x}{y^2}\right) = -\frac{x}{x^2 + y^2}
+\]</div>
+</details>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  ページトップへ戻る
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+      <div class="md-progress" data-md-component="progress" role="progressbar"></div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.instant", "navigation.instant.progress", "navigation.tabs", "navigation.top", "content.tooltips"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u30b3\u30d4\u30fc\u3057\u307e\u3057\u305f", "clipboard.copy": "\u30af\u30ea\u30c3\u30d7\u30dc\u30fc\u30c9\u3078\u30b3\u30d4\u30fc", "search.result.more.one": "\u3053\u306e\u30da\u30fc\u30b8\u5185\u306b\u3082\u30461\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.more.other": "\u3053\u306e\u30da\u30fc\u30b8\u5185\u306b\u3042\u3068#\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.none": "\u4f55\u3082\u898b\u3064\u304b\u308a\u307e\u305b\u3093\u3067\u3057\u305f", "search.result.one": "1\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.other": "#\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.placeholder": "\u691c\u7d22\u30ad\u30fc\u30ef\u30fc\u30c9\u3092\u5165\u529b\u3057\u3066\u304f\u3060\u3055\u3044", "search.result.term.missing": "\u691c\u7d22\u306b\u542b\u307e\u308c\u306a\u3044", "select.version": "\u30d0\u30fc\u30b8\u30e7\u30f3\u5207\u308a\u66ff\u3048"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+      
+        <script src="../javascripts/katex.js"></script>
+      
+    
+  </body>
+</html>

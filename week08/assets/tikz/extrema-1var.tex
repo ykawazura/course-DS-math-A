@@ -1,0 +1,64 @@
+\documentclass[tikz,border=5pt]{standalone}
+\usepackage{luatexja-fontspec}
+\setmainjfont{Hiragino Mincho ProN}
+\setsansjfont{Hiragino Sans}
+\usepackage{amsmath}
+\usetikzlibrary{arrows.meta}
+
+\begin{document}
+\begin{tikzpicture}[
+  every node/.style={font=\normalsize},
+  blabel/.style={font=\normalsize\sffamily, text=blue},
+]
+
+% Axes
+\draw[-{Stealth}, thick] (-0.5, 0) -- (10, 0) node[right] {$x$};
+\draw[-{Stealth}, thick] (0, -2.8) -- (0, 4.2) node[above] {$y$};
+
+% Domain markers
+\draw[thick] (0.5, -0.15) -- (0.5, 0.15);
+\node[below left] at (0.5, -0.2) {$a$};
+\draw[thick] (8.5, -0.15) -- (8.5, 0.15);
+\node[below] at (8.5, -0.2) {$b$};
+
+% Dashed lines at boundaries
+\draw[dashed, thin] (0.5, 0) -- (0.5, -2);
+\draw[dashed, thin] (8.5, 0) -- (8.5, 1.2);
+
+% Curve y = f(x)
+\draw[red, very thick]
+  (0.5, -2)
+  .. controls (0.8, -1.2) and (1.5, 2.0) .. (2.5, 2.2)
+  .. controls (3.5, 2.4) and (3.8, -1.5) .. (4.5, -1.2)
+  .. controls (5.0, -1.0) and (5.5, 3.2) .. (6.5, 3.2)
+  .. controls (7.2, 3.2) and (7.8, 1.5) .. (8.5, 1.2);
+
+% Label y = f(x)
+\node at (7.0, -1.5) {$y = f(x)$};
+
+% Local max (left peak)
+\draw[blue, -{Stealth}, thick] (2.5, 3.5) -- (2.5, 2.5);
+\node[blabel, above] at (2.5, 3.5) {極大};
+
+% Global max (right peak)
+\draw[blue, -{Stealth}, thick] (6.5, 4.5) -- (6.5, 3.5);
+\node[blabel, above] at (6.5, 4.5) {極大かつ最大};
+
+% Local min
+\draw[blue, -{Stealth}, thick] (4.5, -2.5) -- (4.5, -1.5);
+\node[blabel, below] at (4.5, -2.5) {極小};
+
+% Global min at boundary a
+\draw[blue, -{Stealth}, thick] (0.5, -3.5) -- (0.5, -2.3);
+\node[blabel, below] at (0.5, -3.5) {最小};
+
+% Filled dots at boundaries
+\fill[black] (0.5, -2) circle (2pt);
+\fill[black] (8.5, 1.2) circle (2pt);
+
+% Domain label
+\node[right] at (9.2, 2.5) {定義域 $a \le x \le b$};
+\node[right] at (9.7, 1.7) {（閉区間）};
+
+\end{tikzpicture}
+\end{document}

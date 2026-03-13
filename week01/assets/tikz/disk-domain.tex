@@ -1,0 +1,21 @@
+\input{preamble}
+\begin{document}
+\begin{tikzpicture}
+  % Axes
+  \draw[axis] (-3,0) -- (3,0) node[below] {$x$};
+  \draw[axis] (0,-3) -- (0,3) node[left] {$y$};
+
+  % Filled disk
+  \fill[blue, opacity=0.15] (0,0) circle (2);
+  \draw[very thick] (0,0) circle (2);
+
+  % Labels
+  \node[below right, font=\small] at (2,0) {$2$};
+  \node[below left, font=\small] at (-2,0) {$-2$};
+  \node[above right, font=\small] at (0,2) {$2$};
+  \node[below right, font=\small] at (0,-2) {$-2$};
+
+  % Equation
+  \node[font=\small] at (2.5,2.5) {$x^2+y^2 \leq 4$};
+\end{tikzpicture}
+\end{document}

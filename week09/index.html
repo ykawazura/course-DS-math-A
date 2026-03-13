@@ -1,0 +1,1624 @@
+
+<!doctype html>
+<html lang="ja" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="宇都宮大学 データサイエンスの数理A 講義ノート">
+      
+      
+        <meta name="author" content="川面 洋平">
+      
+      
+      
+        <link rel="prev" href="../week08/">
+      
+      
+        <link rel="next" href="../week10/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.2">
+    
+    
+      
+        <title>第9回 n変数の極値 - データサイエンスの数理A</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../stylesheets/extra.css">
+    
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#9n" class="md-skip">
+          コンテンツにスキップ
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="ヘッダー">
+    <a href=".." title="データサイエンスの数理A" class="md-header__button md-logo" aria-label="データサイエンスの数理A" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            データサイエンスの数理A
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              第9回 n変数の極値
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="検索" placeholder="検索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="検索">
+        
+        <button type="reset" class="md-search__icon md-icon" title="クリア" aria-label="クリア" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            検索を初期化
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="タブ" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+  
+    
+  
+  ホーム
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../week01/" class="md-tabs__link">
+          
+  
+  
+  講義ノート
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="ナビゲーション" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="データサイエンスの数理A" class="md-nav__button md-logo" aria-label="データサイエンスの数理A" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    データサイエンスの数理A
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ホーム
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    講義ノート
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    講義ノート
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week01/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第1回 ガイダンス、多変数関数の導入
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week02/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第2回 偏微分
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week03/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第3回 全微分
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week04/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第4回 高階偏導関数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week05/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第5回 合成関数の偏微分
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week06/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第6回 多変数のテイラー展開
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week07/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第7回 陰関数の微分
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week08/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第8回 2変数の極値
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第9回 n変数の極値
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第9回 n変数の極値
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目次">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目次
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#91-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.1 2変数の極値判定とヘッセ行列
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9.1 2変数の極値判定とヘッセ行列">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#hessian-matrix" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ヘッセ行列（Hessian matrix）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        固有値による解釈
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#92-n" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.2 n変数への一般化
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9.2 n変数への一般化">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        正定値性と極値
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        首座小行列式による判定
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#93-n" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.3 n変数の極値判定
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#94" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.4 例題
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9.4 例題">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例題1
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例題2
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#95" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.5 閉区間の最大値・最小値
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9.5 閉区間の最大値・最小値">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        単純な境界の場合：代入消去法
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        複雑な境界の場合
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        演習問題
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week10/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第10回 条件つき極値問題
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week12/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第12回 重積分
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week13/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第13回 重積分の変数変換
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week14/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第14回 広義積分
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week15/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第15回 ベクトル場の微分
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../supplement/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    おまけ ベクトル場の積分
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目次">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目次
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#91-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.1 2変数の極値判定とヘッセ行列
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9.1 2変数の極値判定とヘッセ行列">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#hessian-matrix" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ヘッセ行列（Hessian matrix）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        固有値による解釈
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#92-n" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.2 n変数への一般化
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9.2 n変数への一般化">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        正定値性と極値
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        首座小行列式による判定
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#93-n" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.3 n変数の極値判定
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#94" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.4 例題
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9.4 例題">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例題1
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例題2
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#95" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.5 閉区間の最大値・最小値
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9.5 閉区間の最大値・最小値">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        単純な境界の場合：代入消去法
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        複雑な境界の場合
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        演習問題
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="9n">第9回：n変数の極値</h1>
+<h2 id="91-2">9.1 2変数の極値判定とヘッセ行列</h2>
+<p>前回、停留点 <span class="arithmatex">\((a, b)\)</span> における2次形式</p>
+<div class="arithmatex">\[
+f(a + h,\, b + k) - f(a, b) \approx \frac{1}{2}\bigl[A h^2 + 2B hk + C k^2\bigr] = Q(h, k)
+\]</div>
+<p>の符号から極値を判定した（<span class="arithmatex">\(A = f_{xx}\)</span>, <span class="arithmatex">\(B = f_{xy}\)</span>, <span class="arithmatex">\(C = f_{yy}\)</span>）。これを<strong>行列の言葉</strong>で書き直す。</p>
+<h3 id="hessian-matrix">ヘッセ行列（Hessian matrix）</h3>
+<div class="arithmatex">\[
+Q(h, k) = \frac{1}{2} \begin{pmatrix} h &amp; k \end{pmatrix}
+\underbrace{\begin{pmatrix} f_{xx}(a,b) &amp; f_{xy}(a,b) \\ f_{xy}(a,b) &amp; f_{yy}(a,b) \end{pmatrix}}_{H}
+\begin{pmatrix} h \\ k \end{pmatrix}
+\]</div>
+<p>この対称行列 <span class="arithmatex">\(H\)</span> を<strong>ヘッセ行列</strong>（Hessian）という。</p>
+<div class="arithmatex">\[
+AC - B^2 = |H| \quad \text{（ヘッセ行列の行列式）}
+\]</div>
+<hr />
+<h3 id="_1">固有値による解釈</h3>
+<p><span class="arithmatex">\(H\)</span> は実対称行列なので、直交行列 <span class="arithmatex">\(Q\)</span> により対角化できる：</p>
+<div class="arithmatex">\[
+H = Q \begin{pmatrix} \lambda_1 &amp; 0 \\ 0 &amp; \lambda_2 \end{pmatrix} Q^T \qquad (Q Q^T = I)
+\]</div>
+<p>ここで <span class="arithmatex">\(\lambda_1\)</span>, <span class="arithmatex">\(\lambda_2\)</span> は <span class="arithmatex">\(H\)</span> の固有値である。</p>
+<p><span class="arithmatex">\(Q^T \begin{pmatrix} h \\ k \end{pmatrix} = \begin{pmatrix} \xi \\ \eta \end{pmatrix}\)</span> とおくと</p>
+<div class="arithmatex">\[
+Q(h, k) = \frac{1}{2}(\lambda_1 \xi^2 + \lambda_2 \eta^2)
+\]</div>
+<p>また</p>
+<div class="arithmatex">\[
+\begin{vmatrix} \frac{\partial \xi}{\partial h} &amp; \frac{\partial \xi}{\partial k} \\ \frac{\partial \eta}{\partial h} &amp; \frac{\partial \eta}{\partial k} \end{vmatrix} = |Q^T| = 1
+\]</div>
+<p>なので <span class="arithmatex">\((\xi, \eta)\)</span> と <span class="arithmatex">\((h, k)\)</span> は1対1に対応する。<span class="arithmatex">\(Q(h, k)\)</span> の符号は <span class="arithmatex">\(\lambda_1\)</span>, <span class="arithmatex">\(\lambda_2\)</span> の符号で決まる。</p>
+<div class="arithmatex">\[
+|H| = \lambda_1 \lambda_2
+\]</div>
+<p><strong>（1-1）</strong> <span class="arithmatex">\(\lambda_1 &gt; 0\)</span> かつ <span class="arithmatex">\(\lambda_2 &gt; 0\)</span> のとき</p>
+<p><span class="arithmatex">\(Q(\xi, \eta) &gt; 0\)</span>（ <span class="arithmatex">\(AC - B^2 &gt; 0\)</span> かつ <span class="arithmatex">\(A &gt; 0\)</span> と等価）</p>
+<p><strong>（1-2）</strong> <span class="arithmatex">\(\lambda_1 &lt; 0\)</span> かつ <span class="arithmatex">\(\lambda_2 &lt; 0\)</span> のとき</p>
+<p><span class="arithmatex">\(Q(\xi, \eta) &lt; 0\)</span>（ <span class="arithmatex">\(AC - B^2 &gt; 0\)</span> かつ <span class="arithmatex">\(A &lt; 0\)</span> と等価）</p>
+<p><strong>（2）</strong> <span class="arithmatex">\(\lambda_1\)</span> と <span class="arithmatex">\(\lambda_2\)</span> が異符号のとき</p>
+<p><span class="arithmatex">\(Q\)</span> の符号は <span class="arithmatex">\(\xi\)</span>, <span class="arithmatex">\(\eta\)</span> の値によって変わる → <strong>鞍点</strong>（ <span class="arithmatex">\(AC - B^2 &lt; 0\)</span> と等価）</p>
+<p><strong>（3）</strong> <span class="arithmatex">\(\lambda_1 = 0\)</span> または <span class="arithmatex">\(\lambda_2 = 0\)</span> のとき</p>
+<p><span class="arithmatex">\(Q = 0\)</span> となる方向が存在する → <strong>判定不能</strong>（ <span class="arithmatex">\(AC - B^2 = 0\)</span> と等価）</p>
+<hr />
+<h2 id="92-n">9.2 n変数への一般化</h2>
+<p><span class="arithmatex">\(n\)</span> 変数関数 <span class="arithmatex">\(f(x_1, \ldots, x_n)\)</span> の停留点における2次近似は</p>
+<div class="arithmatex">\[
+\begin{aligned}
+&amp;f(x_1 + \Delta x_1, \ldots, x_n + \Delta x_n) - f(x_1, \ldots, x_n) \\
+&amp;= \underbrace{\left(\Delta x_1 \frac{\partial}{\partial x_1} + \cdots + \Delta x_n \frac{\partial}{\partial x_n}\right) f(x_1, \ldots, x_n)}_{0}
++ \frac{1}{2!}\left(\Delta x_1 \frac{\partial}{\partial x_1} + \cdots + \Delta x_n \frac{\partial}{\partial x_n}\right)^2 f + \cdots \\
+&amp;\approx \frac{1}{2}\, \Delta \mathbf{x}^T\, H\, \Delta \mathbf{x}
+\end{aligned}
+\]</div>
+<p>ここで</p>
+<div class="arithmatex">\[
+H = \begin{pmatrix}
+\dfrac{\partial^2 f}{\partial x_1^2} &amp; \dfrac{\partial^2 f}{\partial x_1 \partial x_2} &amp; \cdots &amp; \dfrac{\partial^2 f}{\partial x_1 \partial x_n} \\[6pt]
+\dfrac{\partial^2 f}{\partial x_2 \partial x_1} &amp; \dfrac{\partial^2 f}{\partial x_2^2} &amp; \cdots &amp; \dfrac{\partial^2 f}{\partial x_2 \partial x_n} \\[6pt]
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots \\[6pt]
+\dfrac{\partial^2 f}{\partial x_n \partial x_1} &amp; \dfrac{\partial^2 f}{\partial x_n \partial x_2} &amp; \cdots &amp; \dfrac{\partial^2 f}{\partial x_n^2}
+\end{pmatrix}
+\]</div>
+<p>が <span class="arithmatex">\(n\)</span> 変数のヘッセ行列である。</p>
+<hr />
+<h3 id="_2">正定値性と極値</h3>
+<p><span class="arithmatex">\(H\)</span> の固有値を <span class="arithmatex">\(\lambda_1, \lambda_2, \ldots, \lambda_n\)</span> とすると：</p>
+<p><strong>(1-1)</strong> <span class="arithmatex">\(H\)</span> の固有値が<strong>すべて正</strong>のとき（<span class="arithmatex">\(H\)</span> が<strong>正定値</strong>）</p>
+<div class="arithmatex">\[
+\Delta \mathbf{x}^T H\, \Delta \mathbf{x} &gt; 0 \quad (\forall\, \Delta \mathbf{x} \neq \mathbf{0})
+\]</div>
+<p><span class="arithmatex">\(\Rightarrow\)</span> <strong>極小</strong></p>
+<p><strong>(1-2)</strong> <span class="arithmatex">\(H\)</span> の固有値が<strong>すべて負</strong>のとき（<span class="arithmatex">\(H\)</span> が<strong>負定値</strong>）</p>
+<div class="arithmatex">\[
+\Delta \mathbf{x}^T H\, \Delta \mathbf{x} &lt; 0 \quad (\forall\, \Delta \mathbf{x} \neq \mathbf{0})
+\]</div>
+<p><span class="arithmatex">\(\Rightarrow\)</span> <strong>極大</strong></p>
+<p><strong>(2)</strong> <span class="arithmatex">\(H\)</span> の固有値に<strong>正と負が混在</strong>するとき（<span class="arithmatex">\(H\)</span> が<strong>不定値</strong>）</p>
+<p><span class="arithmatex">\(\Delta \mathbf{x}^T H\, \Delta \mathbf{x}\)</span> の符号が方向によって変わる <span class="arithmatex">\(\Rightarrow\)</span> <strong>鞍点</strong></p>
+<p><strong>(3)</strong> <span class="arithmatex">\(H\)</span> の固有値に<strong>0が含まれる</strong>とき（<span class="arithmatex">\(|H| = 0\)</span>）</p>
+<p><span class="arithmatex">\(\Rightarrow\)</span> <strong>判定不能</strong></p>
+<hr />
+<h3 id="_3">首座小行列式による判定</h3>
+<p>固有値を直接求めるのは大変なので、<strong>首座小行列式</strong>（leading principal minors）を用いて判定する。</p>
+<p><span class="arithmatex">\(H\)</span> の左上 <span class="arithmatex">\(k \times k\)</span> 部分行列を <span class="arithmatex">\(H_k\)</span> とする（<span class="arithmatex">\(1 \le k \le n\)</span>）。</p>
+<div class="figure-container">
+  <img src="assets/images/hessian-minors.svg" alt="ヘッセ行列と首座小行列式 H_1, H_2, H_3">
+</div>
+
+<ul>
+<li><span class="arithmatex">\(|H_k| &gt; 0\)</span>（<span class="arithmatex">\(1 \le k \le n\)</span>）<span class="arithmatex">\(\Rightarrow\)</span> <strong>正定値</strong></li>
+<li><span class="arithmatex">\(|-H_k| &gt; 0\)</span>（<span class="arithmatex">\(1 \le k \le n\)</span>、すなわち <span class="arithmatex">\(|H_k|\)</span> の符号が <span class="arithmatex">\((-1)^k\)</span> と一致）<span class="arithmatex">\(\Rightarrow\)</span> <strong>負定値</strong></li>
+</ul>
+<hr />
+<h2 id="93-n">9.3 n変数の極値判定</h2>
+<div class="admonition info">
+<p class="admonition-title">n変数関数の極値の判定</p>
+<p>停留点 <span class="arithmatex">\(\mathbf{a}\)</span> におけるヘッセ行列 <span class="arithmatex">\(H\)</span> に対して：</p>
+<p><strong>Step 1.</strong> <span class="arithmatex">\(|H| = 0\)</span> <span class="arithmatex">\(\Rightarrow\)</span> <strong>判定不能</strong></p>
+<p><strong>Step 2.</strong> <span class="arithmatex">\(|H| \neq 0\)</span> かつ <span class="arithmatex">\(|H_k| &gt; 0\)</span>（<span class="arithmatex">\(1 \le k \le n\)</span>） <span class="arithmatex">\(\Rightarrow\)</span> <strong>極小</strong></p>
+<p><strong>Step 3.</strong> <span class="arithmatex">\(|H| \neq 0\)</span> かつ <span class="arithmatex">\(|-H_k| &gt; 0\)</span>（<span class="arithmatex">\(1 \le k \le n\)</span>） <span class="arithmatex">\(\Rightarrow\)</span> <strong>極大</strong></p>
+<p><strong>Step 4.</strong> それ以外 <span class="arithmatex">\(\Rightarrow\)</span> <strong>鞍点</strong></p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">2変数の場合との対応</p>
+<p><span class="arithmatex">\(n = 2\)</span> のとき <span class="arithmatex">\(H = \begin{pmatrix} A &amp; B \\ B &amp; C \end{pmatrix}\)</span> で</p>
+<ul>
+<li><span class="arithmatex">\(|H_1| = A\)</span>, <span class="arithmatex">\(|H_2| = AC - B^2\)</span></li>
+</ul>
+<p>Step 2（極小）：<span class="arithmatex">\(A &gt; 0\)</span> かつ <span class="arithmatex">\(AC - B^2 &gt; 0\)</span> → 前回の判定条件と一致する。</p>
+</div>
+<hr />
+<h2 id="94">9.4 例題</h2>
+<h3 id="1">例題1</h3>
+<div class="admonition example">
+<p class="admonition-title"><span class="arithmatex">\(f(x, y, z) = x^2 + y^2 + z^2 - 2x - 4y + 6z + 10\)</span> の極値を求めよ。</p>
+<details class="success">
+<summary>解</summary>
+<p>停留点を求める。</p>
+<div class="arithmatex">\[
+f_x = 2x - 2 = 0 \quad \Rightarrow \quad x = 1
+\]</div>
+<div class="arithmatex">\[
+f_y = 2y - 4 = 0 \quad \Rightarrow \quad y = 2
+\]</div>
+<div class="arithmatex">\[
+f_z = 2z + 6 = 0 \quad \Rightarrow \quad z = -3
+\]</div>
+<p>停留点は <span class="arithmatex">\((1, 2, -3)\)</span>。</p>
+<p>2階偏導関数を求める。</p>
+<div class="arithmatex">\[
+f_{xx} = 2, \quad f_{yy} = 2, \quad f_{zz} = 2, \quad f_{xy} = f_{xz} = f_{yz} = 0
+\]</div>
+<p>ヘッセ行列は</p>
+<div class="arithmatex">\[
+H = \begin{pmatrix} 2 &amp; 0 &amp; 0 \\ 0 &amp; 2 &amp; 0 \\ 0 &amp; 0 &amp; 2 \end{pmatrix}
+\]</div>
+<p>首座小行列式を求める。</p>
+<div class="arithmatex">\[
+|H_1| = 2 &gt; 0, \qquad |H_2| = \begin{vmatrix} 2 &amp; 0 \\ 0 &amp; 2 \end{vmatrix} = 4 &gt; 0, \qquad |H_3| = |H| = 8 &gt; 0
+\]</div>
+<p>すべて正なので <span class="arithmatex">\(H\)</span> は正定値。</p>
+<p><span class="arithmatex">\(\therefore\)</span> <span class="arithmatex">\((1, 2, -3)\)</span> で<strong>極小値</strong> <span class="arithmatex">\(f(1, 2, -3) = 1 + 4 + 9 - 2 - 8 - 18 + 10 = -4\)</span></p>
+</details>
+</div>
+<h3 id="2">例題2</h3>
+<div class="admonition example">
+<p class="admonition-title"><span class="arithmatex">\(f(x, y, z) = x^2 + y^2 + z^2 + 2xy - 4xz\)</span> の極値を調べよ。</p>
+<details class="success">
+<summary>解</summary>
+<p>停留点を求める。</p>
+<div class="arithmatex">\[
+f_x = 2x + 2y - 4z = 0
+\]</div>
+<div class="arithmatex">\[
+f_y = 2y + 2x = 0 \quad \Rightarrow \quad y = -x
+\]</div>
+<div class="arithmatex">\[
+f_z = 2z - 4x = 0 \quad \Rightarrow \quad z = 2x
+\]</div>
+<p><span class="arithmatex">\(f_x\)</span> に代入すると <span class="arithmatex">\(2x - 2x - 8x = -8x = 0\)</span> より <span class="arithmatex">\(x = 0\)</span>。</p>
+<p>停留点は <span class="arithmatex">\((0, 0, 0)\)</span>。</p>
+<p>ヘッセ行列は</p>
+<div class="arithmatex">\[
+H = \begin{pmatrix} 2 &amp; 2 &amp; -4 \\ 2 &amp; 2 &amp; 0 \\ -4 &amp; 0 &amp; 2 \end{pmatrix}
+\]</div>
+<p>首座小行列式を求める。</p>
+<div class="arithmatex">\[
+|H_1| = 2
+\]</div>
+<div class="arithmatex">\[
+|H_2| = \begin{vmatrix} 2 &amp; 2 \\ 2 &amp; 2 \end{vmatrix} = 4 - 4 = 0
+\]</div>
+<div class="arithmatex">\[
+|H_3| = |H| = 2(4 - 0) - 2(4 - 0) + (-4)(0 + 8) = 8 - 8 - 32 = -32
+\]</div>
+<p><span class="arithmatex">\(|H_2| = 0\)</span> なので正定値でも負定値でもない。<span class="arithmatex">\(|H| \neq 0\)</span> なので判定不能でもない。</p>
+<p><span class="arithmatex">\(\therefore\)</span> <span class="arithmatex">\((0, 0, 0)\)</span> は<strong>鞍点</strong></p>
+</details>
+</div>
+<hr />
+<h2 id="95">9.5 閉区間の最大値・最小値</h2>
+<p>多変数関数の変数が<strong>境界のある閉領域</strong>上にあるとき、<strong>最大値</strong>と<strong>最小値</strong>が存在する。</p>
+<p>最大値（最小値）は、</p>
+<ul>
+<li>領域内部の<strong>極大値</strong>（極小値）</li>
+<li><strong>境界上</strong>での値</li>
+</ul>
+<p>のいずれかである。</p>
+<h3 id="_4">単純な境界の場合：代入消去法</h3>
+<p>境界が座標軸に平行な矩形領域の場合、境界上では1つの変数が定数になるので、残りの変数の1変数関数として調べればよい。</p>
+<div class="admonition example">
+<p class="admonition-title">例：<span class="arithmatex">\(f(x, y) = xy^2 - x - y\)</span> の <span class="arithmatex">\(0 \le x \le 2\)</span>, <span class="arithmatex">\(0 \le y \le 2\)</span> における最大値・最小値</p>
+<details class="success">
+<summary>解</summary>
+<p><div class="figure-container">
+  <img src="assets/images/closed-region-candidates.svg" alt="閉領域 [0,2]×[0,2] 上の候補点">
+</div></p>
+<p><strong>内部の停留点を求める。</strong></p>
+<div class="arithmatex">\[
+f_x = y^2 - 1 = 0 \quad \Rightarrow \quad y = 1 \quad (\text{$0 \le y \le 2$ より})
+\]</div>
+<div class="arithmatex">\[
+f_y = 2xy - 1 = 0 \quad \Rightarrow \quad x = \frac{1}{2}
+\]</div>
+<p>停留点は <span class="arithmatex">\(\left(\dfrac{1}{2},\, 1\right)\)</span> で、<span class="arithmatex">\(f\!\left(\dfrac{1}{2},\, 1\right) = \dfrac{1}{2} - \dfrac{1}{2} - 1 = -1\)</span>。</p>
+<p><strong>境界上の値を調べる。</strong></p>
+<p><span class="arithmatex">\(f(x, 0) = -x\)</span> （<span class="arithmatex">\(0 \le x \le 2\)</span>）：単調減少</p>
+<p><span class="arithmatex">\(f(x, 2) = 4x - x - 2 = 3x - 2\)</span> （<span class="arithmatex">\(0 \le x \le 2\)</span>）：単調増加</p>
+<p><span class="arithmatex">\(f(0, y) = -y\)</span> （<span class="arithmatex">\(0 \le y \le 2\)</span>）：単調減少</p>
+<p><span class="arithmatex">\(f(2, y) = 2y^2 - 2 - y\)</span> （<span class="arithmatex">\(0 \le y \le 2\)</span>）：<span class="arithmatex">\(\dfrac{d}{dy}(2y^2 - y - 2) = 4y - 1 = 0\)</span> より <span class="arithmatex">\(y = \dfrac{1}{4}\)</span></p>
+<p><span class="arithmatex">\(f\!\left(2, \dfrac{1}{4}\right) = 2 \cdot \dfrac{1}{16} - 2 - \dfrac{1}{4} = \dfrac{1}{8} - \dfrac{9}{4} = -\dfrac{17}{8}\)</span></p>
+<p><strong>候補をすべて比較する。</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">点</th>
+<th style="text-align: center;"><span class="arithmatex">\(f\)</span> の値</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><span class="arithmatex">\((0, 0)\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(0\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;"><span class="arithmatex">\((0, 2)\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(-2\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;"><span class="arithmatex">\((2, 0)\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(-2\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;"><span class="arithmatex">\((2, 2)\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(4\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;"><span class="arithmatex">\(\left(\frac{1}{2}, 1\right)\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(-1\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;"><span class="arithmatex">\(\left(2, \frac{1}{4}\right)\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(-\frac{17}{8}\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><span class="arithmatex">\(\therefore\)</span> <strong>最大値</strong> <span class="arithmatex">\(f(2, 2) = 4\)</span>、<strong>最小値</strong> <span class="arithmatex">\(f\!\left(2, \dfrac{1}{4}\right) = -\dfrac{17}{8}\)</span></p>
+</details>
+</div>
+<h3 id="_5">複雑な境界の場合</h3>
+<p>境界が曲線で表されるような場合は、次回学ぶ<strong>ラグランジュの未定乗数法</strong>を用いる。</p>
+<hr />
+<h2 id="_6">演習問題</h2>
+<div class="admonition note">
+<p class="admonition-title">演習1</p>
+<p><span class="arithmatex">\(f(x, y, z) = xy + yz + zx - x - y - z\)</span> の極値を調べよ。</p>
+<details class="success">
+<summary>解答</summary>
+<p>停留点を求める。</p>
+<div class="arithmatex">\[
+f_x = y + z - 1 = 0
+\]</div>
+<div class="arithmatex">\[
+f_y = x + z - 1 = 0
+\]</div>
+<div class="arithmatex">\[
+f_z = y + x - 1 = 0
+\]</div>
+<p><span class="arithmatex">\(f_x - f_y\)</span> より <span class="arithmatex">\(y - x = 0\)</span>、すなわち <span class="arithmatex">\(x = y\)</span>。</p>
+<p><span class="arithmatex">\(f_z\)</span> に代入して <span class="arithmatex">\(2x - 1 = 0\)</span> より <span class="arithmatex">\(x = \dfrac{1}{2}\)</span>。</p>
+<p><span class="arithmatex">\(f_x\)</span> より <span class="arithmatex">\(z = 1 - y = \dfrac{1}{2}\)</span>。</p>
+<p>停留点は <span class="arithmatex">\(\left(\dfrac{1}{2},\, \dfrac{1}{2},\, \dfrac{1}{2}\right)\)</span>。</p>
+<p>ヘッセ行列を求める。</p>
+<div class="arithmatex">\[
+f_{xx} = 0, \quad f_{yy} = 0, \quad f_{zz} = 0, \quad f_{xy} = 1, \quad f_{xz} = 1, \quad f_{yz} = 1
+\]</div>
+<div class="arithmatex">\[
+H = \begin{pmatrix} 0 &amp; 1 &amp; 1 \\ 1 &amp; 0 &amp; 1 \\ 1 &amp; 1 &amp; 0 \end{pmatrix}
+\]</div>
+<p>首座小行列式を求める。</p>
+<div class="arithmatex">\[
+|H_1| = 0, \qquad |H_2| = \begin{vmatrix} 0 &amp; 1 \\ 1 &amp; 0 \end{vmatrix} = -1, \qquad |H| = 0 + 1 + 1 - 0 - 0 - 0 = 2
+\]</div>
+<p><span class="arithmatex">\(|H| = 2 \neq 0\)</span> なので判定不能ではない。</p>
+<p><span class="arithmatex">\(|H_1| = 0\)</span> より正定値でも負定値でもない。</p>
+<p><span class="arithmatex">\(\therefore\)</span> <span class="arithmatex">\(\left(\dfrac{1}{2},\, \dfrac{1}{2},\, \dfrac{1}{2}\right)\)</span> は<strong>鞍点</strong></p>
+</details>
+</div>
+<div class="admonition note">
+<p class="admonition-title">演習2</p>
+<p><span class="arithmatex">\(f(x, y, z) = \sin x + \sin y + \sin z - \sin x \sin y - \sin y \sin z - \sin z \sin x\)</span> の <span class="arithmatex">\(0 &lt; x, y, z &lt; \dfrac{\pi}{2}\)</span> における極値を調べよ。</p>
+<details class="success">
+<summary>解答</summary>
+<p>停留点を求める。</p>
+<div class="arithmatex">\[
+f_x = \cos x\,(1 - \sin y - \sin z) = 0
+\]</div>
+<div class="arithmatex">\[
+f_y = \cos y\,(1 - \sin x - \sin z) = 0
+\]</div>
+<div class="arithmatex">\[
+f_z = \cos z\,(1 - \sin x - \sin y) = 0
+\]</div>
+<p><span class="arithmatex">\(0 &lt; x, y, z &lt; \dfrac{\pi}{2}\)</span> では <span class="arithmatex">\(\cos x, \cos y, \cos z \neq 0\)</span> なので</p>
+<div class="arithmatex">\[
+\sin x + \sin z = 1, \quad \sin x + \sin y = 1, \quad \sin y + \sin z = 1
+\]</div>
+<p>辺々足して <span class="arithmatex">\(2(\sin x + \sin y + \sin z) = 3\)</span> より <span class="arithmatex">\(\sin x + \sin y + \sin z = \dfrac{3}{2}\)</span>。</p>
+<p>よって <span class="arithmatex">\(\sin x = \sin y = \sin z = \dfrac{1}{2}\)</span> すなわち <span class="arithmatex">\(x = y = z = \dfrac{\pi}{6}\)</span>。</p>
+<p>2階偏導関数を求める。</p>
+<div class="arithmatex">\[
+f_{xx} = -\sin x\,(1 - \sin y - \sin z)
+\]</div>
+<div class="arithmatex">\[
+f_{xy} = -\cos x \cos y, \qquad f_{xz} = -\cos x \cos z
+\]</div>
+<div class="arithmatex">\[
+f_{yy} = -\sin y\,(1 - \sin x - \sin z), \qquad f_{yz} = -\cos y \cos z
+\]</div>
+<div class="arithmatex">\[
+f_{zz} = -\cos z\,(1 - \sin x - \sin y)
+\]</div>
+<p><span class="arithmatex">\(\left(\dfrac{\pi}{6}, \dfrac{\pi}{6}, \dfrac{\pi}{6}\right)\)</span> で評価する。<span class="arithmatex">\(\sin\dfrac{\pi}{6} = \dfrac{1}{2}\)</span>, <span class="arithmatex">\(\cos\dfrac{\pi}{6} = \dfrac{\sqrt{3}}{2}\)</span> より</p>
+<div class="arithmatex">\[
+f_{xx} = f_{yy} = f_{zz} = -\frac{1}{2}(1 - \frac{1}{2} - \frac{1}{2}) = 0
+\]</div>
+<div class="arithmatex">\[
+f_{xy} = f_{xz} = f_{yz} = -\frac{\sqrt{3}}{2} \cdot \frac{\sqrt{3}}{2} = -\frac{3}{4}
+\]</div>
+<p>ヘッセ行列は</p>
+<div class="arithmatex">\[
+H = \begin{pmatrix} 0 &amp; -\frac{3}{4} &amp; -\frac{3}{4} \\[4pt] -\frac{3}{4} &amp; 0 &amp; -\frac{3}{4} \\[4pt] -\frac{3}{4} &amp; -\frac{3}{4} &amp; 0 \end{pmatrix}
+\]</div>
+<p>首座小行列式を求める。</p>
+<div class="arithmatex">\[
+|H_1| = 0
+\]</div>
+<div class="arithmatex">\[
+|H_2| = \begin{vmatrix} 0 &amp; -\frac{3}{4} \\[2pt] -\frac{3}{4} &amp; 0 \end{vmatrix} = 0 - \frac{9}{16} = -\frac{9}{16}
+\]</div>
+<div class="arithmatex">\[
+|H| = -\left(\frac{3}{4}\right)^3 - \left(\frac{3}{4}\right)^3 = -\frac{27}{32}
+\]</div>
+<p><span class="arithmatex">\(|H| \neq 0\)</span> なので判定不能ではない。<span class="arithmatex">\(|H_1| = 0\)</span> より正定値でも負定値でもない。</p>
+<p><span class="arithmatex">\(\therefore\)</span> <span class="arithmatex">\(\left(\dfrac{\pi}{6},\, \dfrac{\pi}{6},\, \dfrac{\pi}{6}\right)\)</span> は<strong>鞍点</strong></p>
+</details>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  ページトップへ戻る
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+      <div class="md-progress" data-md-component="progress" role="progressbar"></div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.instant", "navigation.instant.progress", "navigation.tabs", "navigation.top", "content.tooltips"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u30b3\u30d4\u30fc\u3057\u307e\u3057\u305f", "clipboard.copy": "\u30af\u30ea\u30c3\u30d7\u30dc\u30fc\u30c9\u3078\u30b3\u30d4\u30fc", "search.result.more.one": "\u3053\u306e\u30da\u30fc\u30b8\u5185\u306b\u3082\u30461\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.more.other": "\u3053\u306e\u30da\u30fc\u30b8\u5185\u306b\u3042\u3068#\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.none": "\u4f55\u3082\u898b\u3064\u304b\u308a\u307e\u305b\u3093\u3067\u3057\u305f", "search.result.one": "1\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.other": "#\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.placeholder": "\u691c\u7d22\u30ad\u30fc\u30ef\u30fc\u30c9\u3092\u5165\u529b\u3057\u3066\u304f\u3060\u3055\u3044", "search.result.term.missing": "\u691c\u7d22\u306b\u542b\u307e\u308c\u306a\u3044", "select.version": "\u30d0\u30fc\u30b8\u30e7\u30f3\u5207\u308a\u66ff\u3048"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+      
+        <script src="../javascripts/katex.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,27 @@
+\input{preamble}
+\begin{document}
+\begin{tikzpicture}[
+  neuron/.style={circle, draw, minimum size=1.2cm, thick},
+  >=Stealth
+]
+  % Input nodes
+  \node (x1) at (0, 2.5) {$x_1$};
+  \node (x2) at (0, 1.25) {$x_2$};
+  \node (xdots) at (0, 0) {$\vdots$};
+  \node (xm) at (0, -1.25) {$x_m$};
+
+  % Neuron
+  \node[neuron] (f) at (3.5, 0.625) {$f$};
+
+  % Output
+  \node (yj) at (6, 0.625) {$y_j$};
+
+  % Connections with weights
+  \draw[->, thick] (x1) -- (f) node[midway, above, font=\small] {$a_1$};
+  \draw[->, thick] (x2) -- (f) node[midway, above, font=\small] {$a_2$};
+  \draw[->, thick] (xm) -- (f) node[midway, below, font=\small] {$a_m$};
+
+  % Output arrow
+  \draw[->, thick] (f) -- (yj);
+\end{tikzpicture}
+\end{document}

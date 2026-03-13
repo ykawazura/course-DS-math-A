@@ -1,0 +1,1447 @@
+
+<!doctype html>
+<html lang="ja" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="宇都宮大学 データサイエンスの数理A 講義ノート">
+      
+      
+        <meta name="author" content="川面 洋平">
+      
+      
+      
+        <link rel="prev" href="../week13/">
+      
+      
+        <link rel="next" href="../week15/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.2">
+    
+    
+      
+        <title>第14回 広義積分 - データサイエンスの数理A</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../stylesheets/extra.css">
+    
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#14" class="md-skip">
+          コンテンツにスキップ
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="ヘッダー">
+    <a href=".." title="データサイエンスの数理A" class="md-header__button md-logo" aria-label="データサイエンスの数理A" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            データサイエンスの数理A
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              第14回 広義積分
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="検索" placeholder="検索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="検索">
+        
+        <button type="reset" class="md-search__icon md-icon" title="クリア" aria-label="クリア" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            検索を初期化
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="タブ" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+  
+    
+  
+  ホーム
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../week01/" class="md-tabs__link">
+          
+  
+  
+  講義ノート
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="ナビゲーション" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="データサイエンスの数理A" class="md-nav__button md-logo" aria-label="データサイエンスの数理A" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    データサイエンスの数理A
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ホーム
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    講義ノート
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    講義ノート
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week01/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第1回 ガイダンス、多変数関数の導入
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week02/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第2回 偏微分
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week03/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第3回 全微分
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week04/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第4回 高階偏導関数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week05/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第5回 合成関数の偏微分
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week06/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第6回 多変数のテイラー展開
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week07/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第7回 陰関数の微分
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week08/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第8回 2変数の極値
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week09/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第9回 n変数の極値
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week10/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第10回 条件つき極値問題
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week12/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第12回 重積分
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week13/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第13回 重積分の変数変換
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第14回 広義積分
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第14回 広義積分
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目次">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目次
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#141" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14.1 被積分関数が発散する広義積分
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#142" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14.2 積分範囲が無限の広義積分
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#143" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14.3 例題
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="14.3 例題">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例題1
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例題2
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#144" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14.4 ガウス積分
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="14.4 ガウス積分">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        正規分布との関連
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#145" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14.5 広義重積分と積分順序
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="14.5 広義重積分と積分順序">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例題3
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        演習問題
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="演習問題">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-p256" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        演習1（教科書 p.256）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week15/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第15回 ベクトル場の微分
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../supplement/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    おまけ ベクトル場の積分
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目次">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目次
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#141" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14.1 被積分関数が発散する広義積分
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#142" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14.2 積分範囲が無限の広義積分
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#143" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14.3 例題
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="14.3 例題">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例題1
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例題2
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#144" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14.4 ガウス積分
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="14.4 ガウス積分">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        正規分布との関連
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#145" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14.5 広義重積分と積分順序
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="14.5 広義重積分と積分順序">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例題3
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        演習問題
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="演習問題">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-p256" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        演習1（教科書 p.256）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="14">第14回：広義積分</h1>
+<h2 id="141">14.1 被積分関数が発散する広義積分</h2>
+<p>被積分関数が積分区間の端点で発散する場合を考える。</p>
+<div class="arithmatex">\[
+\int_0^1 \frac{1}{\sqrt{x}}\, dx, \qquad \frac{1}{\sqrt{x}} \to \infty \quad (x \to 0)
+\]</div>
+<div class="figure-container">
+  <img src="assets/images/improper-integral-diverge.svg" alt="被積分関数が発散する広義積分" style="max-width: 320px;">
+</div>
+
+<p><span class="arithmatex">\(\varepsilon &gt; 0\)</span> に対して</p>
+<div class="arithmatex">\[
+S(\varepsilon) = \int_\varepsilon^1 \frac{1}{\sqrt{x}}\, dx
+\]</div>
+<p>とおくと</p>
+<div class="arithmatex">\[
+S(\varepsilon) = \left[ 2\sqrt{x} \right]_\varepsilon^1 = 2 - 2\sqrt{\varepsilon}
+\]</div>
+<p>よって</p>
+<div class="arithmatex">\[
+\int_0^1 \frac{1}{\sqrt{x}}\, dx = \lim_{\varepsilon \to 0} S(\varepsilon) = \lim_{\varepsilon \to 0} \int_\varepsilon^1 \frac{1}{\sqrt{x}}\, dx = 2
+\]</div>
+<p>このように、被積分関数が発散する場合でも、極限値が有限に収まるならば積分が<strong>収束する</strong>という。このような積分を<strong>広義積分</strong>（improper integral）と呼ぶ。</p>
+<hr />
+<h2 id="142">14.2 積分範囲が無限の広義積分</h2>
+<p>積分範囲が無限に広がる場合を考える。</p>
+<div class="arithmatex">\[
+\int_0^\infty e^{-x}\, dx
+\]</div>
+<div class="figure-container">
+  <img src="assets/images/improper-integral-infinite.svg" alt="積分範囲が無限の広義積分" style="max-width: 360px;">
+</div>
+
+<p><span class="arithmatex">\(R &gt; 0\)</span> に対して</p>
+<div class="arithmatex">\[
+S(R) = \int_0^R e^{-x}\, dx = \left[ -e^{-x} \right]_0^R = 1 - e^{-R}
+\]</div>
+<p>よって</p>
+<div class="arithmatex">\[
+\int_0^\infty e^{-x}\, dx = \lim_{R \to \infty} S(R) = \lim_{R \to \infty} \int_0^R e^{-x}\, dx = 1
+\]</div>
+<hr />
+<h2 id="143">14.3 例題</h2>
+<h3 id="1">例題1</h3>
+<div class="admonition example">
+<p class="admonition-title"><span class="arithmatex">\(\displaystyle\int_0^1 \frac{1}{x^p}\, dx\)</span> および <span class="arithmatex">\(\displaystyle\int_1^\infty \frac{1}{x^p}\, dx\)</span> の収束・発散を調べよ。</p>
+<details class="success">
+<summary>解</summary>
+<p><strong><span class="arithmatex">\(\displaystyle\int_0^1 \frac{1}{x^p}\, dx\)</span> の場合</strong>（被積分関数が <span class="arithmatex">\(x = 0\)</span> で発散）</p>
+<div class="arithmatex">\[
+\int_0^1 \frac{1}{x^p}\, dx = \lim_{\varepsilon \to 0} \int_\varepsilon^1 \frac{1}{x^p}\, dx = \lim_{\varepsilon \to 0} \left[ \frac{1}{-p+1} x^{-p+1} \right]_\varepsilon^1
+\]</div>
+<p><span class="arithmatex">\(p &lt; 1\)</span> のとき：</p>
+<div class="arithmatex">\[
+= \lim_{\varepsilon \to 0} \frac{1}{1-p} \left( 1 - \varepsilon^{1-p} \right) = \frac{1}{1-p}
+\]</div>
+<p><span class="arithmatex">\(p &gt; 1\)</span> のとき：</p>
+<div class="arithmatex">\[
+= \lim_{\varepsilon \to 0} \frac{1}{-p+1} \left( 1 - \varepsilon^{1-p} \right) = \frac{1}{-p+1} (1 - \infty) \to \infty \quad \text{（発散）}
+\]</div>
+<hr />
+<p><strong><span class="arithmatex">\(\displaystyle\int_1^\infty \frac{1}{x^p}\, dx\)</span> の場合</strong>（積分範囲が無限）</p>
+<div class="arithmatex">\[
+\int_1^\infty \frac{1}{x^p}\, dx = \lim_{R \to \infty} \int_1^R \frac{1}{x^p}\, dx = \lim_{R \to \infty} \left[ \frac{1}{-p+1} x^{-p+1} \right]_1^R
+\]</div>
+<p><span class="arithmatex">\(p &gt; 1\)</span> のとき：</p>
+<div class="arithmatex">\[
+= \lim_{R \to \infty} \frac{1}{-p+1} \left( R^{1-p} - 1 \right) = \frac{1}{-p+1} (0 - 1) = \frac{1}{p-1}
+\]</div>
+<p><span class="arithmatex">\(p &lt; 1\)</span> のとき：</p>
+<div class="arithmatex">\[
+= \lim_{R \to \infty} \frac{1}{-p+1} \left( R^{1-p} - 1 \right) = \frac{1}{-p+1} (\infty - 1) \to \infty \quad \text{（発散）}
+\]</div>
+</details>
+</div>
+<div class="admonition info">
+<p class="admonition-title">まとめ</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th style="text-align: center;"><span class="arithmatex">\(\displaystyle\int_0^1 \frac{1}{x^p}\, dx\)</span></th>
+<th style="text-align: center;"><span class="arithmatex">\(\displaystyle\int_1^\infty \frac{1}{x^p}\, dx\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(p &lt; 1\)</span></td>
+<td style="text-align: center;">収束 <span class="arithmatex">\(\left(\dfrac{1}{1-p}\right)\)</span></td>
+<td style="text-align: center;">発散</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(p &gt; 1\)</span></td>
+<td style="text-align: center;">発散</td>
+<td style="text-align: center;">収束 <span class="arithmatex">\(\left(\dfrac{1}{p-1}\right)\)</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="2">例題2</h3>
+<div class="admonition example">
+<p class="admonition-title"><span class="arithmatex">\(\displaystyle\int_0^\infty x\, e^{-ax^2}\, dx\)</span> （<span class="arithmatex">\(a &gt; 0\)</span>）を求めよ。</p>
+<details class="success">
+<summary>解</summary>
+<div class="arithmatex">\[
+\int_0^\infty x\, e^{-ax^2}\, dx = \lim_{R \to \infty} \int_0^R x\, e^{-ax^2}\, dx
+\]</div>
+<p><span class="arithmatex">\(x\, e^{-ax^2} = -\dfrac{1}{2a} \dfrac{d}{dx} e^{-ax^2}\)</span> であるから</p>
+<div class="arithmatex">\[
+= \lim_{R \to \infty} \left[ -\frac{1}{2a} e^{-ax^2} \right]_0^R = \lim_{R \to \infty} \left[ -\frac{1}{2a} \left( e^{-aR^2} - 1 \right) \right] = \frac{1}{2a}
+\]</div>
+</details>
+</div>
+<hr />
+<h2 id="144">14.4 ガウス積分</h2>
+<div class="arithmatex">\[
+I = \int_{-\infty}^\infty e^{-ax^2}\, dx \qquad (a &gt; 0)
+\]</div>
+<p>を計算する。<span class="arithmatex">\(I^2\)</span> を考える。</p>
+<div class="arithmatex">\[
+I^2 = \left( \int_{-\infty}^\infty e^{-ax^2}\, dx \right) \left( \int_{-\infty}^\infty e^{-ay^2}\, dy \right) = \int_{-\infty}^\infty \int_{-\infty}^\infty e^{-a(x^2 + y^2)}\, dx\, dy
+\]</div>
+<p>極座標 <span class="arithmatex">\(x = r\cos\theta\)</span>, <span class="arithmatex">\(y = r\sin\theta\)</span> に変換すると</p>
+<div class="arithmatex">\[
+I^2 = \int_0^{2\pi} \left( \int_0^\infty e^{-ar^2}\, \textcolor{red}{r}\, dr \right) d\theta
+\]</div>
+<div class="arithmatex">\[
+= \left( \int_0^{2\pi} d\theta \right) \int_0^\infty \left[ -\frac{1}{2a} \frac{d}{dr} e^{-ar^2} \right] dr
+\]</div>
+<div class="arithmatex">\[
+= 2\pi \left[ -\frac{1}{2a} e^{-ar^2} \right]_0^\infty = 2\pi \cdot \frac{1}{2a} = \frac{\pi}{a}
+\]</div>
+<p>よって</p>
+<div class="admonition info">
+<p class="admonition-title">ガウス積分</p>
+<div class="arithmatex">\[
+I = \int_{-\infty}^\infty e^{-ax^2}\, dx = \sqrt{\frac{\pi}{a}}
+\]</div>
+</div>
+<h3 id="_1">正規分布との関連</h3>
+<p>平均 <span class="arithmatex">\(\mu\)</span>、分散 <span class="arithmatex">\(\sigma^2\)</span> の<strong>正規分布</strong>（Gaussian distribution）の確率密度関数は</p>
+<div class="arithmatex">\[
+f(x) = \frac{1}{\sqrt{2\pi}\, \sigma} \exp\left( -\frac{(x - \mu)^2}{2\sigma^2} \right)
+\]</div>
+<div class="figure-container">
+  <img src="assets/images/gaussian-distribution.svg" alt="正規分布の確率密度関数" style="max-width: 360px;">
+</div>
+
+<p>確率密度関数は全体で面積が <span class="arithmatex">\(1\)</span> でなければならないので</p>
+<div class="arithmatex">\[
+\int_{-\infty}^\infty \frac{1}{\sqrt{2\pi}\, \sigma} \exp\left( -\frac{(x - \mu)^2}{2\sigma^2} \right) dx = 1
+\]</div>
+<p>が成り立つ必要がある。実際、ガウス積分で <span class="arithmatex">\(a = \dfrac{1}{2\sigma^2}\)</span> とおくと</p>
+<div class="arithmatex">\[
+\int_{-\infty}^\infty \exp\left( -\frac{(x - \mu)^2}{2\sigma^2} \right) dx = \sqrt{\frac{\pi}{1/(2\sigma^2)}} = \sqrt{2\pi}\, \sigma
+\]</div>
+<p>となり、正規化条件が満たされることが確認できる。</p>
+<hr />
+<h2 id="145">14.5 広義重積分と積分順序</h2>
+<h3 id="3">例題3</h3>
+<div class="admonition example">
+<p class="admonition-title"><span class="arithmatex">\(\displaystyle\iint_D \frac{x^2 - y^2}{(x^2 + y^2)^2}\, dx\, dy\)</span>, <span class="arithmatex">\(D = \{(x, y) \mid 0 \le x \le 1,\; 0 \le y \le 1\}\)</span> を調べよ。</p>
+<p><div class="figure-container">
+  <img src="assets/images/square-region.svg" alt="正方形領域D" style="max-width: 240px;">
+</div></p>
+<details class="success">
+<summary>解</summary>
+<p>被積分関数は <span class="arithmatex">\((x, y) = (0, 0)\)</span> で発散するため、広義積分として扱う。<span class="arithmatex">\(\varepsilon &gt; 0\)</span> として、積分順序を変えて計算してみる。</p>
+<hr />
+<p><strong>積分順序1：<span class="arithmatex">\(y\)</span> を先に積分（<span class="arithmatex">\(\varepsilon \le y \le 1\)</span> で固定）</strong></p>
+<p>$$
+\frac{\partial}{\partial x}\left(\frac{-x}{x^2 + y^2}\right) = \frac{x^2 - y^2}{(x^2 + y^2)^2}
+$$
+より</p>
+<div class="arithmatex">\[
+\int_\varepsilon^1 \left[ \frac{-x}{x^2 + y^2} \right]_{x=0}^{x=1} dy = \int_\varepsilon^1 \frac{-1}{1 + y^2}\, dy
+\]</div>
+<div class="arithmatex">\[
+= -\left[ \tan^{-1} y \right]_\varepsilon^1 = -\frac{\pi}{4} + \tan^{-1}\varepsilon \to -\frac{\pi}{4} \quad (\varepsilon \to 0)
+\]</div>
+<hr />
+<p><strong>積分順序2：<span class="arithmatex">\(x\)</span> を先に積分（<span class="arithmatex">\(\varepsilon \le x \le 1\)</span> で固定）</strong></p>
+<div class="arithmatex">\[
+\frac{\partial}{\partial y}\left( \frac{y}{x^2 + y^2} \right) = \frac{x^2 - y^2}{(x^2 + y^2)^2}
+\]</div>
+<div class="arithmatex">\[
+\int_\varepsilon^1 \left[ \frac{y}{x^2 + y^2} \right]_{y=0}^{y=1} dx = \int_\varepsilon^1 \frac{1}{x^2 + 1}\, dx
+\]</div>
+<div class="arithmatex">\[
+= \left[ \tan^{-1} x \right]_\varepsilon^1 = \frac{\pi}{4} - \tan^{-1}\varepsilon \to \frac{\pi}{4} \quad (\varepsilon \to 0)
+\]</div>
+<hr />
+<p>積分順序1では <span class="arithmatex">\(-\dfrac{\pi}{4}\)</span>、積分順序2では <span class="arithmatex">\(\dfrac{\pi}{4}\)</span> となり、積分順序によって値が異なる。</p>
+<p><strong>この広義積分は存在しない</strong>（極限の取り方によって値が変わる）。</p>
+</details>
+</div>
+<hr />
+<h2 id="_2">演習問題</h2>
+<h3 id="1-p256">演習1（教科書 p.256）</h3>
+<div class="admonition note">
+<p class="admonition-title"><span class="arithmatex">\(\displaystyle\iint_D \ln(x^2 + y^2)\, dx\, dy\)</span>, <span class="arithmatex">\(D = \{(x, y) \mid x^2 + y^2 \le 1\}\)</span> を求めよ。</p>
+<p>被積分関数は原点 <span class="arithmatex">\((0, 0)\)</span> で発散する（<span class="arithmatex">\(\ln(x^2 + y^2) \to -\infty\)</span>）。</p>
+<p><div class="figure-container" style="display: flex; justify-content: center; gap: 40px; flex-wrap: wrap;">
+  <img src="assets/images/unit-disk-polar.svg" alt="単位円板と極座標変換" style="max-width: 420px;">
+</div></p>
+<details class="success">
+<summary>解答</summary>
+<p>極座標変換 <span class="arithmatex">\(x = r\cos\theta\)</span>, <span class="arithmatex">\(y = r\sin\theta\)</span> を用いる。<span class="arithmatex">\(D\)</span> は原点中心・半径 <span class="arithmatex">\(1\)</span> の円板なので</p>
+<div class="arithmatex">\[
+r: \varepsilon \to 1, \qquad \theta: 0 \to 2\pi
+\]</div>
+<div class="arithmatex">\[
+\iint_D \ln(x^2 + y^2)\, dx\, dy = \lim_{\varepsilon \to 0} \int_0^{2\pi} \left( \int_\varepsilon^1 \ln(r^2) \cdot r\, dr \right) d\theta
+\]</div>
+<p><span class="arithmatex">\(\ln(r^2) = 2\ln r\)</span> なので</p>
+<div class="arithmatex">\[
+= \lim_{\varepsilon \to 0} \int_0^{2\pi} d\theta \int_\varepsilon^1 2r \ln r\, dr = 4\pi \lim_{\varepsilon \to 0} \int_\varepsilon^1 r \ln r\, dr
+\]</div>
+<p>ここで <span class="arithmatex">\(r \ln r = \dfrac{1}{2} \dfrac{d}{dr}(r^2 \ln r) - \dfrac{r}{2}\)</span> であるから</p>
+<div class="arithmatex">\[
+= 2\pi \lim_{\varepsilon \to 0} \int_\varepsilon^1 \left[ \frac{d}{dr}(r^2 \ln r) - r \right] dr
+\]</div>
+<div class="arithmatex">\[
+= 2\pi \lim_{\varepsilon \to 0} \left[ r^2 \ln r - \frac{r^2}{2} \right]_\varepsilon^1
+\]</div>
+<div class="arithmatex">\[
+= 2\pi \lim_{\varepsilon \to 0} \left[ -\frac{1}{2} - \varepsilon^2 \ln \varepsilon + \frac{\varepsilon^2}{2} \right]
+\]</div>
+<p><span class="arithmatex">\(\varepsilon^2 \ln \varepsilon \to 0 \; (\varepsilon \to 0)\)</span> を確認する（ロピタルの定理）：</p>
+<div class="arithmatex">\[
+\lim_{\varepsilon \to 0} \varepsilon^2 \ln \varepsilon = \lim_{\varepsilon \to 0} \frac{\ln \varepsilon}{\varepsilon^{-2}} = \lim_{\varepsilon \to 0} \frac{1/\varepsilon}{-2\varepsilon^{-3}} = \lim_{\varepsilon \to 0} \left( -\frac{\varepsilon^2}{2} \right) = 0
+\]</div>
+<p>よって</p>
+<div class="arithmatex">\[
+= 2\pi \left( -\frac{1}{2} \right) = -\pi
+\]</div>
+</details>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  ページトップへ戻る
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+      <div class="md-progress" data-md-component="progress" role="progressbar"></div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.instant", "navigation.instant.progress", "navigation.tabs", "navigation.top", "content.tooltips"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u30b3\u30d4\u30fc\u3057\u307e\u3057\u305f", "clipboard.copy": "\u30af\u30ea\u30c3\u30d7\u30dc\u30fc\u30c9\u3078\u30b3\u30d4\u30fc", "search.result.more.one": "\u3053\u306e\u30da\u30fc\u30b8\u5185\u306b\u3082\u30461\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.more.other": "\u3053\u306e\u30da\u30fc\u30b8\u5185\u306b\u3042\u3068#\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.none": "\u4f55\u3082\u898b\u3064\u304b\u308a\u307e\u305b\u3093\u3067\u3057\u305f", "search.result.one": "1\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.other": "#\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.placeholder": "\u691c\u7d22\u30ad\u30fc\u30ef\u30fc\u30c9\u3092\u5165\u529b\u3057\u3066\u304f\u3060\u3055\u3044", "search.result.term.missing": "\u691c\u7d22\u306b\u542b\u307e\u308c\u306a\u3044", "select.version": "\u30d0\u30fc\u30b8\u30e7\u30f3\u5207\u308a\u66ff\u3048"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+      
+        <script src="../javascripts/katex.js"></script>
+      
+    
+  </body>
+</html>

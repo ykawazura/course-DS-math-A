@@ -1,0 +1,36 @@
+\input{preamble}
+\begin{document}
+\begin{tikzpicture}
+  % Axes
+  \draw[axis] (-0.3,0) -- (5.5,0) node[right] {$x$};
+  \draw[axis] (0,-0.3) -- (0,4.5) node[above] {$y$};
+
+  % Curve (U-shaped, black) — same as diff-1var-review
+  \draw[thick] (0.3,0.9) .. controls (0.35,0.85) and (0.35,0.83) .. (0.5,0.7)
+    .. controls (0.9,0.35) and (1.2,0.2) .. (1.5,0.2)
+    .. controls (1.8,0.2) and (2.1,0.35) .. (2.5,0.7)
+    .. controls (2.9,1.05) and (4.0,2.8) .. (5.0,4.2)
+    node[right, font=\small] {$y = f(x)$};
+
+  % Point A on curve (same as diff-1var-review: slope = 0.875)
+  \coordinate (A) at (2.5,0.7);
+  \fill (A) circle (2pt);
+  \node[below right, font=\small] at (A) {$A\colon(a, f(a))$};
+
+  % Tangent line at A (slope = 0.875)
+  \draw[blue, thick] (1.5,{0.7+0.875*(1.5-2.5)}) -- (4.0,{0.7+0.875*(4.0-2.5)});
+
+  % Point P on tangent line
+  \coordinate (P) at (3.5,{0.7+0.875*(3.5-2.5)});
+  \fill[blue] (P) circle (2pt);
+  \node[blue, below right, font=\small] at (P) {$P\colon(x, y)$};
+
+  % Normal vector (direction: (-f'(a), 1) = (-0.875, 1), pointing upward-left)
+  \draw[-{Stealth[length=8pt]}, thick, orange] (A) -- ++(-0.875,1.0)
+    node[above, font=\small] {$\vec{n} = \begin{pmatrix} f'(a) \\ -1 \end{pmatrix}$};
+
+  % Dashed to axes
+  \draw[dashed, gray] (2.5,0) node[below] {$a$} -- (A);
+  \draw[dashed, gray] (0,0.7) node[left, font=\small] {$f(a)$} -- (A);
+\end{tikzpicture}
+\end{document}

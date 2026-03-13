@@ -1,0 +1,27 @@
+\input{preamble}
+\begin{document}
+\begin{tikzpicture}
+  % Axes
+  \draw[axis] (-4.5,0) -- (5.5,0) node[below] {$x$};
+  \draw[axis] (0,-0.3) -- (0,2.5);
+
+  % Burgers equation: parametric solution
+  % x(s,t) = s + f0(s)*t,  f = f0(s),  f0(s) = A*exp(-s^2/sigma^2)
+  % Wave steepens on the right side over time
+
+  % t=0: symmetric Gaussian
+  \draw[very thick, black, smooth, samples=100, domain=-4.2:4.2]
+    plot (\x, {2*exp(-\x*\x/1.2)});
+  \node[above right] at (0.2,2.0) {$f(x,\,t{=}0)$};
+
+  % t=1: slightly steepened (parametric)
+  \draw[very thick, blue, smooth, samples=200, variable=\s, domain=-4.2:4.2]
+    plot ({\s + 0.6*2*exp(-\s*\s/1.2)}, {2*exp(-\s*\s/1.2)});
+  \node[blue, right] at (1.9,2.1) {$f(x,\,t{=}1)$};
+
+  % t=2: shock formed — triangular (N-wave) profile
+  \draw[very thick, red]
+    (-4.2,0) -- (-2.0,0) -- (2.5,1.6) -- (2.5,0) -- (4.2,0);
+  \node[red, right] at (2.6,1.6) {$f(x,\,t{=}2)$};
+\end{tikzpicture}
+\end{document}

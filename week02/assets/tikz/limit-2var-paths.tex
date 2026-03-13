@@ -1,0 +1,39 @@
+\input{preamble}
+\begin{document}
+\begin{tikzpicture}
+  % Axes
+  \draw[axis] (-3.5,0) -- (3.5,0) node[below] {$x$};
+  \draw[axis] (0,-3.5) -- (0,3.5) node[left] {$y$};
+
+  % Origin label
+  \node[below left, font=\small] at (0,0) {$O$};
+
+  % Target point
+  \pgfmathsetmacro{\px}{1}
+  \pgfmathsetmacro{\py}{1}
+
+  % Path 1: y = 1 (horizontal, red)
+  \draw[red, very thick, -{Stealth[length=7pt]}] (3.0,\py) -- (\px+0.3,\py);
+
+  % Path 2: y = x (blue)
+  \draw[blue, very thick, -{Stealth[length=7pt]}] (2.8,2.8) -- (\px+0.2,\py+0.2);
+
+  % Path 3: y = -x + 2 (green!60!black)
+  \draw[green!60!black, very thick, -{Stealth[length=7pt]}] (2.8,-0.8) -- (\px+0.2,\py-0.2);
+
+  % Path 4: x = 1 (vertical, orange)
+  \draw[orange, very thick, -{Stealth[length=7pt]}] (\px,3.0) -- (\px,\py+0.3);
+
+  % Path 5: spiral (purple)
+  \draw[purple, very thick, -{Stealth[length=7pt]}, domain=0:900, samples=300, variable=\t, smooth]
+    plot ({\px + 2.0*(1-\t/1000)*cos(\t+200)}, {\py + 2.0*(1-\t/1000)*sin(\t+200)});
+
+  % Target dot
+  \fill (\px,\py) circle (3pt);
+  \node[below right, font=\small] at (\px+0.1,\py-0.15) {$(a, b)$};
+
+  % Annotation
+  \node[font=\small, text width=4.5cm, align=center] at (0,-4.2)
+    {近づけ方が無限にある！};
+\end{tikzpicture}
+\end{document}

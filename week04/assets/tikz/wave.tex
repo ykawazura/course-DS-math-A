@@ -1,0 +1,29 @@
+\input{preamble}
+\begin{document}
+\begin{tikzpicture}
+  % Fixed endpoints
+  \fill (0,0) circle (3pt);
+  \fill (6,0) circle (3pt);
+
+  % Equilibrium line
+  \draw[thick, gray, dashed] (0,0) -- (6,0);
+
+  % t=0: full positive amplitude
+  \draw[very thick, black, smooth, samples=200, domain=0:6]
+    plot (\x, {1.5*sin(deg(3*pi*\x/6))});
+  \node[above right] at (1,1.5) {$f(x,\,t{=}0)$};
+
+  % t=1: zero amplitude (equilibrium)
+  \draw[very thick, blue] (0,0) -- (6,0);
+  \node[blue, right] at (6.1,0.15) {$f(x,\,t{=}1)$};
+
+  % t=2: opposite phase
+  \draw[very thick, red, smooth, samples=200, domain=0:6]
+    plot (\x, {-1.5*sin(deg(3*pi*\x/6))});
+  \node[red, below right] at (1,-1.5) {$f(x,\,t{=}2)$};
+
+  % Labels for fixed ends
+  \node[below] at (0,-0.15) {$0$};
+  \node[below] at (6,-0.15) {$L$};
+\end{tikzpicture}
+\end{document}

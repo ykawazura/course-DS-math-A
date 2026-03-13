@@ -1,0 +1,37 @@
+\input{preamble}
+\begin{document}
+\begin{tikzpicture}
+  % Axes
+  \draw[axis] (-0.5,0) -- (6,0) node[below] {$x$};
+  \draw[axis] (0,-0.5) -- (0,4.5) node[left] {$y$};
+
+  % Key values
+  % Curve: y = 0.2*(x-1)*(x-3.5)+2
+  % Left end: x=0.5, y = 0.2*(-0.5)*(-3)+2 = 2.3
+  % Right end: x=5, y = 0.2*(4)*(1.5)+2 = 3.2
+  % Minimum: x=2.25, y = 0.2*(1.25)*(-1.25)+2 = 1.6875
+
+  % Dashed lines from domain ends to curve
+  \draw[dashed, semithick] (0.5,0) -- (0.5,2.3);
+  \draw[dashed, semithick] (5,0) -- (5,3.2);
+
+  % Dashed lines from range ends to curve
+  \draw[dashed, semithick] (0,1.6875) -- (2.25,1.6875);
+  \draw[dashed, semithick] (0,3.2) -- (5,3.2);
+
+  % Curve
+  \draw[very thick, domain=0.5:5, samples=60]
+    plot (\x, {0.2*(\x-1)*(\x-3.5)+2});
+
+  % Domain (red bracket on x-axis)
+  \draw[red, very thick] (0.5,0) -- (5,0);
+  \node[red, below, font=\small] at (2.75,-0.3) {定義域};
+
+  % Range (blue bracket on y-axis)
+  \draw[blue, very thick] (0,1.6875) -- (0,3.2);
+  \node[blue, left, font=\small] at (-0.3,2.45) {値域};
+
+  % Graph label
+  \node[right, font=\small] at (4.5,3.5) {$y = f(x)$};
+\end{tikzpicture}
+\end{document}

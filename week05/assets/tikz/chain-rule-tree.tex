@@ -1,0 +1,43 @@
+\input{preamble}
+\begin{document}
+\begin{tikzpicture}[
+  every node/.style={font=\large},
+  level distance=1.8cm,
+  sibling distance=1cm,
+  edge from parent/.style={draw, thick},
+  circled/.style={draw, thick, circle, inner sep=2pt},
+]
+  % f at top
+  \node (f) {$f$}
+    child[red, sibling distance=3.5cm] {
+      node[black] (x) {$x$}
+      child[red] {
+        node[black] (u) {$u$}
+        child[black, sibling distance=1.5cm] {
+          node (s) {$s$}
+        }
+        child[red, sibling distance=1.5cm] {
+          node[circled, red] (t1) {$t$}
+        }
+      }
+      child[black] {
+        node (v) {$v$}
+      }
+    }
+    child[blue, sibling distance=3.5cm] {
+      node[black] (y) {$y$}
+      child[blue] {
+        node[circled, blue] (t2) {$t$}
+      }
+    }
+    child[green!50!black, sibling distance=3.5cm] {
+      node[black] (z) {$z$}
+      child[black] {
+        node (w) {$w$}
+      }
+      child[green!50!black] {
+        node[circled, green!50!black] (t3) {$t$}
+      }
+    };
+\end{tikzpicture}
+\end{document}

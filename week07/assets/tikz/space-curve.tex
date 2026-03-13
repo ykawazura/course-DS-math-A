@@ -1,0 +1,27 @@
+\input{preamble}
+\begin{document}
+\begin{tikzpicture}[
+  scale=1.2,
+  axis/.style={-{Stealth[length=6pt]}, thick},
+]
+  % Axes
+  \draw[axis] (0,0) -- (-2.5,-1.25) node[below left] {$x$};
+  \draw[axis] (0,0) -- (5,0) node[right] {$y$};
+  \draw[axis] (0,0) -- (0,4) node[above] {$z$};
+
+  % Space curve (blue) — wavy 3D curve with depth variation
+  \draw[blue, thick]
+    (-1.8, 0.3) .. controls (-1.4, -0.3) and (-0.6, 0.2) ..
+    (-0.2, 1.5) .. controls (0.0, 2.2) and (-0.2, 3.0) ..
+    (0.5, 3.4) .. controls (1.2, 3.8) and (2.2, 2.8) ..
+    (2.4, 1.8) .. controls (2.6, 0.8) and (1.8, 0.6) ..
+    (2.2, 1.2) .. controls (2.6, 1.8) and (3.4, 2.2) ..
+    (3.8, 1.4) .. controls (4.2, 0.6) and (4.0, -0.4) ..
+    (4.8, -0.8);
+
+  % Point on the curve with dashed vertical to xy-plane
+  \fill[blue] (0.5, 3.4) circle (2pt);
+  \draw[dashed, thick] (0.5, 3.4) -- (0.5, -0.55);
+  \fill (0.5, -0.55) circle (1.5pt);
+\end{tikzpicture}
+\end{document}

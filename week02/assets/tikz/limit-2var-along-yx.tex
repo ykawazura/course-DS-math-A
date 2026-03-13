@@ -1,0 +1,20 @@
+\input{preamble}
+\begin{document}
+\begin{tikzpicture}
+  % Axes
+  \draw[axis] (-2.5,0) -- (3.5,0) node[below] {$x$};
+  \draw[axis] (0,-2.5) -- (0,3.5) node[left] {$y$};
+
+  \pgfmathsetmacro{\ax}{1.5}
+
+  % Line y = x (reference)
+  \draw[thick] (-2,-2) -- (3,3);
+
+  % (t, t) dot and label
+  \fill (\ax,\ax) circle (3pt);
+  \node[below right, font=\small] at (\ax+0.15,\ax-0.15) {$(t, t)$};
+
+  % Red arrow from (t, t) toward origin
+  \draw[red, very thick, -{Stealth[length=7pt]}] (\ax,\ax) -- (0.1,0.1);
+\end{tikzpicture}
+\end{document}

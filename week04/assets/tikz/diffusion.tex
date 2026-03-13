@@ -1,0 +1,23 @@
+\input{preamble}
+\begin{document}
+\begin{tikzpicture}
+  % Axes
+  \draw[axis] (-4.5,0) -- (4.5,0) node[below] {$x$};
+  \draw[axis] (0,-0.3) -- (0,4.2);
+
+  % t=0: narrow, tall Gaussian
+  \draw[very thick, black, smooth, samples=100, domain=-4.2:4.2]
+    plot (\x, {3.5*exp(-\x*\x/0.3)});
+  \node[above right] at (0.3,3.8) {$f(x,\,t{=}0)$};
+
+  % t=1: medium Gaussian
+  \draw[very thick, blue, smooth, samples=100, domain=-4.2:4.2]
+    plot (\x, {1.6*exp(-\x*\x/2.5)});
+  \node[blue, right] at (2.8,1.2) {$f(x,\,t{=}1)$};
+
+  % t=2: wide, flat Gaussian
+  \draw[very thick, red, smooth, samples=100, domain=-4.2:4.2]
+    plot (\x, {0.7*exp(-\x*\x/8)});
+  \node[red, right] at (3.2,0.45) {$f(x,\,t{=}2)$};
+\end{tikzpicture}
+\end{document}

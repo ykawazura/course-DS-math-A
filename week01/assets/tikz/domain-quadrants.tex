@@ -1,0 +1,24 @@
+\input{preamble}
+\begin{document}
+\begin{tikzpicture}
+  % Axes
+  \draw[axis] (-3,0) -- (3,0) node[below] {$x$};
+  \draw[axis] (0,-3) -- (0,3) node[left] {$y$};
+
+  % First quadrant
+  \fill[blue, opacity=0.15] (0,0) rectangle (2.8,2.8);
+
+  % Third quadrant
+  \fill[blue, opacity=0.15] (0,0) rectangle (-2.8,-2.8);
+
+  % Axes included in domain (very thick, black)
+  \draw[very thick] (0,0) -- (2.8,0);
+  \draw[very thick] (0,0) -- (0,2.8);
+  \draw[very thick] (0,0) -- (-2.8,0);
+  \draw[very thick] (0,0) -- (0,-2.8);
+
+  % Label
+  \node[font=\small] at (1.5,1.5) {$xy \geq 0$};
+  \node[font=\small] at (-1.5,-1.5) {$xy \geq 0$};
+\end{tikzpicture}
+\end{document}

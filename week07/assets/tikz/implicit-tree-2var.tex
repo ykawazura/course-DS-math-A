@@ -1,0 +1,20 @@
+\input{preamble}
+\begin{document}
+\begin{tikzpicture}[
+  every node/.style={font=\large},
+  level distance=1.8cm,
+  sibling distance=3cm,
+  edge from parent/.style={draw, thick, -{Stealth[length=5pt]}},
+]
+  \node {$F$}
+    child {
+      node {$x$}
+    }
+    child {
+      node {$y$}
+      child {
+        node {$x$}
+      }
+    };
+\end{tikzpicture}
+\end{document}

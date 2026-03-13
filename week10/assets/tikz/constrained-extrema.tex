@@ -1,0 +1,51 @@
+\documentclass[tikz,border=5pt]{standalone}
+\usepackage{luatexja}
+\usepackage[hiragino-pron]{luatexja-preset}
+\usepackage{amsmath,amssymb}
+\usetikzlibrary{arrows.meta,calc,decorations.markings}
+
+\tikzset{
+  axis/.style={-{Stealth[length=6pt]}, thick},
+}
+
+\begin{document}
+\begin{tikzpicture}[>=Stealth]
+
+  % 3D perspective axes
+  \draw[axis] (0,0) -- (-2.5,-1.5) node[below left] {$x$};
+  \draw[axis] (0,0) -- (7.8,0) node[below] {$y$};
+  \draw[axis] (0,0) -- (0,6.5) node[left] {$z$};
+
+  % Surface outline
+  \draw[thick]
+    (0.5,2.5) .. controls (1.64,2.45) and (2.76,1.56) .. (3.52,0.8)
+    .. controls (4.28,1.76) and (6.0,2.68) .. (7.0,2.8)
+    .. controls (6.5,3.82) and (4.22,5.53) .. (3.0,5.83)
+    .. controls (1.81,5.03) and (0.7,3.22) .. cycle;
+
+  % Surface label
+  \node[font=\small] at (6.8,4.2) {$z = f(x, y)$};
+
+  % === Constraint curve on xy-plane (blue) ===
+  \draw[blue, thick]
+    (0.6,-0.16) .. controls (1.6,-0.7) and (2.6,-0.75) .. (3.55,-0.55)
+    .. controls (4.5,-0.3) and (5.6,-0.5) .. (6.8,-1.0);
+  \node[blue, font=\small] at (7.5,-1.3) {$g(x,y) = 0$};
+
+  % === Dashed vertical projection lines (red curve → blue curve) ===
+  \draw[blue, dashed, thin] (0.6,2.8) -- (0.6,-0.16);
+  \draw[blue, dashed, thin] (2.3,2.6) -- (2.3,-0.65);
+  \draw[blue, dashed, thin] (3.55,3.2) -- (3.55,-0.55);
+  \draw[blue, dashed, thin] (4.9,3.48) -- (4.9,-0.47);
+  \draw[blue, dashed, thin] (6.8,2.8) -- (6.8,-1.0);
+
+  % === Curve on surface (red) - constrained path ===
+  \draw[red, very thick]
+    (0.6,2.8) .. controls (1.8,2.2) and (2.5,2.6) .. (3.55,3.2)
+    .. controls (4.3,3.65) and (5.5,3.6) .. (6.8,2.8);
+
+  % === Caption ===
+  \node[red, font=\small\sffamily] at (3.5,-1.8) {この曲線の極値を求める};
+
+\end{tikzpicture}
+\end{document}

@@ -1,0 +1,36 @@
+\input{preamble}
+\begin{document}
+\begin{tikzpicture}[>=Stealth]
+
+  % 3D perspective axes
+  \draw[axis] (0,0) -- (-2.5,-1.5) node[below left] {$x$};
+  \draw[axis] (0,0) -- (7.8,0) node[below] {$y$};
+  \draw[axis] (0,0) -- (0,6.5) node[left] {$z$};
+
+  % Surface outline
+  \draw[thick]
+    (0.5,2.5) .. controls (1.64,2.45) and (2.76,1.56) .. (3.52,0.8)
+    .. controls (4.28,1.76) and (6.0,2.68) .. (7.0,2.8)
+    .. controls (6.5,3.82) and (4.22,5.53) .. (3.0,5.83)
+    .. controls (1.81,5.03) and (0.7,3.22) .. cycle;
+
+  % Surface label
+  \node[font=\small] at (6.8,4.2) {$z = f(x, y)$};
+
+  % Tangent point
+  \fill[red] (3.8,3.5) circle (3pt);
+  \node[red, above, font=\small] at (3.8,3.5) {$(a, b, f(a,b))$};
+
+  % Tangent plane (parallelogram)
+  \draw[blue, thick, fill=blue!10, fill opacity=0.4]
+    (2.0,2.8) -- (5.0,2.2) -- (5.8,4.4) -- (2.8,5.0) -- cycle;
+  \node[blue, font=\small] at (5.8,5.0) {接平面};
+
+  % Dashed projection lines to xy-plane
+  \draw[dashed, thin] (3.8,3.5) -- (3.8,-0.78);            % vertical drop to floor
+  \draw[dashed, thin] (-1.3,-0.78) -- (3.8,-0.78);          % along x on floor (from y-axis side)
+  \draw[dashed, thin] (5.1,0) -- (3.8,-0.78);               % along y on floor (from x-axis)
+  \node[font=\small] at (3.5,-1.2) {$(a, b)$};
+
+\end{tikzpicture}
+\end{document}

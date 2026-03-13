@@ -1,0 +1,25 @@
+\input{preamble}
+\begin{document}
+\begin{tikzpicture}
+  % Straight line (the tangent line as abstract line)
+  \draw[blue, thick] (0.5,0.5) -- (5.5,3.5);
+
+  % Point A on line
+  \coordinate (A) at (2.0,1.4);
+  \fill (A) circle (2pt);
+  \node[below right, font=\small] at (A) {$A\colon(a, b)$};
+
+  % Point P on line
+  \coordinate (P) at (4.0,2.6);
+  \fill (P) circle (2pt);
+  \node[below right, font=\small] at (P) {$P\colon(x, y)$};
+
+  % Normal vector at A (perpendicular to line, pointing upper-left)
+  % Line direction: (5.5-0.5, 3.5-0.5) = (5, 3), normal = (-3, 5), normalized ~ (-0.51, 0.86)
+  \draw[-{Stealth[length=8pt]}, thick, orange] (A) -- ++(-0.9,1.5)
+    node[above, font=\small] {$\vec{n} = \begin{pmatrix} p \\ q \end{pmatrix}$};
+
+  % Right angle mark
+  \draw[thin] (A) ++(-0.18,0.3) -- ++(0.3,0.18) -- ++(0.18,-0.3);
+\end{tikzpicture}
+\end{document}

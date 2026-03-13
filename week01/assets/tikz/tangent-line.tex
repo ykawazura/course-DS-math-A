@@ -1,0 +1,32 @@
+\input{preamble}
+\begin{document}
+\begin{tikzpicture}
+  % Axes
+  \draw[axis] (-0.5,0) -- (7.5,0) node[below] {$x$};
+  \draw[axis] (0,-0.5) -- (0,4.5) node[left] {$y$};
+
+  % Curve
+  \draw[very thick, domain=0.3:5, samples=60] plot (\x, {0.25*(\x-1.5)*(\x-3.5)+2});
+
+  % Tangent point
+  \pgfmathsetmacro{\xa}{3.5}
+  \pgfmathsetmacro{\ya}{0.25*(\xa-1.5)*(\xa-3.5)+2}
+  % Derivative: 0.25*(2x - 5)
+  \pgfmathsetmacro{\slope}{0.25*(2*\xa-5)}
+
+  % Tangent line (red)
+  \draw[red, very thick, domain=0.8:5.8] plot (\x, {\slope*(\x-\xa)+\ya});
+
+  % Dashed lines to axes
+  \draw[dashed, semithick] (\xa,0) -- (\xa,\ya);
+  \draw[dashed, semithick] (0,\ya) -- (\xa,\ya);
+
+  % Labels
+  \node[below] at (\xa,0) {$a$};
+  \node[left] at (0,\ya) {$f(a)$};
+
+  % Annotation: "この傾きが f'(a)"
+  \draw[-{Stealth[length=5pt]}, semithick] (6.0,2.5) .. controls (5.5,2.6) .. (5.0,2.7);
+  \node[right, font=\small] at (6.0,2.5) {この傾きが $f'(a)$};
+\end{tikzpicture}
+\end{document}

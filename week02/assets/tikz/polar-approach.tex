@@ -1,0 +1,34 @@
+\input{preamble}
+\begin{document}
+\begin{tikzpicture}
+  % Axes
+  \draw[axis] (-1.5,0) -- (5.5,0) node[below] {$x$};
+  \draw[axis] (0,-1.5) -- (0,4.5) node[left] {$y$};
+
+  % Center point (a, b)
+  \pgfmathsetmacro{\ax}{2.5}
+  \pgfmathsetmacro{\ay}{1.5}
+  \pgfmathsetmacro{\radius}{1.8}
+
+  % Circle centered at (a, b)
+  \draw[thick] (\ax,\ay) circle (\radius);
+
+  % Point (x, y) on circle at ~140 degrees
+  \pgfmathsetmacro{\angle}{140}
+  \pgfmathsetmacro{\px}{\ax + \radius*cos(\angle)}
+  \pgfmathsetmacro{\py}{\ay + \radius*sin(\angle)}
+
+  % Red arrow from (x, y) toward (a, b) with label r
+  \draw[red, very thick, -{Stealth[length=7pt]}]
+    (\px,\py) -- ({\ax-0.1*cos(\angle)},{\ay-0.1*sin(\angle)})
+    node[midway, above right, font=\small] {$r \to 0$};
+
+  % (x, y) dot and label
+  \fill (\px,\py) circle (2.5pt);
+  \node[above left, font=\small] at (\px,\py) {$(x, y)$};
+
+  % (a, b) dot and label
+  \fill (\ax,\ay) circle (2.5pt);
+  \node[below, font=\small] at (\ax,\ay-0.15) {$(a, b)$};
+\end{tikzpicture}
+\end{document}

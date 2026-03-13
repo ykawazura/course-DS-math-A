@@ -1,0 +1,36 @@
+\documentclass[tikz,border=5pt]{standalone}
+\usepackage{luatexja}
+\usepackage[hiragino-pron]{luatexja-preset}
+\usepackage{amsmath,amssymb}
+\usetikzlibrary{arrows.meta,patterns}
+
+\begin{document}
+\begin{tikzpicture}
+
+% Axes
+\draw[-{Stealth[length=6pt]}, thick] (-0.5,0) -- (4,0) node[right] {$x$};
+\draw[-{Stealth[length=6pt]}, thick] (0,-0.5) -- (0,3) node[above] {$y$};
+
+% Rectangle
+\fill[cyan, opacity=0.15] (0.8,0.6) rectangle (3.2,2.3);
+\draw[thick] (0.8,0.6) rectangle (3.2,2.3);
+
+% Hatching
+\fill[pattern=north east lines, pattern color=blue, opacity=0.3]
+  (0.8,0.6) rectangle (3.2,2.3);
+
+% Labels
+\node[below] at (0.8,0) {$a$};
+\node[below] at (3.2,0) {$b$};
+\node[left] at (0,0.6) {$c$};
+\node[left] at (0,2.3) {$d$};
+\node at (2,1.45) {$D$};
+
+% Dashed lines to axes
+\draw[dashed, thin] (0.8,0) -- (0.8,0.6);
+\draw[dashed, thin] (3.2,0) -- (3.2,0.6);
+\draw[dashed, thin] (0,0.6) -- (0.8,0.6);
+\draw[dashed, thin] (0,2.3) -- (0.8,2.3);
+
+\end{tikzpicture}
+\end{document}

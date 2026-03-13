@@ -1,0 +1,47 @@
+\input{preamble}
+\begin{document}
+\begin{tikzpicture}[
+  every node/.style={font=\large},
+  level distance=1.8cm,
+  sibling distance=2cm,
+  edge from parent/.style={draw, thick, -{Stealth[length=5pt]}},
+]
+  % F tree
+  \node {$F$}
+    child {
+      node {$x$}
+      child {
+        node {$z$}
+      }
+    }
+    child {
+      node {$y$}
+      child {
+        node {$z$}
+      }
+    }
+    child {
+      node {$z$}
+    };
+
+  % G tree (shifted right)
+  \begin{scope}[xshift=7cm]
+  \node {$G$}
+    child {
+      node {$x$}
+      child {
+        node {$z$}
+      }
+    }
+    child {
+      node {$y$}
+      child {
+        node {$z$}
+      }
+    }
+    child {
+      node {$z$}
+    };
+  \end{scope}
+\end{tikzpicture}
+\end{document}

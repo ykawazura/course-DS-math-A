@@ -1,0 +1,130 @@
+\documentclass[tikz,border=5pt]{standalone}
+\usepackage{luatexja}
+\usepackage[hiragino-pron]{luatexja-preset}
+\usepackage{amsmath,amssymb}
+\usetikzlibrary{arrows.meta,patterns,calc}
+
+\begin{document}
+\begin{tikzpicture}
+
+% ============================================================
+% Panel 1 (Left): 2D domain D with vertical slice at x
+% ============================================================
+\begin{scope}[shift={(0,0)}]
+
+% Axes
+\draw[-{Stealth[length=6pt]}, thick] (-0.5,0) -- (5,0) node[right] {$x$};
+\draw[-{Stealth[length=6pt]}, thick] (0,-0.5) -- (0,4) node[above] {$y$};
+
+% Region D (ellipse)
+\draw[thick] (2.4,2.0) ellipse [x radius=1.6, y radius=1.0];
+
+% D label
+\node at (2.4,3.4) {$D$};
+
+% Vertical blue line at x (slice)
+% Ellipse at (2.4,2.0), rx=1.6, ry=1.0. At x=2.0: dy = 1.0*sqrt(1-((2.0-2.4)/1.6)^2) = 1.0*0.968 = 0.968
+\draw[blue, very thick] (2.0,{2.0-0.968}) -- (2.0,{2.0+0.968});
+
+% Dashed lines to axes
+\draw[dashed, thin] (0.8,0) -- (0.8,2.0);
+\draw[dashed, thin] (4.0,0) -- (4.0,2.0);
+\draw[dashed, thin] (0,{2.0-0.968}) -- (2.0,{2.0-0.968});
+\draw[dashed, thin] (0,{2.0+0.968}) -- (2.0,{2.0+0.968});
+\draw[blue, dashed, thin] (2.0,0) -- (2.0,{2.0-0.968});
+
+% Labels
+\node[below] at (0.8,0) {$x_0$};
+\node[below] at (4.0,0) {$x_1$};
+\node[left] at (0,{2.0-0.968}) {$a(x)$};
+\node[left] at (0,{2.0+0.968}) {$b(x)$};
+
+\end{scope}
+
+% ============================================================
+% Panel 2 (Middle): 3D volume (cylinder with slice)
+% ============================================================
+\begin{scope}[shift={(9.5,0)}]
+
+\coordinate (O) at (-1,0.8);
+
+% Axes
+\draw[-{Stealth[length=6pt]}, thick] (O) -- ++(0,4.0) node[above] {$z$};
+% y-axis: solid before cylinder, dashed behind, solid after
+\draw[thick] (O) -- ++(-0.5+1.0,0);          % origin to left edge of cylinder
+\draw[thick, dashed] (-0.5,0.8) -- (2.1,0.8); % behind cylinder
+\draw[-{Stealth[length=6pt]}, thick] (2.1,0.8) -- (4.0,0.8) node[right] {$y$}; % after cylinder
+\draw[-{Stealth[length=6pt]}, thick] (O) -- ++(-2.0,-1.2) node[below left] {$x$};
+
+% Domain D on xy-plane (ellipse, no hatching)
+\coordinate (Dc) at (0.8,0.05);
+\begin{scope}[shift={(0.8,0.05)}, rotate=-5]
+  % Back half (dashed)
+  \draw[thick, dashed] (180:1.3 and 0.5) arc[x radius=1.3, y radius=0.5, start angle=180, end angle=0];
+  % Front half (solid)
+  \draw[thick] (180:1.3 and 0.5) arc[x radius=1.3, y radius=0.5, start angle=180, end angle=360];
+\end{scope}
+
+% D label
+\node at ($(Dc)+(1.7,-0.2)$) {$D$};
+
+% Cross-section S(x) - red shaded region (parallel to yz-plane)
+\fill[red, opacity=0.15]
+  (-0.05,-0.25) -- (-0.05,2.32)
+  .. controls (0.5,3.10) and (1.3,3.00) .. (1.95,2.4)
+  -- (1.95,-0.25) -- cycle;
+\draw[red, thick] (-0.05,-0.25) -- (-0.05,2.32);
+\draw[red, thick] (-0.05,2.32) .. controls (0.5,3.10) and (1.3,3.00) .. (1.95,2.4);
+\draw[red, thick] (1.95,-0.25) -- (1.95,2.4);
+\draw[red, thick] (-0.05,-0.25) -- (1.95,-0.25);
+
+% Curve on surface (top of cylinder)
+\draw[thick]
+  (-0.5,2.65) .. controls (-0.3,3.35) and (0.5,3.55) .. (1.0,3.35)
+  .. controls (1.5,3.15) and (2.2,3.05) .. (2.1,2.65)
+  .. controls (2.0,2.25) and (1.3,2.15) .. (0.8,2.25)
+  .. controls (0.2,2.35) and (-0.6,2.25) .. (-0.5,2.65);
+
+% Vertical lines (solid)
+\draw[thick] (-0.5,2.60) -- (-0.5,0.15);
+\draw[thick] (2.1,2.80) -- (2.1,0.04);
+
+% S(x) label
+\node[red] at (1.0,1.2) {$S(x)$};
+
+\end{scope}
+
+% ============================================================
+% Panel 3 (Right): Cross-section S(x) = integral
+% ============================================================
+\begin{scope}[shift={(15,0.5)}]
+
+% Axes
+\draw[-{Stealth[length=6pt]}, thick] (-0.5,0) -- (4,0) node[right] {$y$};
+\draw[-{Stealth[length=6pt]}, thick] (0,-0.5) -- (0,3.5) node[above] {$z$};
+
+% f(x,y) curve (cross section at fixed x)
+\draw[thick, domain=0.3:3.5, samples=60, smooth]
+  plot (\x, {-0.35*(\x-1.8)*(\x-1.8)+2.5});
+
+% Shaded area S(x)
+\fill[red, opacity=0.15]
+  (0.5,0) -- plot[domain=0.5:3.1, samples=60, smooth]
+  (\x, {-0.35*(\x-1.8)*(\x-1.8)+2.5}) -- (3.1,0) -- cycle;
+
+% Boundary marks
+\draw[dashed, thin] (0.5,0) -- (0.5,{-0.35*(0.5-1.8)*(0.5-1.8)+2.5});
+\draw[dashed, thin] (3.1,0) -- (3.1,{-0.35*(3.1-1.8)*(3.1-1.8)+2.5});
+
+% Labels
+\node[below] at (0.5,0) {$a(x)$};
+\node[below] at (3.1,0) {$b(x)$};
+\node[above right] at (3.3,1.8) {$f(x,y)\ \text{（$x$固定）}$};
+
+% S(x) label with integral
+\node[red, align=center, inner sep=0pt] at (1.8,1.0) {$S(x)$\\[4pt]{\scriptsize $\displaystyle= \int_{a(x)}^{b(x)} f(x,y)\,dy$}};
+
+\end{scope}
+
+\end{tikzpicture}
+\end{document}

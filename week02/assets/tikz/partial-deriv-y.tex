@@ -1,0 +1,81 @@
+\input{preamble}
+\begin{document}
+\begin{tikzpicture}[>=Stealth]
+
+  % === Upper part: 3D surface with x=a slice ===
+  \begin{scope}[shift={(0,8)}]
+    % 3D axes (right-hand system matching surface-tangent-plane)
+    \draw[axis] (0,0) -- (-2.5,-1.5) node[below left] {$x$};
+    \draw[axis] (0,0) -- (7.8,0) node[below] {$y$};
+    \draw[axis] (0,0) -- (0,6.5) node[left] {$z$};
+
+    % x=a plane (rectangle: extends in y-direction and z-direction)
+    \fill[blue!10, fill opacity=0.5]
+      (0.85, -1.0) rectangle (6.5, 5.2);
+    \draw[dashed, thin]
+      (0.85, -1.0) rectangle (6.5, 5.2);
+
+    % Surface outline (same as surface-tangent-plane)
+    \draw[thick]
+      (0.5,2.5) .. controls (1.64,2.45) and (2.76,1.56) .. (3.52,0.8)
+      .. controls (4.28,1.76) and (6.0,2.68) .. (7.0,2.8)
+      .. controls (6.5,3.82) and (4.22,5.53) .. (3.0,5.83)
+      .. controls (1.81,5.03) and (0.7,3.22) .. cycle;
+
+    % Label
+    \node[font=\small] at (6.8,4.2) {$z = f(x, y)$};
+
+    % Cross section curve (red, convex upward)
+    \draw[red, very thick]
+      (0.85, 2.5) .. controls (3.4, 3.9) and (4.8, 3.8) .. (6.5, 2.7);
+
+    % Point on surface (red)
+    \fill[red] (3.8, 3.5) circle (3pt);
+
+    % Dashed projection line from point to floor
+    \draw[dashed, thin] (3.8, 3.5) -- (3.8, -1.0);
+
+    % x=a label (on upper part of plane)
+    \node[blue, font=\small] at (3.5, 4.3) {$x = a$};
+  \end{scope}
+
+  % === Lower part: 2D cross section z = f(a, y) ===
+  \begin{scope}[shift={(0,0)}]
+    % Axes
+    \draw[axis] (-0.5,0) -- (6.5,0) node[below] {$y$};
+    \draw[axis] (0,-0.5) -- (0,4.5) node[left] {$z$};
+
+    % Curve z = f(a, y) (concave down)
+    \draw[red, very thick, domain=0.5:5.5, samples=60]
+      plot (\x, {-0.12*(\x-3)*(\x-3)+3.2});
+
+    % Point (b, f(a,b))
+    \pgfmathsetmacro{\yb}{2.5}
+    \pgfmathsetmacro{\zb}{-0.12*(\yb-3)*(\yb-3)+3.2}
+    \fill (\yb,\zb) circle (3pt);
+
+    % Tangent line at y=b
+    \pgfmathsetmacro{\slope}{-0.24*(\yb-3)}
+    \draw[blue, thick, domain=0.5:3.5]
+      plot (\x, {\slope*(\x-\yb)+\zb});
+
+    % Dashed lines to axes
+    \draw[dashed, thin] (\yb,0) -- (\yb,\zb);
+    \draw[dashed, thin] (0,\zb) -- (\yb,\zb);
+
+    % Labels
+    \node[below, font=\small] at (\yb,0) {$b$};
+    \node[red, below, font=\small] at (4.8,1.5) {$z = f(a, y)$};
+
+    % Annotation: slope
+    \draw[-{Stealth[length=5pt]}, semithick] (5.5,3.5) .. controls (4.5,3.3) .. (3.3,3.3);
+    \node[right, font=\small, text width=3cm] at (5.2,3.8)
+      {この傾きが $\left.\dfrac{df(a, y)}{dy}\right|_{y=b}$};
+  \end{scope}
+
+  % Arrow connecting upper and lower (curved, matching Illustrator)
+  \draw[-{Stealth[length=8pt]}, very thick, gray]
+    (2.5, 7.5) .. controls (0.0, 7.0) and (-0.5, 5.8) .. (0.6, 5.0);
+
+\end{tikzpicture}
+\end{document}

@@ -1,0 +1,24 @@
+\input{preamble}
+\begin{document}
+\begin{tikzpicture}[
+  every node/.style={font=\large},
+  level distance=1.8cm,
+  sibling distance=3cm,
+  edge from parent/.style={draw, thick, -{Stealth[length=5pt]}},
+]
+  % f(x,y) at top
+  \node {$f(x, y)$}
+    child {
+      node {$x$}
+      child {
+        node {$t$}
+      }
+    }
+    child {
+      node {$y$}
+      child {
+        node {$t$}
+      }
+    };
+\end{tikzpicture}
+\end{document}

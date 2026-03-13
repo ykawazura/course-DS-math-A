@@ -1,0 +1,152 @@
+\documentclass[tikz,border=5pt]{standalone}
+\usepackage{luatexja}
+\usepackage[hiragino-pron]{luatexja-preset}
+\usepackage{amsmath,amssymb}
+\usetikzlibrary{arrows.meta,patterns,calc}
+
+\begin{document}
+\begin{tikzpicture}
+
+% ============================================================
+% Panel 1 (Left): 2D domain D with horizontal slice at y
+% ============================================================
+\begin{scope}[shift={(0,0)}]
+
+% Axes
+\draw[-{Stealth[length=6pt]}, thick] (-0.5,0) -- (5,0) node[right] {$x$};
+\draw[-{Stealth[length=6pt]}, thick] (0,-0.5) -- (0,4) node[above] {$y$};
+
+% Region D (ellipse)
+\draw[thick] (2.4,2.0) ellipse [x radius=1.6, y radius=1.0];
+
+% D label
+\node at (2.4,3.4) {$D$};
+
+% Horizontal blue line at y (slice)
+% Ellipse at (2.4,2.0), rx=1.6, ry=1.0. At y=2.3: dx = 1.6*sqrt(1-((2.3-2.0)/1.0)^2) = 1.6*0.954 = 1.526
+\draw[blue, very thick] ({2.4-1.526},2.3) -- ({2.4+1.526},2.3);
+
+% Dashed lines to axes
+\draw[dashed, thin] (0,1.0) -- (2.4,1.0);
+\draw[dashed, thin] (0,3.0) -- (2.4,3.0);
+\draw[dashed, thin] ({2.4-1.526},0) -- ({2.4-1.526},2.3);
+\draw[dashed, thin] ({2.4+1.526},0) -- ({2.4+1.526},2.3);
+\draw[blue, dashed, thin] (0,2.3) -- ({2.4-1.526},2.3);
+
+% Labels
+\node[left] at (0,1.0) {$y_0$};
+\node[left] at (0,3.0) {$y_1$};
+\node[below] at ({2.4-1.526},0) {$c(y)$};
+\node[below] at ({2.4+1.526},0) {$d(y)$};
+
+\end{scope}
+
+% ============================================================
+% Panel 2 (Middle): 3D volume (cylinder with slice at fixed y)
+% ============================================================
+\begin{scope}[shift={(9.5,0)}]
+
+\coordinate (O) at (-1,0.8);
+
+% Axes
+\draw[-{Stealth[length=6pt]}, thick] (O) -- ++(0,4.0) node[above] {$z$};
+% y-axis: solid before cylinder, dashed behind, solid after
+\draw[thick] (O) -- ++(-0.5+1.0,0);          % origin to left edge of cylinder
+\draw[thick, dashed] (-0.5,0.8) -- (2.1,0.8); % behind cylinder
+\draw[-{Stealth[length=6pt]}, thick] (2.1,0.8) -- (4.0,0.8) node[right] {$y$};
+\draw[-{Stealth[length=6pt]}, thick] (O) -- ++(-2.0,-1.2) node[below left] {$x$};
+
+% Domain D on xy-plane (ellipse, no hatching)
+\coordinate (Dc) at (0.8,0.05);
+\begin{scope}[shift={(0.8,0.05)}, rotate=-5]
+  % Back half (dashed)
+  \draw[thick, dashed] (180:1.3 and 0.5) arc[x radius=1.3, y radius=0.5, start angle=180, end angle=0];
+  % Front half (solid)
+  \draw[thick] (180:1.3 and 0.5) arc[x radius=1.3, y radius=0.5, start angle=180, end angle=360];
+\end{scope}
+
+% D label
+\node at ($(Dc)+(1.7,-0.2)$) {$D$};
+
+% Curve on surface (top of cylinder)
+\draw[thick]
+  (-0.5,2.65) .. controls (-0.3,3.35) and (0.5,3.55) .. (1.0,3.35)
+  .. controls (1.5,3.15) and (2.2,3.05) .. (2.1,2.65)
+  .. controls (2.0,2.25) and (1.3,2.15) .. (0.8,2.25)
+  .. controls (0.2,2.35) and (-0.6,2.25) .. (-0.5,2.65);
+
+% Vertical lines (solid)
+\draw[thick] (-0.5,2.60) -- (-0.5,0.15);
+\draw[thick] (2.1,2.80) -- (2.1,0.04);
+
+% Cross-section T(y) - red shaded region (parallel to xz-plane)
+% Base runs along x-direction (-1,-0.6), sides go straight up (z)
+% Base endpoints lie ON the domain ellipse
+% Ellipse: center (0.8,0.05), rx=1.3, ry=0.5 (approx, ignoring -5deg rotation)
+% Chord with slope 0.6 (= x-direction): y = 0.6x - 0.4
+% Solving with ellipse gives: (1.47, 0.48) and (0.06, -0.36)
+\coordinate (base-c) at (1.47, 0.48);   % c(y): near origin on ellipse
+\coordinate (base-d) at (0.2, -0.35);  % d(y): far along x on ellipse
+\coordinate (top-c) at (1.47, 3.20);    % straight up from base-c
+\coordinate (top-d) at (0.2, 2.30);    % straight up from base-d
+
+\fill[red, opacity=0.15]
+  (base-d) -- (top-d)
+  .. controls (0.5,2.10) and (1.0,2.80) .. (top-c)
+  -- (base-c) -- cycle;
+\draw[red, thick] (base-d) -- (top-d);
+\draw[red, thick] (top-d) .. controls (0.5,2.10) and (1.0,2.80) .. (top-c);
+\draw[red, thick] (base-c) -- (top-c);
+\draw[red, thick] (base-d) -- (base-c);
+
+% Dashed blue lines projecting c(y), d(y) onto x-axis
+% Project horizontally (y-direction) from base endpoints to x-axis line
+% x-axis: O=(-1,0.8) + t*(-1,-0.6) → (fig_x, fig_y) = (-1-t, 0.8-0.6t)
+% base-c at fig_y=0.48: t=(0.8-0.48)/0.6=0.533, fig_x=-1.53
+% base-d at fig_y=-0.36: t=(0.8+0.36)/0.6=1.933, fig_x=-2.93
+\coordinate (cy-on-axis) at (-1.53, 0.48);
+\coordinate (dy-on-axis) at (-2.92, -0.35);
+\draw[blue, dashed, thick] (base-c) -- (cy-on-axis);
+\draw[blue, dashed, thick] (base-d) -- (dy-on-axis);
+\node[blue, above left] at (cy-on-axis) {$c(y)$};
+\node[blue, above left] at (dy-on-axis) {$d(y)$};
+
+% T(y) label
+\node[red] at (0.8,1.6) {$T(y)$};
+
+\end{scope}
+
+% ============================================================
+% Panel 3 (Right): Cross-section T(y) = integral over x
+% ============================================================
+\begin{scope}[shift={(15,0.5)}]
+
+% Axes
+\draw[-{Stealth[length=6pt]}, thick] (-0.5,0) -- (4,0) node[right] {$x$};
+\draw[-{Stealth[length=6pt]}, thick] (0,-0.5) -- (0,3.5) node[above] {$z$};
+
+% f(x,y) curve (cross section at fixed y)
+\draw[thick, domain=0.3:3.5, samples=60, smooth]
+  plot (\x, {0.35*(\x-1.8)*(\x-1.8)+1.8});
+
+% Shaded area T(y)
+\fill[blue, opacity=0.15]
+  (0.5,0) -- plot[domain=0.5:3.1, samples=60, smooth]
+  (\x, {0.35*(\x-1.8)*(\x-1.8)+1.8}) -- (3.1,0) -- cycle;
+
+% Boundary marks
+\draw[dashed, thin] (0.5,0) -- (0.5,{-0.35*(0.5-1.8)*(0.5-1.8)+2.5});
+\draw[dashed, thin] (3.1,0) -- (3.1,{-0.35*(3.1-1.8)*(3.1-1.8)+2.5});
+
+% Labels
+\node[below] at (0.5,0) {$c(y)$};
+\node[below] at (3.1,0) {$d(y)$};
+\node[above right] at (3.3,1.8) {$f(x,y)\ \text{（$y$固定）}$};
+
+% T(y) label with integral
+\node[blue!70!black, align=center, inner sep=0pt] at (1.8,1.0) {$T(y)$\\[4pt]{\scriptsize $\displaystyle= \int_{c(y)}^{d(y)} f(x,y)\,dx$}};
+
+\end{scope}
+
+\end{tikzpicture}
+\end{document}

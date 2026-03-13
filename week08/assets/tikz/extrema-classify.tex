@@ -1,0 +1,86 @@
+\documentclass[tikz,border=5pt]{standalone}
+\usepackage{luatexja-fontspec}
+\setmainjfont{Hiragino Mincho ProN}
+\setsansjfont{Hiragino Sans}
+\usepackage{amsmath}
+\usetikzlibrary{arrows.meta}
+
+\begin{document}
+\begin{tikzpicture}[
+  every node/.style={font=\normalsize},
+]
+
+\def\colsep{4.2}
+\def\rowA{4.5}   % y = f(x) row
+\def\rowB{0}     % y = f'(x) row
+\def\rowC{-3.8}  % y = f''(x) row
+
+% === Row labels ===
+\node[left] at (-0.5, \rowA) {$y = f(x)$};
+\node[left] at (-0.5, \rowB) {$y = f'(x)$};
+\node[left] at (-0.5, \rowC) {$y = f''(x)$};
+
+% === Column 1: minimum (f'' > 0) ===
+\begin{scope}[shift={(1.5*\colsep, 0)}]
+  % f(x): U-shape (minimum)
+  \draw[blue, very thick] (-1.2, \rowA+1.2)
+    .. controls (-0.5, \rowA-0.8) and (0.5, \rowA-0.8) .. (1.2, \rowA+1.2);
+  \fill[red] (0, 4.2) circle (3pt);
+  % f'(x): line crossing zero with positive slope
+  \draw[-{Stealth}, thin] (-1.5, \rowB) -- (1.5, \rowB);
+  \draw[blue, very thick] (-1.2, \rowB-1.0) -- (1.2, \rowB+1.0);
+  % f''(x)
+  \node at (0, \rowC) {\Large $+$};
+  \node at (0, \rowC-0.8) {at $x = a$};
+\end{scope}
+
+% === Column 2: maximum (f'' < 0) ===
+\begin{scope}[shift={(2.5*\colsep, 0)}]
+  % f(x): inverted U (maximum)
+  \draw[blue, very thick] (-1.2, \rowA-1.2)
+    .. controls (-0.5, \rowA+0.8) and (0.5, \rowA+0.8) .. (1.2, \rowA-1.2);
+  \fill[red] (0, 4.8) circle (3pt);
+  % f'(x): line crossing zero with negative slope
+  \draw[-{Stealth}, thin] (-1.5, \rowB) -- (1.5, \rowB);
+  \draw[blue, very thick] (-1.2, \rowB+1.0) -- (1.2, \rowB-1.0);
+  % f''(x)
+  \node at (0, \rowC) {\Large $-$};
+  \node at (0, \rowC-0.8) {at $x = a$};
+\end{scope}
+
+% === Column 3: f''=0, inflection with horizontal tangent (x^3 type) ===
+\begin{scope}[shift={(3.5*\colsep, 0)}]
+  % f(x): x^3 shape — horizontal tangent at inflection
+  \draw[blue, very thick] (-1.2, \rowA-1.2)
+    .. controls (-0.6, \rowA-0.2) and (-0.3, \rowA) .. (0, \rowA)
+    .. controls (0.3, \rowA) and (0.6, \rowA+0.2) .. (1.2, \rowA+1.2);
+  \fill[red] (0, \rowA) circle (3pt);
+  % f'(x): touches zero from above (tangent)
+  \draw[-{Stealth}, thin] (-1.5, \rowB) -- (1.5, \rowB);
+  \draw[blue, very thick] (-1.2, \rowB+1.2)
+    .. controls (-0.5, \rowB) and (-0.15, \rowB) .. (0, \rowB)
+    .. controls (0.15, \rowB) and (0.5, \rowB) .. (1.2, \rowB+1.2);
+  % f''(x)
+  \node at (0, \rowC) {\Large $0$};
+  \node at (0, \rowC-0.8) {at $x = a$};
+\end{scope}
+
+% === Column 4: f''=0, inflection with horizontal tangent (-x^3 type) ===
+\begin{scope}[shift={(4.5*\colsep, 0)}]
+  % f(x): -x^3 shape — horizontal tangent at inflection
+  \draw[blue, very thick] (-1.2, \rowA+1.2)
+    .. controls (-0.6, \rowA+0.2) and (-0.3, \rowA) .. (0, \rowA)
+    .. controls (0.3, \rowA) and (0.6, \rowA-0.2) .. (1.2, \rowA-1.2);
+  \fill[red] (0, \rowA) circle (3pt);
+  % f'(x): touches zero from above (inverted U tangent to axis)
+  \draw[-{Stealth}, thin] (-1.5, \rowB) -- (1.5, \rowB);
+  \draw[blue, very thick] (-1.2, \rowB-1.2)
+    .. controls (-0.5, \rowB) and (-0.15, \rowB) .. (0, \rowB)
+    .. controls (0.15, \rowB) and (0.5, \rowB) .. (1.2, \rowB-1.2);
+  % f''(x)
+  \node at (0, \rowC) {\Large $0$};
+  \node at (0, \rowC-0.8) {at $x = a$};
+\end{scope}
+
+\end{tikzpicture}
+\end{document}

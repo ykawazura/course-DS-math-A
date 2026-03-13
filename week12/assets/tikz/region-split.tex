@@ -1,0 +1,22 @@
+\documentclass[tikz,border=5pt]{standalone}
+\usepackage{luatexja}
+\usepackage[hiragino-pron]{luatexja-preset}
+\usepackage{amsmath,amssymb}
+\usetikzlibrary{arrows.meta,decorations.pathmorphing}
+
+\begin{document}
+\begin{tikzpicture}
+
+% Ellipse (outer boundary)
+\draw[thick] (0,0) ellipse (2.0 and 1.2);
+
+% Wavy line dividing the ellipse (top to bottom, like a hotpot divider)
+\draw[thick, decorate, decoration={snake, amplitude=5pt, segment length=40pt}]
+  (0,1.2) -- (0,-1.2);
+
+% Labels
+\node at (-1.0,0) {$D_1$};
+\node at (1.0,0) {$D_2$};
+
+\end{tikzpicture}
+\end{document}

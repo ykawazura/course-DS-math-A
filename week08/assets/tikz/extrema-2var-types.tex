@@ -1,0 +1,149 @@
+\documentclass[tikz,border=5pt]{standalone}
+\usepackage{luatexja-fontspec}
+\setmainjfont{Hiragino Mincho ProN}
+\setsansjfont{Hiragino Sans}
+\usepackage{amsmath}
+\usetikzlibrary{arrows.meta}
+
+\begin{document}
+\begin{tikzpicture}[
+  every node/.style={font=\small},
+  scale=0.45,
+  every path/.style={line join=round},
+]
+
+% ============================================================
+% Column 1: 極小点 — bowl (paraboloid opening up)
+% From SVG: bowl with elliptical rim at top, minimum point at bottom
+% ============================================================
+\begin{scope}[shift={(0,0)}]
+  % Tangent plane (red parallelogram) at bottom
+  \draw[red, thin]
+    (-1.9, 2.0) -- (0, 1.15) -- (1.9, 2.0) -- (0, 2.85) -- cycle;
+
+  % Bowl body (black thick)
+  % Left side: from minimum at bottom up to rim
+  \draw[black, thick]
+    (0, 0) .. controls (-1.3, 0) and (-3.0, 4.5) .. (-3.4, 5.5);
+  % Right side
+  \draw[black, thick]
+    (0, 0) .. controls (1.3, 0) and (3.0, 4.5) .. (3.4, 5.5);
+  % Rim ellipse (top opening)
+  \draw[black, thick] (0, 5.5) ellipse (3.4 and 0.7);
+
+  % Blue cross-section (left-right parabola)
+  \draw[blue, thick]
+    (-3.1, 4.9) .. controls (-1.5, 0.5) and (1.5, 0.5) .. (3.1, 4.9);
+  % Blue cross-section (front-back)
+  \draw[blue, thick]
+    (0, 4.0) .. controls (-0.2, 0.5) and (0.2, 0.5) .. (0, 0);
+  % Blue dashed vertical line
+  \draw[blue, densely dashed, thin] (0, 4.0) -- (0, 0);
+
+  % Red dot at minimum
+  \fill[red] (0, 0) circle (5pt);
+
+  % Labels
+  \node[below, font=\normalsize\sffamily] at (0, -1.5) {極小点};
+  \node[below, font=\scriptsize, text width=4cm, align=center] at (0, -2.8) {（どちらに進んでも登る）};
+\end{scope}
+
+% ============================================================
+% Column 2: 極大点 — dome (inverted paraboloid)
+% ============================================================
+\begin{scope}[shift={(10, 0)}]
+  % Tangent plane (red parallelogram) at top
+  \draw[red, thin]
+    (-1.9, 7.5) -- (0, 8.35) -- (1.9, 7.5) -- (0, 6.65) -- cycle;
+
+  % Dome body
+  % Left side: from base up to maximum
+  \draw[black, thick]
+    (-3.4, 1.0) .. controls (-2.8, 1.5) and (-1.3, 7.5) .. (0, 7.5);
+  \draw[black, thick]
+    (0, 7.5) .. controls (1.3, 7.5) and (2.8, 1.5) .. (3.4, 1.0);
+  % Base ellipse (dashed, back)
+  \draw[black, densely dashed, thick]
+    (-3.4, 1.0) .. controls (-2.0, -0.6) and (2.0, -0.6) .. (3.4, 1.0);
+  % Base front
+  % (visible part covered by surface)
+
+  % Blue cross-section (left-right)
+  \draw[blue, thick]
+    (-3.0, 1.5) .. controls (-0.8, 6.5) and (0.8, 6.5) .. (3.0, 1.5);
+  % Blue cross-section (front-back)
+  \draw[blue, thick]
+    (0, 0.3) .. controls (-0.2, 6.5) and (0.2, 6.5) .. (0, 7.5);
+  % Blue dashed vertical line
+  \draw[blue, densely dashed, thin] (0, 0.3) -- (0, 7.5);
+
+  % Red dot at maximum
+  \fill[red] (0, 7.5) circle (5pt);
+
+  % Labels
+  \node[below, font=\normalsize\sffamily] at (0, -1.5) {極大点};
+  \node[below, font=\scriptsize, text width=4cm, align=center] at (0, -2.8) {（どちらに進んでも降りる）};
+\end{scope}
+
+% ============================================================
+% Column 3: 鞍点 (saddle point)
+% ============================================================
+\begin{scope}[shift={(20, 0)}]
+  % Saddle surface
+  % Left-right direction: U-shape (curves down in middle) = goes UP at edges
+  \draw[black, thick]
+    (-3.6, 7.5) .. controls (-1.5, 1.0) and (1.5, 1.0) .. (3.6, 7.5);
+  % Front-back direction: inverted U (goes DOWN at edges) = curves at top
+  \draw[black, thick]
+    (-2.0, 8.8) .. controls (-0.5, 4.5) and (0.5, 4.5) .. (2.0, 8.8);
+  % Connecting edges (left and right)
+  \draw[black, thick]
+    (-3.6, 7.5) .. controls (-3.2, 8.0) and (-2.5, 8.6) .. (-2.0, 8.8);
+  \draw[black, thick]
+    (3.6, 7.5) .. controls (3.2, 8.0) and (2.5, 8.6) .. (2.0, 8.8);
+  % Back/bottom (dashed)
+  \draw[black, densely dashed, thick]
+    (-2.0, 1.5) .. controls (-0.5, 4.5) and (0.5, 4.5) .. (2.0, 1.5);
+
+  % Blue cross-section (left-right: U-shape)
+  \draw[blue, thick]
+    (-3.0, 7.0) .. controls (-1.0, 1.5) and (1.0, 1.5) .. (3.0, 7.0);
+  % Blue cross-section (front-back: inverted U, dashed behind)
+  \draw[blue, densely dashed, thick]
+    (-1.5, 2.0) .. controls (-0.3, 4.0) and (0.3, 4.0) .. (1.5, 2.0);
+  % Blue cross-section (front-back: inverted U, front)
+  \draw[blue, thick]
+    (-1.5, 8.2) .. controls (-0.3, 4.0) and (0.3, 4.0) .. (1.5, 8.2);
+
+  % Red dot at saddle
+  \fill[red] (0, 4.0) circle (5pt);
+
+  % Labels
+  \node[below, font=\normalsize\sffamily] at (0, -1.5) {鞍点（サドル点）};
+  \node[below, font=\scriptsize, text width=5cm, align=center] at (0, -2.8) {（ある方向で増大、別の方向で減少）};
+\end{scope}
+
+% ============================================================
+% Column 4: その他
+% ============================================================
+\begin{scope}[shift={(30, 0)}]
+  % Irregular surface: monkey-saddle-like
+  % Top edge with two bumps and a dip
+  \draw[black, thick]
+    (-3.0, 1.5) -- (-3.0, 5.5)
+    .. controls (-2.0, 8.5) and (-0.8, 8.5) .. (0, 5.0)
+    .. controls (0.8, 8.5) and (2.0, 8.5) .. (3.0, 5.5)
+    -- (3.0, 1.5);
+  % Bottom curve
+  \draw[black, thick]
+    (-3.0, 1.5) .. controls (-1.5, 0.3) and (1.5, 0.3) .. (3.0, 1.5);
+  % Middle dashed
+  \draw[black, densely dashed, thick]
+    (-3.0, 5.5) .. controls (-1.5, 3.0) and (1.5, 3.0) .. (3.0, 5.5);
+
+  % Labels
+  \node[below, font=\normalsize\sffamily] at (0, -1.5) {その他};
+\end{scope}
+
+\end{tikzpicture}
+\end{document}

@@ -1,0 +1,16 @@
+\documentclass[tikz,border=5pt]{standalone}
+\usepackage{luatexja}
+\usepackage[hiragino-pron]{luatexja-preset}
+\usepackage{amsmath,amssymb}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usetikzlibrary{arrows.meta,calc,decorations.markings,patterns,positioning}
+
+% Common styles
+\tikzset{
+  axis/.style={-{Stealth[length=6pt]}, thick},
+  curve/.style={thick, red},
+  dashed curve/.style={thick, dashed, blue},
+  dot/.style={circle, fill, inner sep=0pt, minimum size=6pt},
+  open dot/.style={circle, draw, fill=white, inner sep=0pt, minimum size=6pt},
+}

@@ -1,0 +1,88 @@
+\input{preamble}
+\usetikzlibrary{decorations.pathreplacing}
+\begin{document}
+\begin{tikzpicture}[scale=1.3,
+    x={(1cm,0cm)},
+    y={(0.4cm,0.5cm)},
+    z={(0cm,1cm)}
+  ]
+  % Axes
+  \draw[axis] (0,0,0) -- (5.5,0,0) node[right] {$x$};
+  \draw[axis] (0,0,0) -- (0,5,0) node[above] {$y$};
+  \draw[axis] (0,0,0) -- (0,0,5) node[above] {$z$};
+
+  % Base rectangle corners
+  \coordinate (P00) at (1.5,1.5,0);  % (a, b)
+  \coordinate (P10) at (3.5,1.5,0);  % (a+Δx, b)
+  \coordinate (P01) at (1.5,3.5,0);  % (a, b+Δy)
+  \coordinate (P11) at (3.5,3.5,0);  % (a+Δx, b+Δy)
+
+  % Base rectangle (dashed)
+  \draw[dashed, thick] (P00) -- (P10) -- (P11) -- (P01) -- cycle;
+
+  % Dashed lines from axes to base corners
+  \draw[dashed, thick] (1.5,0,0) -- (P00);
+  \draw[dashed, thick] (3.5,0,0) -- (P10);
+  \draw[dashed, thick] (0,1.5,0) -- (P00);
+  \draw[dashed, thick] (0,3.5,0) -- (P01);
+
+  % Axis labels
+  \node[below] at (1.5,0,0) {$a$};
+  \node[below] at (3.5,0,0) {$a{+}\Delta x$};
+  \node[left] at (0,1.5,0) {$b$};
+  \node[left] at (0,3.5,0) {$b{+}\Delta y$};
+
+  % Tangent plane: z = 1.2 + 0.2*(x-1.5) + 0.15*(y-1.5)
+  % Tangent at (a,b)=(1.5,1.5): z=1.2 (touch point)
+  % Surface = tangent plane at (a,b), curves above elsewhere
+
+  % Vertical dotted lines from base to surface (corners not covered by blue fill)
+  \draw[dotted, thick] (P00) -- (1.5,1.5,1.2);
+  \draw[dotted, thick] (P01) -- (1.5,3.5,1.7);
+  \draw[dotted, thick] (P11) -- (3.5,3.5,2.8);
+
+  % Tangent plane corners
+  \coordinate (T00) at (1.5,1.5,1.2);  % f(a,b) — touch point
+  \coordinate (T10) at (3.5,1.5,1.6);
+  \coordinate (T01) at (1.5,3.5,1.5);
+  \coordinate (T11) at (3.5,3.5,1.9);  % tangent plane value at (a+Δx,b+Δy)
+
+  % Blue fill and outline
+  \fill[blue!15, opacity=0.6] (T00) -- (T10) -- (T11) -- (T01) -- cycle;
+  \draw[blue, thick] (T00) -- (T10) -- (T11) -- (T01) -- cycle;
+
+
+  % Redraw (a+Δx, b) dotted line on top of blue fill
+  \draw[dotted, thick, black] (P10) -- (3.5,1.5,1.9);
+
+  % Surface curves (black, 下凸, tangent to plane at (a,b))
+  % Cubic Bezier: first control matches tangent plane slope at touch point
+  % Front edge (y=1.5): f_x=0.2 at start
+  \draw[thick] (1.5,1.5,1.2) .. controls (2.2,1.5,1.34) and (3.0,1.5,1.5) .. (3.5,1.5,1.9);
+  % Left edge (x=1.5): f_y=0.15 at start
+  \draw[thick] (1.5,1.5,1.2) .. controls (1.5,2.2,1.305) and (1.5,3.0,1.35) .. (1.5,3.5,1.7);
+  % Back edge (y=3.5)
+  \draw[thick] (1.5,3.5,1.7) .. controls (2.2,3.5,1.8) and (3.0,3.5,2.3) .. (3.5,3.5,2.8);
+  % Right edge (x=3.5)
+  \draw[thick] (3.5,1.5,1.9) .. controls (3.5,2.2,2.0) and (3.5,3.0,2.4) .. (3.5,3.5,2.8);
+
+  % Point on surface at (a+Δx, b+Δy)
+  \coordinate (Surf) at (3.5,3.5,2.8);
+  \fill (Surf) circle (2.5pt);
+
+  % Epsilon: gap between tangent plane and surface at (a+Δx,b+Δy)
+  \draw[dotted, thick] (T11) -- (Surf);
+  \draw[decorate, decoration={brace, amplitude=3pt, mirror}, red, thick]
+    ([xshift=2pt]3.5,3.5,1.9) -- ([xshift=2pt]3.5,3.5,2.8);
+  \node[red, right, font=\small] at (3.7,3.5,2.35) {$\varepsilon$};
+
+  % Red labels
+  \node[red, above right, font=\small] at (3.5,3.5,2.9) {$f(a{+}\Delta x,\, b{+}\Delta y)$};
+
+  % Red label for tangent plane value with arrow
+  \draw[red, thick, ->] (5.5,2.5,1.5) -- (3.7,3.4,1.9);
+  \node[red, right, font=\small, align=left] at (5.5,2.5,1.5)
+    {$f_x(a,b)\,\Delta x + f_y(a,b)\,\Delta y$\\$\quad + f(a,b)$};
+
+\end{tikzpicture}
+\end{document}

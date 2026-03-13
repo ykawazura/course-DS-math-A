@@ -1,0 +1,36 @@
+\documentclass[tikz,border=5pt]{standalone}
+\usepackage{luatexja}
+\usepackage[hiragino-pron]{luatexja-preset}
+\usepackage{amsmath,amssymb}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usetikzlibrary{arrows.meta,patterns}
+
+\begin{document}
+\begin{tikzpicture}[every node/.style={font=\large}]
+  % Axes
+  \draw[-{Stealth[length=6pt]}, thick] (-4.5,0) -- (4.5,0) node[right] {$x$};
+  \draw[-{Stealth[length=6pt]}, thick] (0,-0.3) -- (0,3.5);
+
+  % Shaded region
+  \fill[magenta!15, domain=-4:4, samples=200]
+    (-4,0) -- plot (\x, {2.8*exp(-\x*\x/2)}) -- (4,0) -- cycle;
+
+  % Gaussian curve
+  \draw[thick, red, domain=-4.2:4.2, samples=200] plot (\x, {2.8*exp(-\x*\x/2)});
+
+  % mu and sigma markers
+  \draw[dashed] (0,0) -- (0,2.8);
+  \node[below] at (0,0) {$\mu$};
+
+  % sigma arrows
+  \draw[{Stealth[length=5pt]}-{Stealth[length=5pt]}, thick] (-1,1.2) -- (1,1.2);
+  \node[above] at (0,1.2) {$\sigma$};
+
+  % Label
+  \node[right, red] at (2,2.5) {$f(x)$};
+
+  % Area = 1 label
+  \node at (0,0.6) {面積 $= 1$};
+\end{tikzpicture}
+\end{document}

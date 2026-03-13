@@ -1,0 +1,55 @@
+\input{preamble}
+\usetikzlibrary{decorations.pathreplacing}
+\begin{document}
+\begin{tikzpicture}
+  % Axes
+  \draw[axis] (-0.3,0) -- (5.5,0) node[right] {$x$};
+  \draw[axis] (0,-0.3) -- (0,4.5) node[above] {$y$};
+
+  % Curve (U-shaped, black) — symmetric about minimum at (1.5,0.2)
+  % Left side mirrors right: (0.5,0.7) is mirror of A=(2.5,0.7)
+  \draw[thick] (0.3,0.9) .. controls (0.35,0.85) and (0.35,0.83) .. (0.5,0.7)
+    .. controls (0.9,0.35) and (1.2,0.2) .. (1.5,0.2)
+    .. controls (1.8,0.2) and (2.1,0.35) .. (2.5,0.7)
+    .. controls (2.9,1.05) and (4.0,2.8) .. (5.0,4.2);
+
+  % Key points on curve
+  \coordinate (A) at (2.5,0.7);    % point at x=a (on curve, slope≈0.875)
+  \coordinate (B) at (3.8,2.46);   % point at x=a+Δx on curve (Bezier t≈0.6)
+  \coordinate (T) at (3.8,1.84);   % tangent value at x=a+Δx
+
+  % Tangent line at (a, f(a)), slope = 0.875, passes through A
+  \draw[red, thick] (1.7,0.0) -- (3.8,1.8375);
+
+  % Dashed lines (blue)
+  \draw[blue, dashed, thick] (2.5,0) -- (A);
+  \draw[blue, dashed, thick] (3.8,0) -- (3.8,0.7);           % below f(a)
+  \draw[blue, dashed, thick] (3.8,1.84) -- (B);              % above tangent value
+  \draw[blue, dashed, thick] (0,0.7) -- (A);                 % f(a) line to A only
+  \draw[blue, dashed, thick] (0,2.46) -- (B);
+
+  % Red dashed lines: Δx and f'(a)Δx triangle
+  \draw[red, dashed, thick] (2.5,0.7) -- (3.8,0.7);         % (a,f(a)) → (a+Δx, f(a))
+  \draw[red, dashed, thick] (3.8,0.7) -- (T);                % (a+Δx,f(a)) → (a+Δx, f'(a)Δx+f(a))
+
+  % Brace for f'(a)Δx (red)
+  \draw[decorate, decoration={brace, amplitude=4pt, mirror}, red, thick]
+    (4.0,0.7) -- (4.0,1.84);
+  \node[red, right] at (4.15,1.27) {$f'(a)\,\Delta x$};
+
+  % Axis labels (blue)
+  \node[blue, below] at (2.5,0) {$a$};
+  \node[blue, below] at (3.8,0) {$a + \Delta x$};
+  \node[blue, left] at (0,0.7) {$f(a)$};
+  \node[blue, left] at (0,2.46) {$f(a{+}\Delta x)$};
+
+  % Brace for epsilon (blue)
+  \draw[decorate, decoration={brace, amplitude=4pt, mirror}, blue, thick]
+    (4.0,1.84) -- (4.0,2.46);
+  \node[blue, right] at (4.15,2.15) {$\varepsilon$};
+
+  % Dots
+  \fill (A) circle (2pt);
+  \fill (B) circle (2pt);
+\end{tikzpicture}
+\end{document}

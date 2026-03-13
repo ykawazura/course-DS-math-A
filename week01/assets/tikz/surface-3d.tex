@@ -1,0 +1,39 @@
+\input{preamble}
+\begin{document}
+\definecolor{cyanfill}{HTML}{00E7E4}
+\begin{tikzpicture}[>=Stealth]
+
+  % 3D perspective axes
+  \draw[axis] (0,0) -- (-2.5,-1.5) node[below left] {$y$};
+  \draw[axis] (0,0) -- (7.8,0) node[below] {$x$};
+  \draw[axis] (0,0) -- (0,5.5) node[left] {$z$};
+
+  % Domain on xy-plane (cyan filled ellipse, semi-transparent)
+  \fill[cyanfill, fill opacity=0.5, draw=black, thick] (3.2,-1.1) ellipse (1.0 and 0.5);
+  \node[font=\small] at (3.2,-1.95) {定義域};
+
+  % Dashed vertical lines from domain to surface
+  \draw[dashed, thin] (4.2,-1.1) -- (4.2,3.6);
+  \draw[dashed, thin] (2.2,-1.1) -- (2.2,3.3);
+
+  % Surface outline (4 corners, 4 smooth edges)
+  \draw[thick]
+    (0.51,2.85) .. controls (1.5,2.5) and (2.5,1.3) .. (3.58,1.04)
+    .. controls (4.7,1.3) and (6.0,2.7) .. (7.07,2.97)
+    .. controls (6.5,3.8) and (4.0,5.0) .. (2.95,5.22)
+    .. controls (1.8,4.7) and (0.7,3.5) .. cycle;
+
+  % Region on surface (cyan filled tilted ellipse, semi-transparent)
+  \fill[cyanfill, fill opacity=0.5, draw=black, thick, rotate around={19:(3.2,3.46)}]
+    (3.2,3.46) ellipse (1.0 and 0.63);
+
+  % Blue dashed lines from surface to z-axis (range)
+  \draw[blue, dashed, very thick] (0,2.78) -- (3.0,2.78);
+  \draw[blue, dashed, very thick] (0,4.14) -- (3.3,4.14);
+
+  % Blue range indicator on z-axis
+  \draw[blue, thick] (0,2.78) -- (0,4.14);
+  \node[blue, left, font=\small] at (-0.2,3.5) {値域};
+
+\end{tikzpicture}
+\end{document}

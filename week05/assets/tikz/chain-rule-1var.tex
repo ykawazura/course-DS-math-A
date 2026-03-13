@@ -1,0 +1,26 @@
+\input{preamble}
+\begin{document}
+\begin{tikzpicture}[
+  node distance=1.2cm,
+  every node/.style={font=\large},
+  arr/.style={-{Stealth[length=5pt]}, thick},
+  bigarr/.style={-{Stealth[length=8pt]}, line width=2pt},
+]
+  % Left: f(x) <- x
+  \node (fx) {$f(x)$};
+  \node[below=of fx] (x) {$x$};
+  \draw[arr] (x) -- (fx);
+
+  % Center: arrow with label
+  \node[right=3cm of fx, yshift=-0.6cm] (mid) {};
+  \draw[bigarr] ([xshift=-1.2cm]mid.center) -- ([xshift=1.2cm]mid.center);
+  \node[above=0.3cm of mid] {パラメータ化};
+
+  % Right: f(x(t)) <- x(t) <- t
+  \node[right=6.5cm of fx] (fxt) {$f(x(t))$};
+  \node[below=of fxt] (xt) {$x(t)$};
+  \node[below=of xt] (t) {$t$};
+  \draw[arr] (xt) -- (fxt);
+  \draw[arr] (t) -- (xt);
+\end{tikzpicture}
+\end{document}
